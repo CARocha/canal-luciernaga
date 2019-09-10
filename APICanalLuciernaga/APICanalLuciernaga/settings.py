@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # terceros
     'nested_admin',
     'taggit',
+    'taggit_autosuggest',
     'rest_framework',
     'corsheaders',
     'sorl.thumbnail',

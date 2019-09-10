@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
-from taggit.managers import TaggableManager
+from taggit_autosuggest.managers import TaggableManager
 from lugar.models import Pais
 from sorl.thumbnail import ImageField
 from usuario.models import User

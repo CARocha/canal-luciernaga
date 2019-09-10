@@ -3,7 +3,6 @@ from .models import Video, Director, Tipo, Episodio, Temporada
 from lugar.models import Pais
 import nested_admin
 
-
 class TipoAdmin(admin.ModelAdmin):
     search_fields = ['nombre']
     
@@ -13,7 +12,7 @@ class DirectorAdmin(admin.ModelAdmin):
 class CategoriaAdmin(admin.ModelAdmin):
     search_fields = ['nombre']
 
-class EpisodioInline(nested_admin.NestedTabularInline):
+class EpisodioInline(nested_admin.NestedStackedInline):
     model = Episodio
     extra = 1
 

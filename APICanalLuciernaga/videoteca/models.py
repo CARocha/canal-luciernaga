@@ -18,7 +18,7 @@ class Tipo(models.Model):
 
 class Director(models.Model):
     nombre = models.CharField(max_length = 255)
-    fecha_nacimiento = models.DateField('Fecha de nacimiento')
+    # fecha_nacimiento = models.DateField('Fecha de nacimiento')
 
     def __str__(self):
         return self.nombre

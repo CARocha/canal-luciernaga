@@ -1,10 +1,11 @@
 from django.db import models
 from noticias.models import Categoria
+from embed_video.fields import EmbedVideoField
 
 # Create your models here.
 class Programacion(models.Model):
 	titulo = models.CharField(max_length = 225)
-	link = models.URLField(null=True,blank=True)
+	link = EmbedVideoField(null=True,blank=True)
 	fecha = models.DateField()
 
 	def __str__(self):
