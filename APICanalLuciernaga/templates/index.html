@@ -17,20 +17,25 @@
 	<div class="carousel-inner">
 
 		{% for banner in bann_vid %}
-			
-		<div class="item {% if forloop.first %} active {% endif %}" style="background-image: url(static/img/index-banner.jpg)">
+		
+		{% thumbnail banner.imagen "1350x600" crop="center" as im %}	
+		<div class="item {% if forloop.first %} active {% endif %}" style="background-image: url(media/{{im}})">
+		{% endthumbnail %}	
 			<div class="container">
 				<div class="row blurb scrollme animateme" data-when="exit" data-from="0" data-to="1" data-opacity="0" data-translatey="100">
 					<div class="col-md-9 main-items">
 						
 						<h3 class="no-underline white-color bann_name">{{banner}}</h3>
 						<div class="buttons top_padd_20">
-							
+							<p style="width:500px">
+								{{banner.sinopsis|truncatechars:100}}
+							</p>
 							<a class="venobox btn btn-ghost">
 								{% for cat in banner.categoria.all|slice:"1" %}
 									<span>{{cat}}</span>								
 								{% endfor %}
 							</a>
+							
 
 							<a href="{% if banner.tipo == 1 %} {{banner.url}} {% else %} {% endif %} " data-vbtype="video" class="venobox btn btn-default">
 								<i class="material-icons">play_arrow</i>
@@ -49,7 +54,7 @@
 </div>
 
 <!-- 	Breaking news	-->
-<div class="bg-bnews" style="margin-top: 20px; background-color: #2b2b2b; border-radius: 15px;">
+<!-- <div class="bg-bnews" style="margin-top: 20px; background-color: #2b2b2b; border-radius: 15px;">
 	<div class="row bnews-padding">
 		<div>
 			<span class="badge badge-danger bnews-title">Última hora:</span>
@@ -68,7 +73,7 @@
 		</div>
 		
 	</div>
-</div>
+</div> -->
 
 <!-- 	Nuevo en	-->
 <div class="container section">

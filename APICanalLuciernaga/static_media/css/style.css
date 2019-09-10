@@ -570,7 +570,7 @@ hr.space-40 {
 
     width: 100%;
     margin-left: 30px;
-
+    margin-top: 20px;
     text-align: left;
 }
 
@@ -3125,4 +3125,9 @@ footer .copyright a:hover {
     .tabs.pill-style ul li:last-of-type a {
         border-radius: 0 0 30px 30px;
     }
+}
+
+
+.img-detalle-nota{
+    width: 100%;
 }
