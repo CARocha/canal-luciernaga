@@ -26,18 +26,17 @@
 					<div class="col-md-9 main-items">
 						
 						<h3 class="no-underline white-color bann_name">{{banner}}</h3>
-						<div class="buttons top_padd_20">
+						<div class="buttons top_padd_10">
+							<div>
+								{% for cat in banner.categoria.all|slice:"3" %}
+								<span class="title">{{cat}}</span>{% if not forloop.last %},{% endif %}
+								{% endfor%}
+							</div>
 							<p style="width:500px">
 								{{banner.sinopsis|truncatechars:100}}
 							</p>
-							<a class="venobox btn btn-ghost">
-								{% for cat in banner.categoria.all|slice:"1" %}
-									<span>{{cat}}</span>								
-								{% endfor %}
-							</a>
 							
-
-							<a href="{% if banner.tipo == 1 %} {{banner.url}} {% else %} {% endif %} " data-vbtype="video" class="venobox btn btn-default">
+							<a href="{% if banner.tipo == 1 %} {{banner.url}} {% else %} {% endif %} " data-vbtype="video" class="btn btn-default">
 								<i class="material-icons">play_arrow</i>
 								<span>Reproducir</span>
 							</a>
@@ -75,7 +74,90 @@
 	</div>
 </div> -->
 
-<!-- 	Nuevo en	-->
+
+<div class="container section pb-0">
+	<div class="row">
+        <div class="large-12 columns">
+			<h2>Nuevo en Luciernaga</h2>
+			<div class="owl-carousel owl-theme slick-slide">
+				{% for video in latest_video %}
+				<div class="movie-poster">
+					<aside>
+						<div>
+							<a href="{% url 'Video_detail' video.slug %}" class="play">
+								<i class="material-icons">play_arrow</i>
+							</a>
+							<a class="titulo">{{video.nombre}}</a>
+							<span class="date">
+								{% for cat in video.categoria.all|slice:"3" %}
+									<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
+								{% endfor%}
+							</span>
+							<a class="material-icons expand-more" data-toggle="collapse" href="#nuevo_{{video.id}}" aria-expanded="false" aria-controls="nuevo_{{video.id}}">
+									keyboard_arrow_down
+							</a>
+							
+						</div>
+					</aside>
+				
+					{% thumbnail video.imagen "1280x720" crop="center" as im %}
+					<img src="{{ im.url }}" alt="">
+					{% empty %}
+					<img src="http://via.placeholder.com/1280x720 " alt="">
+					{% endthumbnail %}
+					
+				
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+{% for video in latest_video %}
+<!-- Section -->
+<section class="dark collapse" id="nuevo_{{video.id}}">
+	<a class="close_collapse" data-toggle="collapse" data-target="#nuevo_{{video.id}}" aria-expanded="false" aria-controls="nuevo_{{video.id}}">
+		<span class="material-icons">close</span>
+	</a>
+	<div class="container remove-bottom-padding">
+		<div class="row comingSoon-slides">
+			<div class="col-sm-12">
+				<div class="row single-slide">
+					<div class="col-sm-5 col-xs-12 slide-content">
+						{% for cat in video.categoria.all|slice:"3" %}
+						<span class="title">{{cat}}</span>{% if not forloop.last %},{% endif %}
+						{% endfor%}
+						<h3 class="no-underline">{{video.nombre}}</h3>
+						<div class="date">
+							<i class="material-icons">date_range</i> {{video.fecha|date:"d F Y"}}
+							<i class="material-icons" style="margin-left: 5px;">
+									av_timer
+							</i>{{video.duracion}}
+						</div>
+						
+						<p>{{video.sinopsis}}<p>
+						<span class="details">Productora: {{video.produccion}}</span>
+						<span class="">|</span>
+						<span class="details">Pais: {{video.pais}}</span>
+					</div>
+					<div class="col-sm-6 col-xs-12 col-sm-push-1 slide-video">
+						<a href="{% url 'Video_detail' video.slug %}" data-vbtype="video" class="video">
+							<i class="material-icons">play_arrow</i>
+							{% thumbnail video.imagen "1280x720" crop="center" as im %}
+								<img src="{{ im.url }}" alt="">
+							{% empty %}
+								<img src="http://via.placeholder.com/1280x720 " alt="">
+							{% endthumbnail %}
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endfor %}
+
+<!-- 	Nuevo en
 <div class="container section">
 	<div class="row">
         <div class="large-12 columns">
@@ -105,54 +187,10 @@
 				
 				{% endfor %}
 			</div>
-
-			<!--<div class="slick-carousel" id="newIn">
-				{% for video in latest_video %}
-				<div class="movie-slide">
-					<div class="movie-poster">
-						<aside>
-							<div>
-								<a href="" class="venobox play">
-									<i class="material-icons">play_arrow</i>
-								</a>
-								<div style="padding-top: 15px;">
-									<span class="date"><strong>{{video.nombre}}</strong> </span>
-									<span class="date">
-										{% for cat in video.categoria.all|slice:"3" %}
-										<i class="material-icons" style="
-										font-size: 8px;
-										">
-											fiber_manual_record
-										</i>{{cat}}
-										{% endfor %}										
-									</span>					
-									<span>
-										<i class="material-icons expand-more" onclick="showmore({{video.id}},0)" href="#activeVideo_{{video.id}}_0">
-											expand_more
-										</i>
-									</span>
-								</div>
-							</div>
-						</aside>
-						<a href="#">
-							{% thumbnail video.imagen "360x270" crop="center" as im %}
-							<img src="{{ im.url }}" alt="">
-							{% empty %}
-							<img src="http://via.placeholder.com/450x337" alt="">
-							{% endthumbnail %}
-						</a>
-					</div>
-					<h4 class="no-underline white-color">
-						<p>{{video.nombre}}</p>
-					</h4> 
-				</div>
-					
-				{% endfor %}
-			</div>-->
 		</div>
 	</div>
 </div>
-
+	-->
 {% for video in latest_video %}
 
 <section id="activeVideo_{{video.id}}_0" class="dark linear-bg hidden">
@@ -200,7 +238,7 @@
 						</span>
 					</div>
 					<div class="col-sm-6 col-xs-12 col-sm-push-1 slide-video">
-						<!--  class venobox se comentario para poder mandar link detalle-->
+						
 						<a href="{% url 'Video_detail' video.slug %}" data-vbtype="video" class="video">
 							<i class="material-icons">play_arrow</i>
 							{% thumbnail video.imagen "539x307" crop="center" as im%}

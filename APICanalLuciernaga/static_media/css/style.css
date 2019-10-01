@@ -442,7 +442,7 @@ hr.space-40 {
     position: relative;
 
     width: 100%;
-    margin-top: 50px;
+    margin-top: 20px;
 
     -webkit-animation: Blurb .5s .5s forwards;
        -moz-animation: Blurb .5s .5s forwards;
@@ -569,7 +569,7 @@ hr.space-40 {
     left: 0;
 
     width: 100%;
-    margin-left: 30px;
+    margin-left: 40px;
     margin-top: 20px;
     text-align: left;
 }
@@ -1026,7 +1026,6 @@ a.arrow-button:hover {
 }
 
 .slick-slide {
-    margin: 0 15px;
 
     text-align: center;
 }
@@ -1074,8 +1073,6 @@ a.arrow-button:hover {
     overflow: hidden;
 
     margin-bottom: 20px;
-
-    border-radius: 10px;
 }
 
 .slick-slide .movie-poster img {
@@ -1144,13 +1141,13 @@ a.arrow-button:hover {
 
 .slick-slide .movie-poster aside .play {
     font-size: 32px;
-    line-height: 70px;
+    line-height: 40px;
 
     display: block;
 
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 20px auto;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 10px auto;
 
     color: #fff;
     color: #fff;
@@ -1161,7 +1158,18 @@ a.arrow-button:hover {
 .slick-slide .movie-poster aside .play:hover {
     transform: scale(.9);
 }
+.slick-slide .movie-poster aside .titulo {
+    font-size: 14px;
 
+    display: block;
+
+    margin-bottom: 10px;
+
+    cursor: pointer;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
 .slick-slide .movie-poster aside .read-more {
     font-size: 13px;
 
@@ -1177,7 +1185,7 @@ a.arrow-button:hover {
 }
 
 .slick-slide .movie-poster aside .date {
-    font-size: 16px;
+    font-size: 13px;
 
     display: block;
 
