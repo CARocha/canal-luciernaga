@@ -519,7 +519,7 @@
 						</span>
 					</div>
 					<div class="col-sm-6 col-xs-12 col-sm-push-1 slide-video">
-						<a href="https://www.youtube.com/watch?v=0SCvNj9tayk" data-vbtype="video" class="venobox video">
+						<a href="{% url 'Video_detail' video.slug %}" data-vbtype="video" class="video">
 							<i class="material-icons">play_arrow</i>
 							{% thumbnail video.imagen "539x307" crop="center" as im%}
 							<img src="{{im.url}}" alt="" />
@@ -744,7 +744,7 @@
 						</span>
 					</div>
 					<div class="col-sm-6 col-xs-12 col-sm-push-1 slide-video">
-						<a href="https://www.youtube.com/watch?v=0SCvNj9tayk" data-vbtype="video" class="venobox video">
+						<a href="{% url 'Video_detail' video.slug %}" data-vbtype="video" class="video">
 							<i class="material-icons">play_arrow</i>
 							{% thumbnail video.imagen "539x307" crop="center" as im%}
 							<img src="{{im.url}}" alt="" />
@@ -900,7 +900,7 @@
 						</span>
 					</div>
 					<div class="col-sm-6 col-xs-12 col-sm-push-1 slide-video">
-						<a href="https://www.youtube.com/watch?v=0SCvNj9tayk" data-vbtype="video" class="venobox video">
+						<a href="{% url 'Video_detail' video.slug %}" data-vbtype="video" class="video">
 							<i class="material-icons">play_arrow</i>
 							{% thumbnail video.imagen "539x307" crop="center" as im%}
 							<img src="{{im.url}}" alt="" />
