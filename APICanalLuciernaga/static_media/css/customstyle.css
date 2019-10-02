@@ -463,3 +463,6 @@ a.close_collapse {
 .pb-0{
 	padding-bottom: 0px !important;
 }
+
+.grow {transition: all .2s ease-in-out;}
+.grow:hover {transform: scale(1.12);}
