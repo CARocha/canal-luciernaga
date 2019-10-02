@@ -55,8 +55,8 @@
 						
 						<tr>
 							<th scope="row" style="vertical-align: middle;">
-								<span class="time past"style="background-color: gray; border-radius: 5px;padding: 5px;color: antiquewhite;">{{programa.hora_inicio|time:"TIME_FORMAT"}}</span> 
-								<span class="time"style="background-color: gray;border-radius: 5px;padding: 5px;color: white;">{{programa.hora_fin|time:"TIME_FORMAT"}}</span>	
+								<span class="time past"style="background-color: gray; border-radius: 5px;padding: 5px;color: antiquewhite;">{{programa.hora_inicio|time:"h:i a"}}</span> 
+								<span class="time"style="background-color: gray;border-radius: 5px;padding: 5px;color: white;">{{programa.hora_fin|time:"h:i a"}}</span>	
 							</th>
 							<td>
 								<h3 class="no-underline white-color">
@@ -69,7 +69,7 @@
 								<span class="white-color">Nicaragua</span>
 							</td>
 							<td style="vertical-align: middle;">
-								<p>Economia</p> 
+								<p>{{programa.categoria_p}}</p> 
 							</td>
 						</tr>
 						{% endfor %}
