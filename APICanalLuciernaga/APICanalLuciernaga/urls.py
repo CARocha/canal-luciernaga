@@ -22,7 +22,7 @@ from django.contrib.flatpages import views
 from rest_framework import routers
 from biblioteca.views import BibliotecaViewSet, CategoriaBibliotecaViewSet
 from programacion.views import HoraProgramacionViewSet
-from noticias.views import ComunicacionViewSet, CategoriaNoticiaViewSet
+from noticias.views import *
 from videoteca.views import VideoViewSet, EpisodioViewSet,TipoVideoTecaViewSet, CategoriaVideoTecaViewSet
 from lugar.views import PaisViewSet
 
@@ -54,6 +54,7 @@ urlpatterns = [
     path('videos/',include('videoteca.urls')),
     path('biblioteca/', include('biblioteca.urls')),
     path('en-directo/',include('programacion.urls')),
+    path('buscador/',buscador),
     path('taggit_autosuggest/', include('taggit_autosuggest.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

@@ -4,6 +4,7 @@ from .models import *
 from .serializers import ComunicacionSerializer, CategoriaSerializer
 
 from videoteca.models import Video,Temporada,Episodio
+from django.db.models import Q
 
 # Create your views here.
 class ComunicacionViewSet(viewsets.ModelViewSet):
@@ -45,5 +46,14 @@ def news_detail(request,slug,template='news_detail.html'):
 	ids = news_list.values_list('id',flat=True)
 	common_tags = Comunicacion.tags.most_common(min_count=2,extra_filters={'id__in': ids})[:6]
 
+	return render(request,template,locals())
+
+
+def buscador(request,template = 'movies.html'):
+	if request.GET.get('search'):
+		q = request.GET['search']
+		videos = Video.objects.filter(Q(nombre__icontains = q)| Q(categoria__nombre__icontains = q)).order_by('-id')
+		print(videos)
+	
 	return render(request,template,locals())
 
