@@ -47,252 +47,230 @@ jQuery(function ($) {
 	
 
 	// Slick carousel
-	$(window).on('load resize scroll', function(){  
+	// $(window).on('load resize scroll', function(){  
 		
-		$('#newIn').not('.slick-initialized').slick({
-			autoplay: false,
-			autoplaySpeed: 3000,
-			slidesToShow: 3,
-			centerPadding: '60px',
-			prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
-			nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
-			responsive: [
-			    {
-			      breakpoint: 768,
-			      settings: {
-			        slidesToShow: 2
-			      }
-			    },
-			    {
-			      breakpoint: 480,
-			      settings: {
-			        slidesToShow: 1
-			      }
-			    }
-			  ]
-		});
+	// 	$('#newIn').not('.slick-initialized').slick({
+	// 		autoplay: false,
+	// 		autoplaySpeed: 3000,
+	// 		slidesToShow: 3,
+	// 		centerPadding: '60px',
+	// 		prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
+	// 		nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
+	// 		responsive: [
+	// 		    {
+	// 		      breakpoint: 768,
+	// 		      settings: {
+	// 		        slidesToShow: 2
+	// 		      }
+	// 		    },
+	// 		    {
+	// 		      breakpoint: 480,
+	// 		      settings: {
+	// 		        slidesToShow: 1
+	// 		      }
+	// 		    }
+	// 		  ]
+	// 	});
 
-		$('#Series').not('.slick-initialized').slick({
-			autoplay: false,
-			autoplaySpeed: 3000,
-			slidesToShow: 4,
-			centerPadding: '60px',
-			prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
-			nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
-			responsive: [
-			    {
-			      breakpoint: 768,
-			      settings: {
-			        slidesToShow: 2
-			      }
-			    },
-			    {
-			      breakpoint: 480,
-			      settings: {
-			        slidesToShow: 1
-			      }
-			    }
-			  ]
-		});
+	// 	$('#Series').not('.slick-initialized').slick({
+	// 		autoplay: false,
+	// 		autoplaySpeed: 3000,
+	// 		slidesToShow: 4,
+	// 		centerPadding: '60px',
+	// 		prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
+	// 		nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
+	// 		responsive: [
+	// 		    {
+	// 		      breakpoint: 768,
+	// 		      settings: {
+	// 		        slidesToShow: 2
+	// 		      }
+	// 		    },
+	// 		    {
+	// 		      breakpoint: 480,
+	// 		      settings: {
+	// 		        slidesToShow: 1
+	// 		      }
+	// 		    }
+	// 		  ]
+	// 	});
 
-		$('#relacionadas').not('.slick-initialized').slick({
-			autoplay: false,
-			autoplaySpeed: 3000,
-			slidesToShow: 4,
-			centerPadding: '60px',
-			prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
-			nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
-			responsive: [
-			    {
-			      breakpoint: 768,
-			      settings: {
-			        slidesToShow: 2
-			      }
-			    },
-			    {
-			      breakpoint: 480,
-			      settings: {
-			        slidesToShow: 1
-			      }
-			    }
-			  ]
-		});
+	// 	$('#relacionadas').not('.slick-initialized').slick({
+	// 		autoplay: false,
+	// 		autoplaySpeed: 3000,
+	// 		slidesToShow: 4,
+	// 		centerPadding: '60px',
+	// 		prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
+	// 		nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
+	// 		responsive: [
+	// 		    {
+	// 		      breakpoint: 768,
+	// 		      settings: {
+	// 		        slidesToShow: 2
+	// 		      }
+	// 		    },
+	// 		    {
+	// 		      breakpoint: 480,
+	// 		      settings: {
+	// 		        slidesToShow: 1
+	// 		      }
+	// 		    }
+	// 		  ]
+	// 	});
 
-		$('#Movies').not('.slick-initialized').slick({
-			autoplay: false,
-			autoplaySpeed: 3000,
-			slidesToShow: 4,
-			centerPadding: '60px',
-			prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
-			nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
-			responsive: [
-			    {
-			      breakpoint: 768,
-			      settings: {
-			        slidesToShow: 2
-			      }
-			    },
-			    {
-			      breakpoint: 480,
-			      settings: {
-			        slidesToShow: 1
-			      }
-			    }
-			  ]
-		});
 
-		$('#Documental').not('.slick-initialized').slick({
-			autoplay: false,
-			autoplaySpeed: 3000,
-			slidesToShow: 4,
-			centerPadding: '60px',
-			prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
-			nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
-			responsive: [
-			    {
-			      breakpoint: 768,
-			      settings: {
-			        slidesToShow: 2
-			      }
-			    },
-			    {
-			      breakpoint: 480,
-			      settings: {
-			        slidesToShow: 1
-			      }
-			    }
-			  ]
-		});
+	// 	$('#Documental').not('.slick-initialized').slick({
+	// 		autoplay: false,
+	// 		autoplaySpeed: 3000,
+	// 		slidesToShow: 4,
+	// 		centerPadding: '60px',
+	// 		prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
+	// 		nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
+	// 		responsive: [
+	// 		    {
+	// 		      breakpoint: 768,
+	// 		      settings: {
+	// 		        slidesToShow: 2
+	// 		      }
+	// 		    },
+	// 		    {
+	// 		      breakpoint: 480,
+	// 		      settings: {
+	// 		        slidesToShow: 1
+	// 		      }
+	// 		    }
+	// 		  ]
+	// 	});
 
-		$('#cultura_religion').not('.slick-initialized').slick({
-			autoplay: false,
-			autoplaySpeed: 3000,
-			slidesToShow: 4,
-			centerPadding: '60px',
-			prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
-			nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
-			responsive: [
-			    {
-			      breakpoint: 768,
-			      settings: {
-			        slidesToShow: 2
-			      }
-			    },
-			    {
-			      breakpoint: 480,
-			      settings: {
-			        slidesToShow: 1
-			      }
-			    }
-			  ]
-		});
+	// 	$('#cultura_religion').not('.slick-initialized').slick({
+	// 		autoplay: false,
+	// 		autoplaySpeed: 3000,
+	// 		slidesToShow: 4,
+	// 		centerPadding: '60px',
+	// 		prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
+	// 		nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
+	// 		responsive: [
+	// 		    {
+	// 		      breakpoint: 768,
+	// 		      settings: {
+	// 		        slidesToShow: 2
+	// 		      }
+	// 		    },
+	// 		    {
+	// 		      breakpoint: 480,
+	// 		      settings: {
+	// 		        slidesToShow: 1
+	// 		      }
+	// 		    }
+	// 		  ]
+	// 	});
 
-		$('#salud_sexualidad').not('.slick-initialized').slick({
-			autoplay: false,
-			autoplaySpeed: 3000,
-			slidesToShow: 4,
-			centerPadding: '60px',
-			prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
-			nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
-			responsive: [
-			    {
-			      breakpoint: 768,
-			      settings: {
-			        slidesToShow: 2
-			      }
-			    },
-			    {
-			      breakpoint: 480,
-			      settings: {
-			        slidesToShow: 1
-			      }
-			    }
-			  ]
-		});
+	// 	$('#salud_sexualidad').not('.slick-initialized').slick({
+	// 		autoplay: false,
+	// 		autoplaySpeed: 3000,
+	// 		slidesToShow: 4,
+	// 		centerPadding: '60px',
+	// 		prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
+	// 		nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
+	// 		responsive: [
+	// 		    {
+	// 		      breakpoint: 768,
+	// 		      settings: {
+	// 		        slidesToShow: 2
+	// 		      }
+	// 		    },
+	// 		    {
+	// 		      breakpoint: 480,
+	// 		      settings: {
+	// 		        slidesToShow: 1
+	// 		      }
+	// 		    }
+	// 		  ]
+	// 	});
 
 
 
 
-		$('#similar_video').not('.slick-initialized').slick({
-			autoplay: false,
-			slidesToShow: 6,
-			centerPadding: '60px',
-			prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
-			nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
-			responsive: [
-			    {
-			      breakpoint: 1024,
-			      settings: {
-			        slidesToShow: 4
-			      }
-			    },
-			    {
-			      breakpoint: 768,
-			      settings: {
-			        slidesToShow: 3
-			      }
-			    },
-			    {
-			      breakpoint: 480,
-			      settings: {
-			        slidesToShow: 2
-			      }
-			    }
-			  ]
-		});
+	// 	$('#similar_video').not('.slick-initialized').slick({
+	// 		autoplay: false,
+	// 		slidesToShow: 6,
+	// 		centerPadding: '60px',
+	// 		prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
+	// 		nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
+	// 		responsive: [
+	// 		    {
+	// 		      breakpoint: 1024,
+	// 		      settings: {
+	// 		        slidesToShow: 4
+	// 		      }
+	// 		    },
+	// 		    {
+	// 		      breakpoint: 768,
+	// 		      settings: {
+	// 		        slidesToShow: 3
+	// 		      }
+	// 		    },
+	// 		    {
+	// 		      breakpoint: 480,
+	// 		      settings: {
+	// 		        slidesToShow: 2
+	// 		      }
+	// 		    }
+	// 		  ]
+	// 	});
 
-		$('.gallery').not('.slick-initialized').slick({
-			autoplay: false,
-			slidesToShow: 6,
-			centerPadding: '60px',
-			prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
-			nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
-			responsive: [
-			    {
-			      breakpoint: 1024,
-			      settings: {
-			        slidesToShow: 4
-			      }
-			    },
-			    {
-			      breakpoint: 768,
-			      settings: {
-			        slidesToShow: 3
-			      }
-			    },
-			    {
-			      breakpoint: 480,
-			      settings: {
-			        slidesToShow: 2
-			      }
-			    }
-			  ]
-		});
+	// 	$('.gallery').not('.slick-initialized').slick({
+	// 		autoplay: false,
+	// 		slidesToShow: 6,
+	// 		centerPadding: '60px',
+	// 		prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
+	// 		nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
+	// 		responsive: [
+	// 		    {
+	// 		      breakpoint: 1024,
+	// 		      settings: {
+	// 		        slidesToShow: 4
+	// 		      }
+	// 		    },
+	// 		    {
+	// 		      breakpoint: 768,
+	// 		      settings: {
+	// 		        slidesToShow: 3
+	// 		      }
+	// 		    },
+	// 		    {
+	// 		      breakpoint: 480,
+	// 		      settings: {
+	// 		        slidesToShow: 2
+	// 		      }
+	// 		    }
+	// 		  ]
+	// 	});
 
-		$('.news-carousel').not('.slick-initialized').slick({
-			autoplay: false,
-			autoplaySpeed: 3000,
-			slidesToShow: 3,
-			centerPadding: '60px',
-			prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
-			nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
-			responsive: [
-			    {
-			      breakpoint: 768,
-			      settings: {
-			        slidesToShow: 2
-			      }
-			    },
-			    {
-			      breakpoint: 480,
-			      settings: {
-			        slidesToShow: 1
-			      }
-			    }
-			  ]
-		});
+	// 	$('.news-carousel').not('.slick-initialized').slick({
+	// 		autoplay: false,
+	// 		autoplaySpeed: 3000,
+	// 		slidesToShow: 3,
+	// 		centerPadding: '60px',
+	// 		prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
+	// 		nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
+	// 		responsive: [
+	// 		    {
+	// 		      breakpoint: 768,
+	// 		      settings: {
+	// 		        slidesToShow: 2
+	// 		      }
+	// 		    },
+	// 		    {
+	// 		      breakpoint: 480,
+	// 		      settings: {
+	// 		        slidesToShow: 1
+	// 		      }
+	// 		    }
+	// 		  ]
+	// 	});
 		
-	});
+	// });
 
 	// Vertical align navbar
 	var $nav = $('.nav').height();
