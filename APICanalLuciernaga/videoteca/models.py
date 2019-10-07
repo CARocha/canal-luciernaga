@@ -8,7 +8,7 @@ from noticias.models import Categoria
 
 class Tipo(models.Model):
     nombre = models.CharField(max_length = 255)
-    slug = models.SlugField(max_length = 250, editable= False)
+    slug = models.SlugField(max_length = 250, editable = False)
     
     class Meta:
          ordering = ['-id']
@@ -19,7 +19,6 @@ class Tipo(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nombre)
         super(Tipo, self).save(*args, **kwargs)
-
 
 class Director(models.Model):
     nombre = models.CharField(max_length = 255)
