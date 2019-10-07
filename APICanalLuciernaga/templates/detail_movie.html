@@ -5,6 +5,17 @@
 {% block content %}
 {% if episodio %}
 	{% video episodio.link '800x600' %}
+	<br>
+
+	Temporadas <br>
+	{% for temp in temporadas %}
+		Temporada {{temp.temporada}} <br>
+		<br>
+		{% for ep in temp.episodio_set.all %}
+			<a href="{% url 'episodio_detail' slug temp.temporada ep.slug %}">{{ep}}</a> <br>
+		{% endfor %}
+	{% endfor %}
+	
 {% else %}
 	{% video object.url '800x600' %}
 {% endif %}

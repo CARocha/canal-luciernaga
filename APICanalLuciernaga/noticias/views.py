@@ -23,12 +23,31 @@ class CategoriaNoticiaViewSet(viewsets.ModelViewSet):
 # Web Views
 def home(request,template='index.html'):
 	highlight_news = Comunicacion.objects.filter(ultimo_momento=1,tipo=1)[:5]
+
+	#lo nuevo
 	latest_video = Video.objects.order_by('-id')[:10]
+	dict = {}
+	for x in latest_video:
+		similares = Video.objects.filter(tipo = x.tipo,categoria__in = x.categoria.all()).exclude(id = x.id)
+		dict[x] = similares
+
+	#resto de tipos
+	# tipo = {}
+	# for x in Tipo.objects.all():
+	# 	videos_list = Video.objects.filter(tipo__nombre=x).order_by('-id')
+	# 	if videos_list:
+	# 		tipo[x.nombre] = videos_list
+
 	tipo = {}
 	for x in Tipo.objects.all():
 		videos_list = Video.objects.filter(tipo__nombre=x).order_by('-id')
+		videos = {}
+		for vid in videos_list:
+			similares = Video.objects.filter(tipo = vid.tipo,categoria__in = vid.categoria.all()).exclude(id = vid.id)
+			videos[vid] = similares
 		if videos_list:
-			tipo[x.nombre] = videos_list
+			tipo[x.nombre] = videos
+	####
 
 	bann_vid = Video.objects.filter(portada=True).order_by('-id')[:3]
 

@@ -3,5 +3,14 @@
 {% load embed_video_tags %}
 
 {% block content %}
-	{% video episodio.link '800x600' %}
+	{% video episodio.link '800x600' %} <br>
+
+	Temporadas <br>
+	{% for temp in temporadas %}
+		Temporada {{temp.temporada}} <br>
+		<br>
+		{% for ep in temp.episodio_set.all %}
+			<a href="{% url 'episodio_detail' slug temp.temporada ep.slug %}">{{ep}}</a> <br>
+		{% endfor %}
+	{% endfor %}
 {% endblock content %}
