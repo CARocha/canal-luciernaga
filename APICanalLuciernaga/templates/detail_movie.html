@@ -1,10 +1,11 @@
-{% extends "base.html" %}
+{% extends "basevideo.html" %}
 {% load thumbnail %}
 {% load embed_video_tags %}
 
 {% block content %}
+
 {% if episodio %}
-	{% video episodio.link '800x600' %}
+	{% video episodio.link '854x480' %}
 	<br>
 
 	Temporadas <br>
@@ -16,8 +17,13 @@
 		{% endfor %}
 	{% endfor %}
 	
+
 {% else %}
-	{% video object.url '800x600' %}
+<div class="container-fluid">
+	<div class="plyr__video-embed" id="player" autoplay="true">
+		{% video object.url '854x480' %}
+	</div>
+</div>
 {% endif %}
 
 

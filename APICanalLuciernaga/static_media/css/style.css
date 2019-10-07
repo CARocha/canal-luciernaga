@@ -310,7 +310,7 @@ hr.space-40 {
 
 .section {
     padding-top: 20px;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
 }
 
 .section.negative-margin {
@@ -1071,8 +1071,6 @@ a.arrow-button:hover {
     position: relative;
 
     overflow: hidden;
-
-    margin-bottom: 20px;
 }
 
 .slick-slide .movie-poster img {
