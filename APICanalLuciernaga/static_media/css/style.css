@@ -309,8 +309,8 @@ hr.space-40 {
 /**  Sections  **/
 
 .section {
-    padding-top: 75px;
-    padding-bottom: 75px;
+    padding-top: 20px;
+    padding-bottom: 50px;
 }
 
 .section.negative-margin {
@@ -1542,11 +1542,7 @@ a.arrow-button:hover {
 }
 
 .comingSoon-slides .single-slide {
-
-
-    height: 0;
-    opacity: 1;
-
+    padding: 10px;
 }
 
 .comingSoon-slides span.title {
