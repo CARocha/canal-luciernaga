@@ -505,3 +505,7 @@ a.close_collapse {
 .nav.nav-custom li.active a:after{
 	background: transparent;
 }
+.plyr__video-embed iframe {
+    top: -50%;
+    height: 200%;
+}

@@ -31,9 +31,15 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="search">
-								<a href="#">
+								<!--<a href="#">
 									<i class="material-icons">search</i>
-								</a>
+								</a> -->
+								<form method="get" class="searchform search-form form-inline" action="/buscador">
+							        <div class="form-group bottommargin_0"> 
+							        	<input type="text" value="" name="search" class="form-control" placeholder="buscador" id="modal-search-input"> 
+							        </div> 
+							        <button type="submit">search</button>
+							    </form>
 							</div>
 							
 						</div>
@@ -58,9 +64,9 @@
 						<li class="active dropdown">
 							<a href="/">Inicio</a>
 							<ul class="dropdown-menu">
-								<li><a href="/videos/peliculas/" class="white-color">Peliculas</a></li>
-								<li><a href="/videos/series/" class="white-color">series</a></li>
-								<li><a href="/videos/documentales/" class="white-color">Documentales</a></li>
+								{% for x in tipos %}
+									<li><a href="{% url 'list_videos' x.slug %}" class="white-color">{{x}}</a></li>
+								{% endfor %}
 								<li><a href="/biblioteca/" class="white-color">Biblioteca</a></li>
 							</ul>
 						</li>

@@ -8,12 +8,17 @@ from noticias.models import Categoria
 
 class Tipo(models.Model):
     nombre = models.CharField(max_length = 255)
+    slug = models.SlugField(max_length = 250, editable= False)
     
     class Meta:
          ordering = ['-id']
 
     def __str__(self):
         return self.nombre
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.nombre)
+        super(Tipo, self).save(*args, **kwargs)
 
 
 class Director(models.Model):
@@ -42,7 +47,7 @@ class Video(models.Model):
     pais = models.ForeignKey(Pais, on_delete = models.CASCADE,verbose_name='País')
     duracion = models.CharField('Duración',max_length=20)
     url = models.URLField(null = True, blank = True)
-    slug = models.SlugField(max_length = 250, unique=True, editable= False)
+    slug = models.SlugField(max_length = 250,editable= False)
 
     def __str__(self):
         return self.nombre
@@ -62,6 +67,11 @@ TEMPORADAS_CHOICE = [
     (3, 'Temporada 3'),
     (4, 'Temporada 4'),
     (5, 'Temporada 5'),
+    (6, 'Temporada 6'),
+    (7, 'Temporada 7'),
+    (8, 'Temporada 8'),
+    (9, 'Temporada 9'),
+    (10, 'Temporada 10'),
 ]
 
 class Temporada(models.Model):
@@ -79,9 +89,14 @@ class Episodio(models.Model):
     titulo = models.CharField('Título',max_length = 225)
     sinopsis = models.TextField('Sinopsis',max_length=200)
     duracion = models.CharField('Duración',max_length=20)
+    slug = models.SlugField(max_length = 250, editable= False)
 
     def __str__(self):
         return self.titulo
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.titulo)
+        super(Episodio, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Episodio"

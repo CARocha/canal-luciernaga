@@ -1,5 +1,6 @@
 from programacion.models import *
-import datetime
+import datetime 
+from videoteca.models import *
 
 def directo(request):
 	hoy = datetime.date.today()
@@ -13,3 +14,9 @@ def directo(request):
 		result = False
 		
 	return {'directo' : result,}
+
+def tipos_video(request):
+	videos = Video.objects.values_list('tipo',flat = True)
+	tipos = Tipo.objects.filter(id__in = videos)
+
+	return {'tipos':tipos}

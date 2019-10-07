@@ -9,10 +9,15 @@ from usuario.models import User
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length =225)
+    slug = models.SlugField(max_length = 250, editable= False) 
 
     def __str__(self):
         return self.nombre
     
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.nombre)
+        super(Categoria, self).save(*args, **kwargs)
+        
     class Meta:
         verbose_name = "Categoria"
         verbose_name_plural = "Categorias"

@@ -12,28 +12,12 @@
 			<div class="col-md-9">
 				<span class="title"></span>
 				<h1>
-					{% if request.path == '/videos/documentales/' %}
-						Documentales
-						{% endif %}
-						{% if request.path == '/videos/series/' %}
-						Series
-						{% endif %}
-						{% if request.path == '/videos/peliculas/' %}
-						Peliculas
-						{% endif %}
+					{{name}}
 				</h1>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="/">Inicio</a></li>
 					<li class="breadcrumb-item active white-color" aria-current="page">
-						{% if request.path == '/videos/documentales/' %}
-						Documentales
-						{% endif %}
-						{% if request.path == '/videos/series/' %}
-						Series
-						{% endif %}
-						{% if request.path == '/videos/peliculas/' %}
-						Peliculas
-						{% endif %}
+						{{name}}
 				</li>
 				</ol>
 
@@ -113,7 +97,7 @@
 							</li>
 							{% endif %}	
 						</ul>
-					
+				
 						<!-- Tab panes -->
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="{{x}}_{{video.id}}-detalles">
