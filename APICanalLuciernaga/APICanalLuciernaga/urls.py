@@ -26,6 +26,9 @@ from noticias.views import ComunicacionViewSet, CategoriaNoticiaViewSet
 from videoteca.views import VideoViewSet, EpisodioViewSet,TipoVideoTecaViewSet, CategoriaVideoTecaViewSet
 from lugar.views import PaisViewSet
 
+admin.site.site_header = 'Administración Nativa Media'
+admin.site.site_title = 'Nativa Media'
+
 router = routers.DefaultRouter()
 router.register('biblioteca', BibliotecaViewSet)
 router.register('programacion', HoraProgramacionViewSet)
