@@ -20,37 +20,14 @@ class TipoVideoTecaViewSet(viewsets.ModelViewSet):
 	queryset = Tipo.objects.all()
 	serializer_class = TipoSerializer
 
-def Movies(request,template='movies.html'):
-	videos_all = Video.objects.all()
+def list_videos(request,tipo,template='movies.html'):
 	movies_by_cat = {}
 	for x in Categoria.objects.all():
-		filt_movies = Video.objects.filter(categoria=x,tipo__nombre='Peliculas').order_by('-id')
+		filt_movies = Video.objects.filter(categoria=x,tipo__slug=tipo).order_by('-id')
 		if filt_movies.exists():
 			movies_by_cat[x] = filt_movies
-
+	name = Tipo.objects.get(slug = tipo)
 	return render(request,template,locals())
-
-def Series(request,template='movies.html'):
-	videos_all = Video.objects.all()
-	is_serie = True
-	movies_by_cat = {}
-	for x in Categoria.objects.all():
-		filt_movies = Video.objects.filter(categoria=x,tipo__nombre='Series').order_by('-id')
-		if filt_movies.exists():
-			movies_by_cat[x] = filt_movies
-
-	return render(request,template,locals())
-
-def Documental(request,template='movies.html'):
-	videos_all = Video.objects.all()
-	movies_by_cat = {}
-	for x in Categoria.objects.all():
-		filt_movies = Video.objects.filter(categoria=x,tipo__nombre='Documentales').order_by('-id')
-		if filt_movies.exists():
-			movies_by_cat[x] = filt_movies
-
-	return render(request,template,locals())
-
 
 def Video_detail(request,slug,template='detail_movie.html'):
 	object = Video.objects.get(slug=slug)
@@ -58,8 +35,9 @@ def Video_detail(request,slug,template='detail_movie.html'):
 		episodio = Episodio.objects.filter(temporada__info_video = object).order_by('id').first()
 	return render(request,template,locals())
 
-def episodio_detail(request,id,template='detail_episodio.html'):
-	episodio = Episodio.objects.get(id=id)
+def episodio_detail(request,slug,temporada,episodio,template='detail_episodio.html'):
+	episodio = Episodio.objects.get(temporada__info_video__slug = slug,temporada__temporada = temporada,slug=episodio)
+	print(episodio)
 	return render(request,template,locals())
 
 def GetVideoInfo(request):

@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request', ## For EL-pagination
                 'APICanalLuciernaga.context.directo',
+                'APICanalLuciernaga.context.tipos_video',
 
             ],
         },

@@ -12,28 +12,12 @@
 			<div class="col-md-9">
 				<span class="title"></span>
 				<h1>
-					{% if request.path == '/videos/documentales/' %}
-						Documentales
-						{% endif %}
-						{% if request.path == '/videos/series/' %}
-						Series
-						{% endif %}
-						{% if request.path == '/videos/peliculas/' %}
-						Peliculas
-						{% endif %}
+					{{name}}
 				</h1>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="/">Inicio</a></li>
 					<li class="breadcrumb-item active white-color" aria-current="page">
-						{% if request.path == '/videos/documentales/' %}
-						Documentales
-						{% endif %}
-						{% if request.path == '/videos/series/' %}
-						Series
-						{% endif %}
-						{% if request.path == '/videos/peliculas/' %}
-						Peliculas
-						{% endif %}
+						{{name}}
 				</li>
 				</ol>
 
@@ -195,7 +179,7 @@
 					<div class="col-sm-12 col-xs-12 slide-content">
 						<!-- dropdown inline de temporada y cap -->
 						<div>
-							<div class="d-inline-block">
+							<!--<div class="d-inline-block">
 								<div class="dropdown show">
 									<a class="btn btn-secondary dropdown-toggle light_hover" href="#" role="button" id="dropdownSeason" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										Temporada
@@ -208,9 +192,9 @@
 										<a class="dropdown-item" href="#">3</a>
 									</div>
 								</div>
-							</div>
+							</div>-->
 
-							<div class="d-inline-block">
+							<!--<div class="d-inline-block">
 
 								<div class="dropdown show">
 									<a class="btn btn-secondary dropdown-toggle light_hover" href="#" role="button" id="dropdownSeason" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -223,7 +207,7 @@
 										<a class="dropdown-item" href="#">3</a>
 									</div>
 								</div>
-							</div>
+							</div>-->
 						</div>
 
 						{% for temp in det_vid.temporada_set.all %}

@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from .models import *
 from .serializers import ComunicacionSerializer, CategoriaSerializer
 
-from videoteca.models import Video,Temporada,Episodio
+from videoteca.models import *
 from django.db.models import Q
 
 # Create your views here.
@@ -24,9 +24,12 @@ class CategoriaNoticiaViewSet(viewsets.ModelViewSet):
 def home(request,template='index.html'):
 	highlight_news = Comunicacion.objects.filter(ultimo_momento=1,tipo=1)[:5]
 	latest_video = Video.objects.order_by('-id')[:10]
-	series_list = Video.objects.filter(tipo__nombre='Series').order_by('-id')
-	peli_list = Video.objects.filter(tipo__nombre='Peliculas').order_by('-id')
-	doc_list = Video.objects.filter(tipo__nombre='Documentales').order_by('-id')
+	tipo = {}
+	for x in Tipo.objects.all():
+		videos_list = Video.objects.filter(tipo__nombre=x).order_by('-id')
+		if videos_list:
+			tipo[x.nombre] = videos_list
+
 	bann_vid = Video.objects.filter(portada=True).order_by('-id')[:3]
 
 	return render(request,template,locals())
@@ -49,11 +52,10 @@ def news_detail(request,slug,template='news_detail.html'):
 	return render(request,template,locals())
 
 
-def buscador(request,template = 'movies.html'):
+def buscador(request,template = 'buscador.html'):
 	if request.GET.get('search'):
 		q = request.GET['search']
 		videos = Video.objects.filter(Q(nombre__icontains = q)| Q(categoria__nombre__icontains = q)).order_by('-id')
-		print(videos)
 	
 	return render(request,template,locals())
 
