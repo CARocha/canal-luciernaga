@@ -446,10 +446,10 @@ aside.info{
 	text-align: right !important;
 }
 .owl-dots .owl-dot span{
-	height: 5px !important;
-	width: 15px !important;
+	height: 3px !important;
+	width: 10px !important;
 	border-radius: 0px !important;
-	margin: 5px !important;
+	margin: 3px !important;
 }
 
 .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
