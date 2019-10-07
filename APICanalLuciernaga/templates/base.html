@@ -140,25 +140,13 @@
 	</div>
 
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 	var prev_det;
 
 	function showmore(idvid, cat){
 		var video_id = idvid;
 		var data = {video_id};
-		// $.ajax({
-		// 	type : 'GET',
-		// 	url :  "{% url 'get_video_info' %}",
-		// 	data : data,
-		// 	success : function(response){
-		// 		// alert(response.video_info.nombre);
-		// 		document.getElementById('cat_title').innerHTML = response.video_info.nombre;
-		// 		document.getElementById('name_video_det').innerHTML = response.video_info.nombre;
-		// 	},
-		// 	error : function(response){
-		// 		alert(response);
-		// 	}
-		// });
+
 		$('#selected_det_id').val(idvid);
 		hide_active(idvid,cat);	 // ocultar si hay otro activo en ese momento
 		$('#video_name_'+idvid+'_'+cat).addClass('hidden');
@@ -185,7 +173,7 @@
 		$('i.material-icons').closest('section').addClass('hidden');
 		$('#activelitab_'+idvid+'_'+cat).removeClass('active');
 	}
-	</script>
+	</script> -->
 
 	<script src="/static/js/jquery-2.2.4.min.js"></script>
 	<script src="/static/js/jquery-ui.min.js"></script>
@@ -203,31 +191,41 @@
 
 	<script>
 	$(document).ready(function(){
-  $('.owl-carousel').owlCarousel({
-		loop: true,
-		margin: 10,
-		responsiveClass: true,
-		responsive: {
-			0: {
-				items: 1,
-				nav: true
-			},
-			600: {
-				items: 3,
-				nav: true
-			},
-			1000: {
-				items: 4,
+		$('.owl-carousel').owlCarousel({
+				loop: true,
+				margin: 10,
+				responsiveClass: true,
 				nav: true,
-				loop: false,
-				margin: 20
-			}
-		}
-	});
+				responsive: {
+					0: {
+						items: 1,
+						nav: true
+					},
+					600: {
+						items: 3,
+						nav: true
+					},
+					1000: {
+						items: 4,
+						loop: false,
+						margin: 20
+					}
+				}
+			});
 
-});
-	</script>
+		});
 	
+		
+	</script>
+	<script type="text/javascript">
+		function reply_click(clicked_id)
+		{	
+			$('.collapse').removeClass('in');
+			var selectedUrl = clicked_id.split('#')[1];
+			//var prueba = selectedUrl.split('_')[0];
+			//alert(selectedUrl);
+		}
+	</script>
 
 	{% block extra_js %}{% endblock extra_js %}
 </body>

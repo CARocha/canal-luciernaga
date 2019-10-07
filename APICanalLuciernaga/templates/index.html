@@ -26,18 +26,17 @@
 					<div class="col-md-9 main-items">
 						
 						<h3 class="no-underline white-color bann_name">{{banner}}</h3>
-						<div class="buttons top_padd_20">
+						<div class="buttons top_padd_10">
+							<div>
+								{% for cat in banner.categoria.all|slice:"3" %}
+								<span class="title">{{cat}}</span>{% if not forloop.last %},{% endif %}
+								{% endfor%}
+							</div>
 							<p style="width:500px">
 								{{banner.sinopsis|truncatechars:100}}
 							</p>
-							<a class="venobox btn btn-ghost">
-								{% for cat in banner.categoria.all|slice:"1" %}
-									<span>{{cat}}</span>								
-								{% endfor %}
-							</a>
 							
-
-							<a href="{% if banner.tipo == 1 %} {{banner.url}} {% else %} {% endif %} " data-vbtype="video" class="venobox btn btn-default">
+							<a href="{% if banner.tipo == 1 %} {{banner.url}} {% else %} {% endif %} " data-vbtype="video" class="btn btn-default">
 								<i class="material-icons">play_arrow</i>
 								<span>Reproducir</span>
 							</a>
@@ -53,102 +52,298 @@
 	</div>
 </div>
 
-<!-- 	Breaking news	-->
-<!-- <div class="bg-bnews" style="margin-top: 20px; background-color: #2b2b2b; border-radius: 15px;">
-	<div class="row bnews-padding">
-		<div>
-			<span class="badge badge-danger bnews-title">Última hora:</span>
-			<div class="bnews-slider nobottommargin">
-				<div class="slide flex-active-slide" style="width: 970px; margin-right: 0px; float: left; display: block;">
 
-					<marquee scrollamount='7'>
-						{% for news in highlight_news %}
-						<div class="d-inline-block rigt_mar_200 white-color">
-							<a class="white-color">{{news.pais}}: {{news.titulo}}</a>
-						</div>
-						{% endfor %}					
-					</marquee>
+<div class="nuevos" >			
+	<div class="container section pb-0">
+		<div class="row">
+			<div class="large-12 columns">
+				<h2>Nuevo en Luciernaga</h2>
+				<div class="owl-carousel owl-theme slick-slide">
+					{% for video in latest_video %}
+					<div class="movie-poster grow">
+						<aside>
+							<div>
+								<a href="{% url 'Video_detail' video.slug %}" class="play">
+									<i class="material-icons">play_arrow</i>
+								</a>
+								<a class="titulo">{{video.nombre}}</a>
+								<span class="date">
+									{% for cat in video.categoria.all|slice:"3" %}
+										<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
+									{% endfor%}
+								</span>
+								<a class="material-icons expand-more" data-toggle="collapse" href="#nuevo_{{video.id}}" onClick="reply_click(this.href)">
+										keyboard_arrow_down
+								</a>
+								
+							</div>
+						</aside>
+					
+						{% thumbnail video.imagen "1280x720" crop="center" as im %}
+						<img src="{{ im.url }}" alt="">
+						{% empty %}
+						<img src="http://via.placeholder.com/1280x720 " alt="">
+						{% endthumbnail %}
+						
+					
+					</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>
-		
 	</div>
-</div> -->
+	{% for video in latest_video %}
+	<!-- Section -->
+	<section class="dark collapse" id="nuevo_{{video.id}}" data-parent="#accordion">
+		<a class="close_collapse" data-toggle="collapse" data-target="#nuevo_{{video.id}}" aria-expanded="false" aria-controls="nuevo_{{video.id}}">
+			<span class="material-icons">close</span>
+		</a>
+		<div class="container remove-bottom-padding">
+			<div class="row comingSoon-slides">
+				<div class="col-sm-12">
+					
+					<div role="tabpanel">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs nav-custom" role="tablist">
+							<li role="presentation" class="active">
+								<a href="#nuevo{{video.id}}-detalles"  aria-controls="#nuevo{{video.id}}-detalles" role="tab" data-toggle="tab">{{video.nombre}}</a>
+							</li>
+							{% if video.tipo.nombre == 'Series' %}
+							<li role="presentation">
+								<a href="#nuevo{{video.id}}-episodio" aria-controls="#nuevo{{video.id}}-episodio" role="tab" data-toggle="tab">Episodios</a>
+							</li>
+							{% endif %}
+							<li role="presentation">
+								<a href="#nuevo{{video.id}}-similares" aria-controls="#nuevo{{video.id}}-similares" role="tab" data-toggle="tab">Similares</a>
+							</li>
+							
+						</ul>
+					
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="nuevo{{video.id}}-detalles">
+								<div class="row single-slide">
+									<div class="col-sm-5 col-xs-12 slide-content">
+										{% for cat in video.categoria.all|slice:"3" %}
+										<span class="title">{{cat}}</span>{% if not forloop.last %},{% endif %}
+										{% endfor%}
+										<h3 class="no-underline">{{video.nombre}}</h3>
+										<div class="date">
+											<i class="material-icons">date_range</i> {{video.fecha|date:"d F Y"}}
+											<i class="material-icons" style="margin-left: 5px;">
+													av_timer
+											</i>{{video.duracion}}
+										</div>
+										
+										<p>{{video.sinopsis}}<p>
+										<span class="details">Productora: {{video.produccion}}</span>
+										<span class="">|</span>
+										<span class="details">Pais: {{video.pais}}</span>
+									</div>
+									<div class="col-sm-6 col-xs-12 col-sm-push-1 slide-video">
+										<a href="{% url 'Video_detail' video.slug %}" data-vbtype="video" class="video">
+											<i class="material-icons">play_arrow</i>
+											{% thumbnail video.imagen "1280x720" crop="center" as im %}
+												<img src="{{ im.url }}" alt="">
+											{% empty %}
+												<img src="http://via.placeholder.com/1280x720 " alt="">
+											{% endthumbnail %}
+										</a>
+									</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="nuevo{{video.id}}-similares">
+								<div class="row">
+									<div class="col-sm-12 col-xs-12">
+										<div class="owl-carousel owl-theme slick-slide">
+											{% for cat in video.categoria.all %}
+										
+												{% for latestvid in latest_video %}
+											
+													{% for cat_vid in latestvid.categoria.all %}
+			
+													{% if cat_vid.id == cat.id and video.id != latestvid.id %}
+			
+													<div class="movie-poster grow">
+														<aside>
+															<div>
+																<a href="" class="play">
+																	<i class="material-icons">play_arrow</i>
+																</a>
+																<a class="titulo">{{latestvid}}</a>
+																<span class="date">
+																	{% for cat in latestvid.categoria.all|slice:"3" %}
+																		<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
+																	{% endfor%}
+																</span>
+																
+															</div>
+														</aside>
+													
+														{% thumbnail latestvid.imagen "1280x720" crop="center" as im %}
+														<img src="{{im.url}}" alt="">
+	
+														{%empty%}
+														<img src="http://via.placeholder.com/1280x720" alt="">
+														{% endthumbnail%}
+														
+													
+													</div>
+			
+												{% endif %}
+												{% endfor %}
+												{% endfor %}
+											{% endfor %}
+			
+			
+			
+											{% for sim_vid in video.categoria_set.all %}
+											<h1>{{sim_vid}}</h1>
+											{% if sim_vid.id != video.id%}
+											<div class="item">
+			
+												<div>
+													<a href="#">
+														{% thumbnail sim_vid.imagen "256x340" crop="center" as im %}
+														<img src="{{im.url}}" alt="">
+			
+														{%empty%}
+														<img src="http://via.placeholder.com/265x340" alt="">
+														{% endthumbnail%}
+													</a>
+													<h4 class="left no-underline"> {{sim_vid}}</h4>
+												</div>
+			
+											</div>
+			
+											{% endif %}
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+							</div>
+							{% if video.tipo.nombre == 'Series' %}
+							<div role="tabpanel" class="tab-pane" id="nuevo{{video.id}}-episodio">
+								<div class="row">
+									<div class="col-sm-12 col-xs-12 slide-content">
+										<!-- dropdown inline de temporada y cap -->
+										<div>
+											<div class="d-inline-block">
+												<div class="dropdown show">
+													<a class="btn btn-secondary dropdown-toggle light_hover" href="#" role="button" id="dropdownSeason" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														Temporada
+														<i class="material-icons">arrow_drop_down</i>
+													</a>
+			
+													<div class="dropdown-menu" aria-labelledby="dropdownSeason">
+														<a class="dropdown-item active" href="#">1</a>
+														<a class="dropdown-item" href="#">2</a>
+														<a class="dropdown-item" href="#">3</a>
+													</div>
+												</div>
+											</div>
+			
+											<div class="d-inline-block">
+			
+												<div class="dropdown show">
+													<a class="btn btn-secondary dropdown-toggle light_hover" href="#" role="button" id="dropdownSeason" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														Episodio <i class="material-icons">arrow_drop_down</i>
+													</a>
+			
+													<div class="dropdown-menu" aria-labelledby="dropdownSeason">
+														<a class="dropdown-item active" href="#">1</a>
+														<a class="dropdown-item" href="#">2</a>
+														<a class="dropdown-item" href="#">3</a>
+													</div>
+												</div>
+											</div>
+										</div>
+							
+										{% for temp in video.temporada_set.all %}
+			
+										<h1>Temporada {{temp.id}}</h1>
+										<div class="owl-carousel owl-theme">
+											{% for ep in temp.episodio_set.all %}
+											<div class="item">
+												<div>
+			
+													<a href="#">
+														{% thumbnail ep.imagen "256x340" crop="center" as im %}
+														<img src="{{im.url}}" alt="">
+			
+														{%empty%}
+														<img src="http://via.placeholder.com/265x340" alt="">
+														{% endthumbnail%}
+													</a>
+													<h4 class="left no-underline"> {{ep}}</h4>
+												</div>
+			
+											</div>
+											{% endfor %}
+										</div>
+			
+										{% endfor %}
+			
+									</div>
+			
+								</div>
+							</div>
+							{% endif %}
+						</div>
+					</div>
+						
 
+					
+					
+
+					
+					
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	{% endfor %}
+</div>
+
+{% comment %}
 <!-- 	Nuevo en	-->
 <div class="container section">
 	<div class="row">
         <div class="large-12 columns">
 			<h2>Nuevo en Luciernaga</h2>
-			<div class="owl-carousel owl-theme">
+			<div class="owl-carousel owl-theme slick-slide">
 				{% for video in latest_video %}
-				<div class="item">
-					<div class="poster">
-						<a href="#">
-							{% thumbnail video.imagen "263x197" crop="center" as im %}
-							<img src="{{ im.url }}" alt="">
-							{% empty %}
-							<img src="http://via.placeholder.com/450x337" alt="">
-							{% endthumbnail %}
-						</a>
-						<h4 class="no-underline white-color">
-							{{video.nombre}}
-							<span>
+				<div class="movie-poster grow">
+					<aside>
+						<div>
+							<a href="{% url 'Video_detail' video.slug %}" class="play">
+								<i class="material-icons">play_arrow</i>
+							</a>
+							<a class="titulo">{{video.nombre}}</a>
+							<span class="date">
+								{% for cat in video.categoria.all|slice:"3" %}
+									<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
+								{% endfor%}
+							</span>
 							<i class="material-icons expand-more" onclick="showmore({{video.id}},0)">
 								expand_more
 							</i>
-						</span>
-						</h4>
-
-					</div>
+							
+						</div>
+					</aside>
+				
+					{% thumbnail video.imagen "1280x720" crop="center" as im %}
+					<img src="{{ im.url }}" alt="">
+					{% empty %}
+					<img src="http://via.placeholder.com/1280x720 " alt="">
+					{% endthumbnail %}
+					
+				
 				</div>
 				
 				{% endfor %}
 			</div>
-
-			<!--<div class="slick-carousel" id="newIn">
-				{% for video in latest_video %}
-				<div class="movie-slide">
-					<div class="movie-poster">
-						<aside>
-							<div>
-								<a href="" class="venobox play">
-									<i class="material-icons">play_arrow</i>
-								</a>
-								<div style="padding-top: 15px;">
-									<span class="date"><strong>{{video.nombre}}</strong> </span>
-									<span class="date">
-										{% for cat in video.categoria.all|slice:"3" %}
-										<i class="material-icons" style="
-										font-size: 8px;
-										">
-											fiber_manual_record
-										</i>{{cat}}
-										{% endfor %}										
-									</span>					
-									<span>
-										<i class="material-icons expand-more" onclick="showmore({{video.id}},0)" href="#activeVideo_{{video.id}}_0">
-											expand_more
-										</i>
-									</span>
-								</div>
-							</div>
-						</aside>
-						<a href="#">
-							{% thumbnail video.imagen "360x270" crop="center" as im %}
-							<img src="{{ im.url }}" alt="">
-							{% empty %}
-							<img src="http://via.placeholder.com/450x337" alt="">
-							{% endthumbnail %}
-						</a>
-					</div>
-					<h4 class="no-underline white-color">
-						<p>{{video.nombre}}</p>
-					</h4> 
-				</div>
-					
-				{% endfor %}
-			</div>-->
 		</div>
 	</div>
 </div>
@@ -200,7 +395,7 @@
 						</span>
 					</div>
 					<div class="col-sm-6 col-xs-12 col-sm-push-1 slide-video">
-						<!--  class venobox se comentario para poder mandar link detalle-->
+						
 						<a href="{% url 'Video_detail' video.slug %}" data-vbtype="video" class="video">
 							<i class="material-icons">play_arrow</i>
 							{% thumbnail video.imagen "539x307" crop="center" as im%}
@@ -347,90 +542,50 @@
 {% endfor %}
 
 
-<!--  Series	-->
-<div class="container">
-	<div class="row">
-		<div class="col-sm-12">
-			<h2>Series</h2>
-			
-				<div class="owl-carousel owl-theme">
-					{% for serie in series_list %}
-					<div class="item">
-						<div class="poster">
-							<a href="#">
-								{% thumbnail serie.imagen "263x197" crop="center" as im %}
-								<img src="{{ im.url }}" alt="">
-								{% empty %}
-								<img src="http://via.placeholder.com/450x337" alt="">
-								{% endthumbnail %}
-							</a>
-							<h4 class="no-underline white-color">
-								{{serie.nombre}}
-								<span>
-									<i class="material-icons expand-more" onclick="showmore({{serie.id}},1)">
-										expand_more
-									</i>
-								</span>
-							</h4>
 
-						</div>
+	
+{% endcomment %}
+
+<!--  Series	-->
+	<div class="container section pb-0">
+		<div class="row">
+			<div class="large-12 columns">
+				<h2>Series</h2>
+				<div class="owl-carousel owl-theme slick-slide">
+					{% for serie in series_list %}
+					<div class="movie-poster grow">
+						<aside>
+							<div>
+								<a href="" class="play">
+									<i class="material-icons">play_arrow</i>
+								</a>
+								<a class="titulo">{{serie.nombre}}</a>
+								<span class="date">
+									{% for cat in serie.categoria.all|slice:"3" %}
+										<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
+									{% endfor%}
+								</span>
+								<a class="material-icons expand-more" data-toggle="collapse" href="#serie_{{serie.id}}" onClick="reply_click(this.href)">
+										keyboard_arrow_down
+								</a>
+								
+							</div>
+						</aside>
+					
+						{% thumbnail serie.imagen "1280x720" crop="center" as im %}
+						<img src="{{ im.url }}" alt="">
+						{% empty %}
+						<img src="http://via.placeholder.com/1280x720 " alt="">
+						{% endthumbnail %}
+						
+					
 					</div>
 					{% endfor %}
 				</div>
-			
-			<!--<div class="slick-carousel" id="Series">
-
-				<div class="movie-slide">
-					<div class="movie-poster">
-						<aside>
-							<div>
-								<a href="" class="venobox play">
-									<i class="material-icons">play_arrow</i>
-								</a>
-								<div style="padding-top: 15px;">
-									<span class="date"><strong>{{serie.nombre}}</strong> </span>
-									<span class="date">
-										{% for cat in serie.categoria.all|slice:"3" %}
-										<i class="material-icons" style="
-										font-size: 8px;
-										">
-											fiber_manual_record
-										</i>{{cat}}
-										{% endfor %}										
-									</span>					
-									<p id="expand-action" onclick="showmore({{serie.id}},1)">
-										<i class="material-icons expand-more">
-											expand_more
-										</i>
-									</p>
-								</div>
-							</div>
-						</aside>
-						<a href="#">
-							{% thumbnail serie.imagen "270x337" crop="center" as im %}
-							<img src="{{ im.url }}" alt="">
-							{% empty %}
-							<img src="http://via.placeholder.com/270x337" alt="">
-							{% endthumbnail %}
-						</a>
-					</div>
-
-					<span class="title genrecolor"></span>
-					<h4 class="no-underline white-color">
-						<a id="expand-icon_{{serie.id}}" href="" class="hidden">
-							<i class="material-icons" style="font-size: 32px;">
-								expand_more
-							</i>
-						</a>
-						<p id="video_name_{{serie.id}}">{{serie}}</p>
-					</h4> 
-				</div>
-
-				
-			</div>-->
+			</div>
 		</div>
 	</div>
-</div>
+
 
 
 {% for video in series_list %}
@@ -603,60 +758,45 @@
 
 
 <!-- peliculas -->
-<div class="container section ">
+<div class="container section pb-0">
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="large-12 columns">
 			<h2>Peliculas</h2>
-			<div class="slick-carousel" id="Movies">
+			<div class="owl-carousel owl-theme slick-slide">
 				{% for peli in peli_list %}
+				<div class="movie-poster grow">
+					<aside>
+						<div>
+							<a href="" class="play">
+								<i class="material-icons">play_arrow</i>
+							</a>
+							<a class="titulo">{{peli.nombre}}</a>
+							<span class="date">
+								{% for cat in peli.categoria.all|slice:"3" %}
+									<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
+								{% endfor%}
+							</span>
+							<a class="material-icons expand-more" data-toggle="collapse" href="#peli_{{peli.id}}" onClick="reply_click(this.href)">
+									keyboard_arrow_down
+							</a>
+							
+						</div>
+					</aside>
 				
-				<div class="movie-slide">
-					<div class="movie-poster">
-						<aside>
-							<div>
-								<a href="" class="venobox play">
-									<i class="material-icons">play_arrow</i>
-								</a>
-								<div style="padding-top: 15px;">
-									<span class="date">{{peli.nombre}}</span>
-									<span class="date">
-										{% for cat in peli.categoria.all|slice:"3" %}
-											<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
-										{% endfor%}
-									</span>
-
-									<span>
-										<i class="material-icons" onclick="showmore({{peli.id}},2)">
-											expand_more
-										</i>
-									</span>
-								</div>
-							</div>
-						</aside>
-						<a href="#">
-							{% thumbnail peli.imagen "270x337" crop="center" as im %}
-							<img src="{{ im.url }}" alt="">
-							{% empty %}
-							<img src="http://via.placeholder.com/270x337" alt="">
-							{% endthumbnail %}
-						</a>
-					</div>
-					<!-- <span class="title genrecolor"></span>-->
-					<h4 class="no-underline white-color">
-						<a id="expand-icon_{{peli.id}}" href="" class="hidden">
-							<i class="material-icons" style="font-size: 32px;">
-								expand_more
-							</i>
-						</a>
-						<p id="video_name_{{peli.id}}">{{peli}}</p>
-					</h4> 
+					{% thumbnail peli.imagen "1280x720" crop="center" as im %}
+					<img src="{{ im.url }}" alt="">
+					{% empty %}
+					<img src="http://via.placeholder.com/1280x720 " alt="">
+					{% endthumbnail %}
+					
+				
 				</div>
 				{% endfor %}
-
 			</div>
 		</div>
 	</div>
 </div>
+
 
 {% for video in peli_list %}
 
@@ -760,59 +900,48 @@
 {% endfor %}
 
 <!-- Documentales-->
-<div class="container section">
+<div class="container section pb-0">
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="large-12 columns">
 			<h2>Documentales</h2>
-			<div class="slick-carousel" id="Documental">
+			<div class="owl-carousel owl-theme slick-slide">
 				{% for doc in doc_list %}
-				<div class="movie-slide">
-					<div class="movie-poster">
-						<aside>
-							<div>
-								<a href="" class="venobox play">
-									<i class="material-icons">play_arrow</i>
-								</a>
-								<div style="padding-top: 15px;">
-									<span class="date">{{doc}}</span>
-
-									<span class="date">
-										{% for cat in doc.categoria.all|slice:"3" %}
-											<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
-										{% endfor%}
-									</span>											
-									<span>
-										<i class="material-icons" onclick="showmore({{doc.id}},3)">
-											expand_more
-										</i>
-									</span>
-								</div>
-							</div>
-						</aside>
-						<a href="#">
-							{% thumbnail doc.imagen "270x337" crop="center" as im %}
-							<img src="{{ im.url }}" alt="">
-							{% empty %}
-							<img src="http://via.placeholder.com/270x337" alt="">
-							{% endthumbnail %}
-						</a>
-					</div>
-					<!--<span class="title genrecolor">Ficcion</span> -->
-					<h4 class="no-underline white-color">
-						<a id="expand-icon_{{doc.id}}" href="" class="hidden">
-							<i class="material-icons" style="font-size: 32px;">
-								expand_more
-							</i>
-						</a>
-						<p id="video_name_{{doc.id}}">{{doc}}</p>
-					</h4>
+				<div class="movie-poster grow">
+					<aside>
+						<div>
+							<a href="" class="play">
+								<i class="material-icons">play_arrow</i>
+							</a>
+							<a class="titulo">{{doc.nombre}}</a>
+							<span class="date">
+								{% for cat in doc.categoria.all|slice:"3" %}
+									<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
+								{% endfor%}
+							</span>
+							<a class="material-icons expand-more" data-toggle="collapse" href="#doc_{{doc.id}}" onClick="reply_click(this.href)">
+									keyboard_arrow_down
+							</a>
+							
+						</div>
+					</aside>
+				
+					{% thumbnail doc.imagen "1280x720" crop="center" as im %}
+					<img src="{{ im.url }}" alt="">
+					{% empty %}
+					<img src="http://via.placeholder.com/1280x720 " alt="">
+					{% endthumbnail %}
+					
+				
 				</div>
 				{% endfor %}
-				
 			</div>
 		</div>
 	</div>
 </div>
+
+
+
+
 
 {% for video in doc_list %}
 

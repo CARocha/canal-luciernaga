@@ -107,8 +107,7 @@
 }
 
 .expand-more{
-	font-size: 32px !important;
-	padding-top: 30px;
+	font-size: 30px !important;
 	color: white;
 }
 
@@ -440,3 +439,69 @@ aside.info{
 	transform: skewX(30deg);
 	opacity: .9;
 }*/
+.owl-nav.disabled+.owl-dots{
+	margin-top: 0px !important;
+}
+.owl-dots {
+	text-align: right !important;
+}
+.owl-dots .owl-dot span{
+	height: 5px !important;
+	width: 15px !important;
+	border-radius: 0px !important;
+	margin: 5px !important;
+}
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+	background-color: #faa82f !important;
+}
+a.close_collapse {
+    display: block;
+	text-align: right;
+	padding: 10px;
+}
+.pb-0{
+	padding-bottom: 0px !important;
+}
+
+.grow {transition: all .2s ease-in-out;}
+.grow:hover {transform: scale(1.12);}
+.owl-nav {
+	position: absolute;
+	top: 10%;
+	left: 0;
+	right: 0;
+}
+.owl-theme .owl-next, .owl-theme .owl-prev {
+	position: absolute;
+	height: 100px;
+	width: 30px;
+	color: inherit;
+	background: none;
+	border: none;
+	z-index: 100;
+}
+.owl-theme .owl-next span,.owl-theme .owl-prev span {
+	font-size: 2.5rem;
+	color: #cecece;
+}
+.owl-theme .owl-prev {
+	position: absolute;
+	left: 0 !important;
+}
+.owl-theme .owl-next {
+	position: absolute;
+	bottom: 20;
+	right: 0 !important;
+}
+
+/***tabs***/
+.nav-custom{
+	position: relative !important;
+}
+.nav.nav-custom li.active a{
+	color: black;
+}
+.nav.nav-custom li.active a:after{
+	background: transparent;
+}

@@ -211,33 +211,7 @@ jQuery(function ($) {
 		});
 
 
-		$('#comingSoon').not('.slick-initialized').slick({
-			autoplay: false,
-			slidesToShow: 6,
-			centerPadding: '60px',
-			prevArrow: '<i class="material-icons left">keyboard_arrow_left</i>',
-			nextArrow: '<i class="material-icons right">keyboard_arrow_right</i>',
-			responsive: [
-			    {
-			      breakpoint: 1024,
-			      settings: {
-			        slidesToShow: 4
-			      }
-			    },
-			    {
-			      breakpoint: 768,
-			      settings: {
-			        slidesToShow: 3
-			      }
-			    },
-			    {
-			      breakpoint: 480,
-			      settings: {
-			        slidesToShow: 2
-			      }
-			    }
-			  ]
-		});
+
 
 		$('#similar_video').not('.slick-initialized').slick({
 			autoplay: false,
