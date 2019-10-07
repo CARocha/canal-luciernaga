@@ -54,6 +54,12 @@ def Documental(request,template='movies.html'):
 
 def Video_detail(request,slug,template='detail_movie.html'):
 	object = Video.objects.get(slug=slug)
+	if object.tipo.nombre == 'Series':
+		episodio = Episodio.objects.filter(temporada__info_video = object).order_by('id').first()
+	return render(request,template,locals())
+
+def episodio_detail(request,id,template='detail_episodio.html'):
+	episodio = Episodio.objects.get(id=id)
 	return render(request,template,locals())
 
 def GetVideoInfo(request):

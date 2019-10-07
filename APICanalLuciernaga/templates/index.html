@@ -228,7 +228,7 @@
 									<div class="col-sm-12 col-xs-12 slide-content">
 										<!-- dropdown inline de temporada y cap -->
 										<div>
-											<div class="d-inline-block">
+											<!--<div class="d-inline-block">
 												<div class="dropdown show">
 													<a class="btn btn-secondary dropdown-toggle light_hover" href="#" role="button" id="dropdownSeason" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 														Temporada
@@ -236,14 +236,14 @@
 													</a>
 			
 													<div class="dropdown-menu" aria-labelledby="dropdownSeason">
-														<a class="dropdown-item active" href="#">1</a>
-														<a class="dropdown-item" href="#">2</a>
-														<a class="dropdown-item" href="#">3</a>
+														{% for temp in video.temporada_set.all %}
+															<a class="dropdown-item {% if forloop.first %}active{% endif %}" href="#">{{temp.temporada}}</a>
+														{% endfor %}
 													</div>
 												</div>
-											</div>
+											</div>-->
 			
-											<div class="d-inline-block">
+											<!--<div class="d-inline-block">
 			
 												<div class="dropdown show">
 													<a class="btn btn-secondary dropdown-toggle light_hover" href="#" role="button" id="dropdownSeason" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -256,7 +256,7 @@
 														<a class="dropdown-item" href="#">3</a>
 													</div>
 												</div>
-											</div>
+											</div>-->
 										</div>
 							
 										{% for temp in video.temporada_set.all %}
@@ -267,7 +267,7 @@
 											<div class="item">
 												<div>
 			
-													<a href="#">
+													<a href="{% url 'episodio_detail' ep.id %}">
 														{% thumbnail ep.imagen "256x340" crop="center" as im %}
 														<img src="{{im.url}}" alt="">
 			

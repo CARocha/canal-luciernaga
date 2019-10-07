@@ -62,6 +62,11 @@ TEMPORADAS_CHOICE = [
     (3, 'Temporada 3'),
     (4, 'Temporada 4'),
     (5, 'Temporada 5'),
+    (6, 'Temporada 6'),
+    (7, 'Temporada 7'),
+    (8, 'Temporada 8'),
+    (9, 'Temporada 9'),
+    (10, 'Temporada 10'),
 ]
 
 class Temporada(models.Model):

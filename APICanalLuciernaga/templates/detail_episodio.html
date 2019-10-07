@@ -3,11 +3,5 @@
 {% load embed_video_tags %}
 
 {% block content %}
-{% if episodio %}
 	{% video episodio.link '800x600' %}
-{% else %}
-	{% video object.url '800x600' %}
-{% endif %}
-
-
 {% endblock content %}
