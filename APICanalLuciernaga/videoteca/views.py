@@ -3,6 +3,7 @@ from .models import *
 from .serializers import VideoSerializer, EpisodioSerializer, CategoriaSerializer, TipoSerializer
 from django.shortcuts import render
 from django.http import JsonResponse
+from .forms import *
 
 class VideoViewSet(viewsets.ModelViewSet):
 	queryset = Video.objects.all()
@@ -21,12 +22,33 @@ class TipoVideoTecaViewSet(viewsets.ModelViewSet):
 	serializer_class = TipoSerializer
 
 def list_videos(request,tipo,template='movies.html'):
-	movies_by_cat = {}
-	for x in Categoria.objects.all():
-		filt_movies = Video.objects.filter(categoria=x,tipo__slug=tipo).order_by('-id')
-		if filt_movies.exists():
-			movies_by_cat[x] = filt_movies
 	name = Tipo.objects.get(slug = tipo)
+
+	if request.method == 'POST':
+		form = CategoriasFilter(request.POST,tipo = tipo)
+		if form.is_valid():
+			cate = form.cleaned_data['categorias']
+			cat = {}
+			for x in Categoria.objects.filter(id = cate.id):
+				videos_list = Video.objects.filter(categoria=x,tipo__slug=tipo).order_by('-id')
+				videos = {}
+				for vid in videos_list:
+					similares = Video.objects.filter(tipo = vid.tipo,categoria__in = vid.categoria.all()).exclude(id = vid.id)
+					videos[vid] = similares
+				if videos_list:
+					cat[x.nombre] = videos
+	else:
+		form = CategoriasFilter(tipo = tipo)
+		cat = {}
+		for x in Categoria.objects.all():
+			videos_list = Video.objects.filter(categoria=x,tipo__slug=tipo).order_by('-id')
+			videos = {}
+			for vid in videos_list:
+				similares = Video.objects.filter(tipo = vid.tipo,categoria__in = vid.categoria.all()).exclude(id = vid.id)
+				videos[vid] = similares
+			if videos_list:
+				cat[x.nombre] = videos
+
 	return render(request,template,locals())
 
 def Video_detail(request,slug,template='detail_movie.html'):
