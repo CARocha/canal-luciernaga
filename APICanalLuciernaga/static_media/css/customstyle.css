@@ -103,7 +103,7 @@
 }
 
 .bg-bnews{
-	background-image: linear-gradient(to right, #c77016,#FF9E11, #dbdc98);
+	background-image: linear-gradient(to right, #c77016,#e76115, #dbdc98);
 }
 
 .expand-more{
@@ -513,12 +513,16 @@ a.close_collapse {
 	margin-bottom: 15px;
 }
 .title-movie:hover h4{
- color: #FF9E11 !important;
+ color: #e76115 !important;
 }
 
 .slick-slide .movie-poster.episodios aside div{
  height: 70%;
  padding: 10px 0px
+}
+.movie-poster .hover-tab{
+	height: 75%;
+	padding: 10px 0px
 }
 
 .slick-slide .title-movie h4{
@@ -528,26 +532,52 @@ a.close_collapse {
 .mb-10{
 	margin-bottom: 10px !important;
 }
-#floorplanSelect{
+.mt-10{
+	margin-top: 10px !important;
+}
+select[class*='floorplanSelect']{
 	background: transparent;
     color: white;
     border: 0;
     width: auto;
 	font-size: 20px;
-	border-bottom: 1px solid #d8d8d8;
 	line-height: 1.4em;
     position: relative;
-    margin: 0 0 10px 0;
-    padding: 0 0 20px 0;
+	margin: 10px 0 10px 0;
+	padding: 0px;
+}
+select[class*='floorplanSelect'] option{
+	background: #101010;
 }
 
-#floorplanSelect:after{
-	position: absolute;
-    right: auto;
-    bottom: -1px;
-    display: block;
-    width: 125px;
-    height: 4px;
-    content: '';
-    background-image: linear-gradient(to right, #faa82f, #e76115);
+select[class*='floorplanSelect']:focus{
+	box-shadow: none;
+}
+
+select[class*='serieselect']{
+	background: transparent;
+    color: white;
+    border: 0;
+    width: auto;
+	font-size: 20px;
+	line-height: 1.4em;
+    position: relative;
+	margin: 10px 0 10px 0;
+	padding: 0px;
+}
+select[class*='serieselect'] option{
+	background: #101010;
+}
+
+select[class*='serieselect']:focus{
+	box-shadow: none;
+}
+
+.slick-slide .movie-poster aside .play:hover{
+	color: #e76115;
+	border-color: #e76115;
+}
+
+.tab-content h2.mb-10{
+ padding: 0px;
 }
