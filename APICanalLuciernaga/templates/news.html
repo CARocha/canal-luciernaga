@@ -90,13 +90,14 @@
 
 		<aside class="col-sm-3 col-sm-push-1 sidebar">
 			<div class="widget">
-				<form>
-					<input type="text" placeholder="Buscar..." class="search" />
+				<form method="get" action="{% url 'buscador_news' %}">
+					<input type="text" placeholder="{% if q %}{{q}}{% else %}Buscar...{% endif %}" class="search" name="search" />
 					<i class="material-icons">search</i>
+					<button type="submit">buscar</button>
 				</form>
 			</div>
 			<div class="widget">
-				<h3>Temas</h3>
+				<h3>Categorías</h3>
 				<ul>
 					{% for themat in thematic_list %}
 						

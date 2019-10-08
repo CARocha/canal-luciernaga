@@ -27,157 +27,412 @@
 
 </div>
 
-{% for x,y in movies_by_cat.items %}
-<div class="container section {% if not forloop.last %}rm_padd_bottom{% endif %}">
-	<div class="row">
-		<div class="large-12 columns">
-			<h2>{{x}}</h2>
-			<div class="owl-carousel owl-theme slick-slide">
-				{% for video in  y %}
-				<div class="item">
-					<div class="movie-poster grow">
-						<aside>
-							<div>
-								<a href="{% url 'Video_detail' video.slug %}" class="play">
-									<i class="material-icons">play_arrow</i>
-								</a>
-								<span class="date">
-									{% for cat in video.categoria.all|slice:"3" %}
-										<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
-									{% endfor%}
-								</span>
-								<a class="material-icons expand-more" data-toggle="collapse" href="#{{x}}_{{video.id}}" onClick="reply_click(this.href)">
-										keyboard_arrow_down
-								</a>
-								
-							</div>
-						</aside>
-					
-						{% thumbnail video.imagen "1280x720" crop="center" as im %}
-						<img src="{{ im.url }}" alt="">
-						{% empty %}
-						<img src="http://via.placeholder.com/1280x720 " alt="">
-						{% endthumbnail %}
-					</div>
-					<div>
-						<h4 id="video_name_{{video.id}}_{{x.id}}" class="no-underline white-color hg_video">
-							{{video}}
-						</h4> 
-						<a id="expand-icon_{{video.id}}_{{x.id}}" href="" class="hidden">
-							<i class="material-icons" style="font-size: 32px;">
-								expand_more
-							</i>
-						</a>
-					</div>
-				</div>
-				
-				{% endfor %}
-			</div>
-		</div>
-	</div>
-</div>
+<form action="." method="POST">{% csrf_token %}
+{{form}}
+<button type="submit">Consultar</button>
+</form>
 
-{% for video in  y %}
-	<section class="dark collapse" id="{{x}}_{{video.id}}" data-parent="#accordion">
-		<a class="close_collapse" data-toggle="collapse" data-target="#{{x}}_{{video.id}}" aria-expanded="false" aria-controls="nuevo_{{video.id}}">
-			<span class="material-icons">close</span>
-		</a>
-		<div class="container remove-bottom-padding">
-			<div class="row comingSoon-slides">
-				<div class="col-sm-12">
-					<div role="tabpanel">
-						<!-- Nav tabs -->
-						<ul class="nav nav-tabs nav-custom" role="tablist">
-							<li role="presentation" class="active">
-								<a href="#{{x}}_{{video.id}}-detalles"  aria-controls="#{{x}}_{{video.id}}-detalles" role="tab" data-toggle="tab">{{video.nombre}}</a>
-							</li>
-							{% if video.tipo.nombre == 'Series' %}
-							<li role="presentation">
-								<a href="#{{x}}_{{video.id}}-episodio" aria-controls="#{{x}}_{{video.id}}-episodio" role="tab" data-toggle="tab">Episodios</a>
-							</li>
-							{% endif %}	
-						</ul>
-				
-						<!-- Tab panes -->
-						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane active" id="{{x}}_{{video.id}}-detalles">
-								<div class="row single-slide">
-									<div class="col-sm-5 col-xs-12 slide-content">
-										{% for cat in video.categoria.all|slice:"3" %}
-										<span class="title">{{cat}}</span>{% if not forloop.last %},{% endif %}
-										{% endfor%}
-										<h3 class="no-underline">{{video.nombre}}</h3>
-										<div class="date">
-											<i class="material-icons">date_range</i> {{video.fecha|date:"d F Y"}}
-											<i class="material-icons" style="margin-left: 5px;">
-													av_timer
-											</i>{{video.duracion}}
-										</div>
-										
-										<p>{{video.sinopsis}}<p>
-										<span class="details">Productora: {{video.produccion}}</span>
-										<span class="">|</span>
-										<span class="details">Pais: {{video.pais}}</span>
-									</div>
-									<div class="col-sm-6 col-xs-12 col-sm-push-1 slide-video">
-										<a href="{% url 'Video_detail' video.slug %}" data-vbtype="video" class="video">
+{% for k,v in cat.items %}
+	<!-- series -->
+	{% if name.nombre == 'Series' %}
+		<div class="series">
+			<div class="container section">
+				<div class="row">
+					<div class="large-12 columns">
+						<h2>{{k}}</h2>
+						<div class="owl-carousel owl-theme slick-slide">
+							{% for serie in v %}
+							<div class="movie-poster grow">
+								<aside>
+									<div>
+										<a href="" class="play">
 											<i class="material-icons">play_arrow</i>
-											{% thumbnail video.imagen "1280x720" crop="center" as im %}
-												<img src="{{ im.url }}" alt="">
-											{% empty %}
-												<img src="http://via.placeholder.com/1280x720 " alt="">
-											{% endthumbnail %}
+										</a>
+										<a class="titulo">{{serie.nombre}}</a>
+										<span class="date">
+											{% for cat in serie.categoria.all|slice:"3" %}
+												<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
+											{% endfor%}
+										</span>
+										<a class="material-icons expand-more" data-toggle="collapse" href="#serie_{{serie.id}}" onClick="reply_click(this.href)">
+											keyboard_arrow_down
 										</a>
 									</div>
-								</div>
+								</aside>
+								{% thumbnail serie.imagen "1280x720" crop="center" as im %}
+								<img src="{{ im.url }}" alt="">
+								{% empty %}
+								<img src="http://via.placeholder.com/1280x720 " alt="">
+								{% endthumbnail %}
 							</div>
-							{% if video.tipo.nombre == 'Series' %}
-							<div role="tabpanel" class="tab-pane" id="{{x}}_{{video.id}}-episodio">
-								<div class="row">
-									<div class="col-sm-12 col-xs-12 slide-content">
-							
-										{% for temp in video.temporada_set.all %}
-			
-										<h1>Temporada {{temp.id}}</h1>
-										<div class="owl-carousel owl-theme">
-											{% for ep in temp.episodio_set.all %}
-											<div class="item">
-												<div>
-			
-													<a href="#">
-														{% thumbnail ep.imagen "256x340" crop="center" as im %}
-														<img src="{{im.url}}" alt="">
-			
-														{%empty%}
-														<img src="http://via.placeholder.com/265x340" alt="">
-														{% endthumbnail%}
-													</a>
-													<h4 class="left no-underline"> {{ep}}</h4>
-												</div>
-			
-											</div>
-											{% endfor %}
-										</div>
-			
-										{% endfor %}
-			
-									</div>
-			
-								</div>
-							</div>
-							{% endif %}
+							{% endfor %}
 						</div>
 					</div>
 				</div>
 			</div>
+			{% for video,similares in v.items %}
+			<section class="dark collapse" id="serie_{{video.id}}" data-parent="#accordion">
+				<a class="close_collapse" data-toggle="collapse" data-target="#serie_{{video.id}}" aria-expanded="false" aria-controls="nuevo_{{video.id}}">
+					<span class="material-icons">close</span>
+				</a>
+				<div class="container remove-bottom-padding">
+					<div class="row comingSoon-slides">
+						<div class="col-sm-12">
+							<div role="tabpanel">
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs nav-custom" role="tablist">
+									<li role="presentation" class="active">
+										<a href="#serie{{video.id}}-detalles" aria-controls="#serie{{video.id}}-detalles" role="tab" data-toggle="tab">{{video.nombre}}</a>
+									</li>
+									<li role="presentation">
+										<a href="#serie{{video.id}}-episodio" aria-controls="#serie{{video.id}}-episodio" role="tab" data-toggle="tab">Episodios</a>
+									</li>
+									{% if similares %}
+									<li role="presentation">
+										<a href="#serie{{video.id}}-similares" aria-controls="#serie{{video.id}}-similares" role="tab" data-toggle="tab">Similares</a>
+									</li>
+									{% endif %}
+								</ul>
+								<div class="tab-content">
+									<div role="tabpanel" class="tab-pane active" id="serie{{video.id}}-detalles">
+										<div class="row single-slide">
+											<div class="col-sm-5 col-xs-12 slide-content">
+												{% for cat in video.categoria.all|slice:"3" %}
+												<span class="title">{{cat}}</span>{% if not forloop.last %},{% endif %}
+												{% endfor%}
+												<h3 class="no-underline">{{video.nombre}}</h3>
+												<div class="date">
+													<i class="material-icons">date_range</i> {{video.fecha|date:"d F Y"}}
+													<i class="material-icons" style="margin-left: 5px;">
+															av_timer
+													</i>{{video.duracion}}
+												</div>
+												
+												<p>{{video.sinopsis}}<p>
+												<span class="details">Productora: {{video.produccion}}</span>
+												<span class="">|</span>
+												<span class="details">Pais: {{video.pais}}</span>
+											</div>
+											<div class="col-sm-6 col-xs-12 col-sm-push-1 slide-video">
+												<a href="{% url 'Video_detail' video.slug %}" data-vbtype="video" class="video">
+													<i class="material-icons">play_arrow</i>
+													{% thumbnail video.imagen "1280x720" crop="center" as im %}
+														<img src="{{ im.url }}" alt="">
+													{% empty %}
+														<img src="http://via.placeholder.com/1280x720 " alt="">
+													{% endthumbnail %}
+												</a>
+											</div>
+										</div>
+									</div>
+									
+									<div role="tabpanel" class="tab-pane" id="serie{{video.id}}-episodio">
+										<div class="row">
+											<div class="col-sm-12 col-xs-12 slide-content">
+												<!-- dropdown inline de temporada y cap -->
+												<!--<div>
+													<div class="d-inline-block">
+														<div class="dropdown show">
+															<a class="btn btn-secondary dropdown-toggle light_hover" href="#" role="button" id="dropdownSeason" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																Temporada
+																<i class="material-icons">arrow_drop_down</i>
+															</a>
+					
+															<div class="dropdown-menu" aria-labelledby="dropdownSeason">
+																<a class="dropdown-item active" href="#">1</a>
+																<a class="dropdown-item" href="#">2</a>
+																<a class="dropdown-item" href="#">3</a>
+															</div>
+														</div>
+													</div>
+					
+													<div class="d-inline-block">
+					
+														<div class="dropdown show">
+															<a class="btn btn-secondary dropdown-toggle light_hover" href="#" role="button" id="dropdownSeason" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																Episodio <i class="material-icons">arrow_drop_down</i>
+															</a>
+					
+															<div class="dropdown-menu" aria-labelledby="dropdownSeason">
+																<a class="dropdown-item active" href="#">1</a>
+																<a class="dropdown-item" href="#">2</a>
+																<a class="dropdown-item" href="#">3</a>
+															</div>
+														</div>
+													</div>
+												</div>-->
+									
+												{% for temp in video.temporada_set.all %}
+					
+												<h1>Temporada {{temp.temporada}}</h1>
+												<div class="owl-carousel owl-theme">
+													{% for ep in temp.episodio_set.all|dictsort:"id" %}
+													<div class="item">
+														<div>
+					
+															<a href="{% url 'episodio_detail' video.slug temp.temporada ep.slug %}">
+																{% thumbnail ep.imagen "256x340" crop="center" as im %}
+																<img src="{{im.url}}" alt="">
+					
+																{%empty%}
+																<img src="http://via.placeholder.com/265x340" alt="">
+																{% endthumbnail%}
+															</a>
+															<h4 class="left no-underline"> {{ep}}</h4>
+														</div>
+					
+													</div>
+													{% endfor %}
+												</div>
+					
+												{% endfor %}
+					
+											</div>
+					
+										</div>
+									</div>
+									
+									<div role="tabpanel" class="tab-pane" id="serie{{video.id}}-similares">
+										<div class="row">
+											<div class="col-sm-12 col-xs-12">
+												<div class="owl-carousel owl-theme slick-slide">
+													{% for similar in similares %}
+											
+													<div class="movie-poster grow">
+														<aside>
+															<div>
+																<a href="{% url 'episodio_detail' similar.slug similar.temporada_set.first.temporada similar.temporada_set.first.episodio_set.first.slug %}" class="play">
+																	<i class="material-icons">play_arrow</i>
+																</a>
+																<a class="titulo">{{similar}}</a>
+																<span class="date">
+																	{% for cat in similar.categoria.all|slice:"3" %}
+																		<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
+																	{% endfor%}
+																</span>
+																
+															</div>
+														</aside>
+													
+														{% thumbnail similar.imagen "1280x720" crop="center" as im %}
+														<img src="{{im.url}}" alt="">
+	
+														{%empty%}
+														<img src="http://via.placeholder.com/1280x720" alt="">
+														{% endthumbnail%}
+														
+													
+													</div>
+											{% endfor %}
+					
+					
+					
+													<!--{% for sim_vid in video.categoria_set.all %}
+													<h1>{{sim_vid}}</h1>
+													{% if sim_vid.id != video.id%}
+													<div class="item">
+					
+														<div>
+															<a href="#">
+																{% thumbnail sim_vid.imagen "256x340" crop="center" as im %}
+																<img src="{{im.url}}" alt="">
+					
+																{%empty%}
+																<img src="http://via.placeholder.com/265x340" alt="">
+																{% endthumbnail%}
+															</a>
+															<h4 class="left no-underline"> {{sim_vid}}</h4>
+														</div>
+					
+													</div>
+					
+													{% endif %}
+													{% endfor %}-->
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</section>
+			{% endfor %}
 		</div>
-	</section>
+	{% else %}
+		<div class="{{k}}">
+			<!-- peliculas -->
+			<div class="container section">
+				<div class="row">
+					<div class="large-12 columns">
+						<h2>{{k}}</h2>
+						<div class="owl-carousel owl-theme slick-slide">
+							{% for peli in v %}
+							<div class="movie-poster grow">
+								<aside>
+									<div>
+										<a href="" class="play">
+											<i class="material-icons">play_arrow</i>
+										</a>
+										<a class="titulo">{{peli.nombre}}</a>
+										<span class="date">
+											{% for cat in peli.categoria.all|slice:"3" %}
+												<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
+											{% endfor%}
+										</span>
+										<a class="material-icons expand-more" data-toggle="collapse" href="#peli_{{peli.id}}" onClick="reply_click(this.href)">
+												keyboard_arrow_down
+										</a>
+										
+									</div>
+								</aside>
+							
+								{% thumbnail peli.imagen "1280x720" crop="center" as im %}
+								<img src="{{ im.url }}" alt="">
+								{% empty %}
+								<img src="http://via.placeholder.com/1280x720 " alt="">
+								{% endthumbnail %}
+								
+							
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			{% for video,similares in v.items %}
+
+
+			<section class="dark collapse" id="peli_{{video.id}}" data-parent="#accordion">
+				<a class="close_collapse" data-toggle="collapse" data-target="#peli_{{video.id}}" aria-expanded="false" aria-controls="nuevo_{{video.id}}">
+					<span class="material-icons">close</span>
+				</a>
+				<div class="container remove-bottom-padding">
+					<div class="row comingSoon-slides">
+						<div class="col-sm-12">
+							<div role="tabpanel">
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs nav-custom" role="tablist">
+									<li role="presentation" class="active">
+										<a href="#peli{{video.id}}-detalles" aria-controls="#peli{{video.id}}-detalles" role="tab" data-toggle="tab">{{video.nombre}}</a>
+									</li>
+									{% if similares %}
+									<li role="presentation">
+										<a href="#peli{{video.id}}-similares" aria-controls="#peli{{video.id}}-similares" role="tab" data-toggle="tab">Similares</a>
+									</li>
+									{% endif %}
+									
+								</ul>
+								<div class="tab-content">
+									<div role="tabpanel" class="tab-pane active" id="peli{{video.id}}-detalles">
+										<div class="row single-slide">
+											<div class="col-sm-5 col-xs-12 slide-content">
+												{% for cat in video.categoria.all|slice:"3" %}
+												<span class="title">{{cat}}</span>{% if not forloop.last %},{% endif %}
+												{% endfor%}
+												<h3 class="no-underline">{{video.nombre}}</h3>
+												<div class="date">
+													<i class="material-icons">date_range</i> {{video.fecha|date:"d F Y"}}
+													<i class="material-icons" style="margin-left: 5px;">
+															av_timer
+													</i>{{video.duracion}}
+												</div>
+												
+												<p>{{video.sinopsis}}<p>
+												<span class="details">Productora: {{video.produccion}}</span>
+												<span class="">|</span>
+												<span class="details">Pais: {{video.pais}}</span>
+											</div>
+											<div class="col-sm-6 col-xs-12 col-sm-push-1 slide-video">
+												<a href="{% url 'Video_detail' video.slug %}" data-vbtype="video" class="video">
+													<i class="material-icons">play_arrow</i>
+													{% thumbnail video.imagen "1280x720" crop="center" as im %}
+														<img src="{{ im.url }}" alt="">
+													{% empty %}
+														<img src="http://via.placeholder.com/1280x720 " alt="">
+													{% endthumbnail %}
+												</a>
+											</div>
+										</div>
+									</div>
+									<div role="tabpanel" class="tab-pane" id="peli{{video.id}}-similares">
+										<div class="row">
+											<div class="col-sm-12 col-xs-12">
+												<div class="owl-carousel owl-theme slick-slide">
+													{% for similar in similares %}
+											
+													<div class="movie-poster grow">
+														<aside>
+															<div>
+																<a href="{% url 'Video_detail' video.slug %}" class="play">
+																	<i class="material-icons">play_arrow</i>
+																</a>
+																<a class="titulo">{{similar}}</a>
+																<span class="date">
+																	{% for cat in similar.categoria.all|slice:"3" %}
+																		<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
+																	{% endfor%}
+																</span>
+																
+															</div>
+														</aside>
+													
+														{% thumbnail similar.imagen "1280x720" crop="center" as im %}
+														<img src="{{im.url}}" alt="">
+	
+														{%empty%}
+														<img src="http://via.placeholder.com/1280x720" alt="">
+														{% endthumbnail%}
+														
+													
+													</div>
+											{% endfor %}
+					
+					
+					
+													<!--{% for sim_vid in video.categoria_set.all %}
+													<h1>{{sim_vid}}</h1>
+													{% if sim_vid.id != video.id%}
+													<div class="item">
+					
+														<div>
+															<a href="#">
+																{% thumbnail sim_vid.imagen "256x340" crop="center" as im %}
+																<img src="{{im.url}}" alt="">
+					
+																{%empty%}
+																<img src="http://via.placeholder.com/265x340" alt="">
+																{% endthumbnail%}
+															</a>
+															<h4 class="left no-underline"> {{sim_vid}}</h4>
+														</div>
+					
+													</div>
+					
+													{% endif %}
+													{% endfor %}-->
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</section>
+			{% endfor %}
+		</div>
+	{% endif %}
 {% endfor %}
-
-
-{% endfor %}<!-- fin for loop videos por categoria -->
-
-
 {% endblock content %}
 
 {% block extra_js %}
