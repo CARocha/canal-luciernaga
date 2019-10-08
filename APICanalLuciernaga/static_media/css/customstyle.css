@@ -509,3 +509,45 @@ a.close_collapse {
     top: -50%;
     height: 200%;
 }
+.movie-poster{
+	margin-bottom: 15px;
+}
+.title-movie:hover h4{
+ color: #FF9E11 !important;
+}
+
+.slick-slide .movie-poster.episodios aside div{
+ height: 70%;
+ padding: 10px 0px
+}
+
+.slick-slide .title-movie h4{
+	margin-bottom: 0px;
+}
+
+.mb-10{
+	margin-bottom: 10px !important;
+}
+#floorplanSelect{
+	background: transparent;
+    color: white;
+    border: 0;
+    width: auto;
+	font-size: 20px;
+	border-bottom: 1px solid #d8d8d8;
+	line-height: 1.4em;
+    position: relative;
+    margin: 0 0 10px 0;
+    padding: 0 0 20px 0;
+}
+
+#floorplanSelect:after{
+	position: absolute;
+    right: auto;
+    bottom: -1px;
+    display: block;
+    width: 125px;
+    height: 4px;
+    content: '';
+    background-image: linear-gradient(to right, #faa82f, #e76115);
+}
