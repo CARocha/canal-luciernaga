@@ -313,7 +313,7 @@
 					</div>
 				</div>
 			</div>
-			{% for video in v %}
+			{% for video,similares in v.items %}
 			<section class="dark collapse" id="serie_{{video.id}}" data-parent="#accordion">
 				<a class="close_collapse" data-toggle="collapse" data-target="#serie_{{video.id}}" aria-expanded="false" aria-controls="nuevo_{{video.id}}">
 					<span class="material-icons">close</span>
@@ -330,9 +330,11 @@
 									<li role="presentation">
 										<a href="#serie{{video.id}}-episodio" aria-controls="#serie{{video.id}}-episodio" role="tab" data-toggle="tab">Episodios</a>
 									</li>
+									{% if similares %}
 									<li role="presentation">
 										<a href="#serie{{video.id}}-similares" aria-controls="#serie{{video.id}}-similares" role="tab" data-toggle="tab">Similares</a>
 									</li>
+									{% endif %}		
 								</ul>
 								<div class="tab-content">
 									<div role="tabpanel" class="tab-pane active" id="serie{{video.id}}-detalles">
