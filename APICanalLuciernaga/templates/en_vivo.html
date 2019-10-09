@@ -5,38 +5,38 @@
 {% block content %}
 
 {% for directo in v_directo|slice:"1" %}
-<div class=" section" style="margin-top:50px;">
+<div class="container section" style="margin-top:120px;">
 
 		
-	
-	<div class="row">
-		<div class="col-sm-12">
-
-		
-			
-
-			<div style="text-align:center">			
-
+	<div class="dark">
+		<div class="row">
+			<div class="col-sm-8">
 				{% video directo.link as my_video %}
-				<iframe width="100%" height="600" src="{{my_video.url}}?modestbranding=1&autoplay=1&controls=1&fs=0&loop=1&rel=0&showinfo=0&disablekb=1&mute=0" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0">
+				<iframe width="100%" height="500" src="{{my_video.url}}?modestbranding=1&autoplay=1&controls=1&fs=0&loop=1&rel=0&showinfo=0&disablekb=1&mute=0" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0">
 				</iframe>
 				{% endvideo %}
-
-			
 			</div>
-
-			<div class="buttons text-center top_padd_30">
-
-				<a href="#inline-content" class="venobox btn btn-default" data-vbtype="inline">
-
-					<span>Programación</span>
-				</a>
+			<div class="col-sm-4">
+				<h2 class="pb-10 pt-10 mb-0">Programación</h2>
+				<ul class="programacion">
+					{% for programa  in directo.horaprogramacion_set.all|dictsort:'id' %}
+						<li>
+							<time datetime="">{{programa.hora_inicio|time:"h:i a"}}
+								<br><small>{{programa.categoria_p}}</small>
+							</time>
+							<p>{{programa.titulo}}</p>
+						</li>
+						{% comment %} {% if programa.descripcion %}
+							<li class="p-desc">
+								{{programa.descripcion}}
+							</li>
+						{% endif %} {% endcomment %}
+					{% endfor %}
+				</ul>				
 			</div>
-
 		</div>
 	</div>
-
-	<div id="inline-content" style="display:none;">
+	{% comment %} <div id="inline-content" style="display:none;">
 		<div class="padd_15">
 			<div class="col-sm-12">
 				<div class="tabs movies">
@@ -62,9 +62,7 @@
 								<h3 class="no-underline white-color">
 									<span class="title">{{programa.titulo}}</span>
 								</h3>
-								{% if programa.descripcion %}
-									<p>{{programa.descripcion}}</p>
-								{% endif %}
+								
 								
 								<span class="white-color">Nicaragua</span>
 							</td>
@@ -79,7 +77,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> {% endcomment %}
 
 
 	
