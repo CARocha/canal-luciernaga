@@ -67,7 +67,10 @@
 								{% for x in tipos %}
 									<li><a href="{% url 'list_videos' x.slug %}" class="white-color">{{x}}</a></li>
 								{% endfor %}
-								<li><a href="/biblioteca/" class="white-color">Biblioteca</a></li>
+								{% if biblioteca %}
+									<li><a href="/biblioteca/" class="white-color">Biblioteca</a></li>
+								{% endif %}
+								
 							</ul>
 						</li>
 						{% if directo == True %}
@@ -83,12 +86,15 @@
 						</li>
 						{% endif %}
 						
+						{% if noticias %}
 						<li class="dropdown">
 							<a href="/noticias">Noticias</a>
-							<ul class="dropdown-menu">
+							<!--<ul class="dropdown-menu">
 								<li><a href="#">Reportaje</a></li>
-							</ul>
+							</ul>-->
 						</li>
+						{% endif %}
+						
 						
 						<li>
 							<a href="/conocenos">Conocenos</a>
