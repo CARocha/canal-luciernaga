@@ -1,16 +1,41 @@
-{% extends "base.html" %}
+{% extends "basevideo.html" %}
 {% load thumbnail %}
 {% load embed_video_tags %}
 
 {% block content %}
-	{% video episodio.link '800x600' %} <br>
+<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="row">
+					<div class="dark up-video">
+						<div class="row">
+							<div class="col-lg-6">
+								<a href="" onclick="window.history.go(-1); return false;">
+									<i class="material-icons">arrow_back</i> Regresar
+								</a>
+							</div>
+							<div class="col-lg-6 text-right">
+								<div class="btn-group">
+									<i class="material-icons">view_list</i> 
+									<a  class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Episodios <span class="caret"></span>
+									</a>
+									<ul class="dropdown-menu">
+										{% for temp in temporadas %}
+										<li>Temporada {{temp.temporada}}</li>
+										{% for ep in temp.episodio_set.all %}
+										<li><a href="{% url 'episodio_detail' slug temp.temporada ep.slug %}">{{ep}}</a></li>
+										{% endfor %}
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 text-center">
+				{% video episodio.link '982x552' %}
+			</div>
 
-	Temporadas <br>
-	{% for temp in temporadas %}
-		Temporada {{temp.temporada}} <br>
-		<br>
-		{% for ep in temp.episodio_set.all %}
-			<a href="{% url 'episodio_detail' slug temp.temporada ep.slug %}">{{ep}}</a> <br>
-		{% endfor %}
-	{% endfor %}
 {% endblock content %}

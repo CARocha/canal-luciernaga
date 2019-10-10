@@ -31,7 +31,10 @@
 				</div>
 			</div>
 		</div>
-	{% if episodio %}
+		<div class="col-lg-12 text-center">
+			{% video object.url '982x552' %}
+		</div>
+	{% comment %} {% if episodio %}
 		{% video episodio.link '854x480' %}
 		<br>
 
@@ -43,15 +46,10 @@
 				<a href="{% url 'episodio_detail' slug temp.temporada ep.slug %}">{{ep}}</a> <br>
 			{% endfor %}
 		{% endfor %}
-		
 
-	{% else %}
+	{% else %} 
 
-			<div class="col-lg-12 text-center">
-				{% video object.url '854x480' %}
-			</div>
-		
-	{% endif %}
+	{% endif %}{% endcomment %}
 	</div>
 </div>
 
