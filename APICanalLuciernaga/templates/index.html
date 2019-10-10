@@ -36,7 +36,11 @@
 								{{banner.sinopsis|truncatechars:100}}
 							</p>
 							
-							<a href="{% url 'Video_detail' banner.slug %}" data-vbtype="video" class="btn btn-default">
+							<a href="{% if banner.tipo.nombre == 'Series' %}
+										{% url 'episodio_detail' banner.slug banner.temporada_set.first.temporada banner.temporada_set.first.episodio_set.first.slug %}
+										{% else %}
+										{% url 'Video_detail' banner.slug %}
+										{% endif %}" data-vbtype="video" class="btn btn-default">
 								<i class="material-icons">play_arrow</i>
 								<span>Reproducir</span>
 							</a>
@@ -60,7 +64,11 @@
 						<div class="movie-poster grow">
 							<aside>
 								<div>
-									<a href="{% url 'Video_detail' video.slug %}" class="play">
+									<a href="{% if video.tipo.nombre == 'Series' %}
+											{% url 'episodio_detail' video.slug video.temporada_set.first.temporada video.temporada_set.first.episodio_set.first.slug %}
+											{% else %}
+											{% url 'Video_detail' video.slug %}
+											{% endif %}" class="play">
 										<i class="material-icons">play_arrow</i>
 									</a>
 									<span class="date">
@@ -83,7 +91,11 @@
 							
 						
 						</div>
-						<a class="title-movie" href="{% url 'Video_detail' video.slug %}">
+						<a class="title-movie" href="{% if video.tipo.nombre == 'Series' %}
+											{% url 'episodio_detail' video.slug video.temporada_set.first.temporada video.temporada_set.first.episodio_set.first.slug %}
+											{% else %}
+											{% url 'Video_detail' video.slug %}
+											{% endif %}">
 							<h4 id="" class="no-underline white-color hg_video">
 								{{video.nombre}}
 							</h4>
@@ -146,7 +158,11 @@
 										<span class="details">Pais: {{video.pais}}</span>
 									</div>
 									<div class="col-sm-6 col-xs-12 col-sm-push-1 slide-video">
-										<a href="{% url 'Video_detail' video.slug %}" data-vbtype="video" class="video">
+										<a href="{% if video.tipo.nombre == 'Series' %}
+											{% url 'episodio_detail' video.slug video.temporada_set.first.temporada video.temporada_set.first.episodio_set.first.slug %}
+											{% else %}
+											{% url 'Video_detail' video.slug %}
+											{% endif %}" data-vbtype="video" class="video">
 											<i class="material-icons">play_arrow</i>
 											{% thumbnail video.imagen "1280x720" crop="center" as im %}
 												<img src="{{ im.url }}" alt="">
@@ -232,7 +248,11 @@
 														<div class="movie-poster episodios">
 															<aside>
 																<div>
-																	<a href="{% url 'episodio_detail' video.slug temp.temporada ep.slug %}" class="play">
+																	<a href="{% if video.tipo.nombre == 'Series' %}
+																	{% url 'episodio_detail' video.slug video.temporada_set.first.temporada video.temporada_set.first.episodio_set.first.slug %}
+																	{% else %}
+																	{% url 'Video_detail' video.slug %}
+																	{% endif %}" class="play">
 																		<i class="material-icons">play_arrow</i>
 																	</a>
 																</div>
@@ -283,7 +303,11 @@
 								<div class="movie-poster grow">
 									<aside>
 										<div>
-											<a href="{% url 'Video_detail' serie.slug %}" class="play">
+											<a href="{% if serie.tipo.nombre == 'Series' %}
+													{% url 'episodio_detail' serie.slug serie.temporada_set.first.temporada serie.temporada_set.first.episodio_set.first.slug %}
+													{% else %}
+													{% url 'Video_detail' serie.slug %}
+													{% endif %}" class="play">
 												<i class="material-icons">play_arrow</i>
 											</a>
 											<span class="date">
@@ -302,7 +326,11 @@
 									<img src="http://via.placeholder.com/1280x720 " alt="">
 									{% endthumbnail %}
 								</div>
-								<a class="title-movie" href="{% url 'Video_detail' serie.slug %}">
+								<a class="title-movie" href="{% if serie.tipo.nombre == 'Series' %}
+													{% url 'episodio_detail' serie.slug serie.temporada_set.first.temporada serie.temporada_set.first.episodio_set.first.slug %}
+													{% else %}
+													{% url 'Video_detail' serie.slug %}
+													{% endif %}">
 									<h4 id="" class="no-underline white-color hg_video">
 										{{serie.nombre}}
 									</h4>
@@ -357,7 +385,11 @@
 												<span class="details">Pais: {{video.pais}}</span>
 											</div>
 											<div class="col-sm-6 col-xs-12 col-sm-push-1 slide-video">
-												<a href="{% url 'Video_detail' video.slug %}"  class="video">
+												<a href="{% if video.tipo.nombre == 'Series' %}
+															{% url 'episodio_detail' video.slug video.temporada_set.first.temporada video.temporada_set.first.episodio_set.first.slug %}
+															{% else %}
+															{% url 'Video_detail' video.slug %}
+															{% endif %}"  class="video">
 													<i class="material-icons">play_arrow</i>
 													{% thumbnail video.imagen "1280x720" crop="center" as im %}
 														<img class="owl-lazy" src="{{im.url}}" data-src-retina="{{im.url}}" alt="">
