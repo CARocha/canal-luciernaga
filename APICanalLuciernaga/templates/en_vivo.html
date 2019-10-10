@@ -18,19 +18,34 @@
 			</div>
 			<div class="col-sm-4">
 				<h2 class="pb-10 pt-10 mb-0">Programación</h2>
-				<ul class="programacion">
+				<ul class="programacion" id="progra">
 					{% for programa  in directo.horaprogramacion_set.all|dictsort:'id' %}
+					{% if programa.descripcion %}
+						<li>
+							<a data-toggle="collapse" href="#list{{programa.id}}">
+								<time datetime="">{{programa.hora_inicio|time:"h:i a"}}
+									<br><small>{{programa.categoria_p}}</small>
+								</time>
+								<p>{{programa.titulo}}</p>
+							</a>
+						</li>
+						<div class="collapse p-desc" id="list{{programa.id}}" data-parent="#progra">
+							{{programa.descripcion}}
+						</div>
+					{% else %}
 						<li>
 							<time datetime="">{{programa.hora_inicio|time:"h:i a"}}
 								<br><small>{{programa.categoria_p}}</small>
 							</time>
 							<p>{{programa.titulo}}</p>
 						</li>
-						{% comment %} {% if programa.descripcion %}
+					{% endif %}
+						
+						{% comment %} 
 							<li class="p-desc">
 								{{programa.descripcion}}
 							</li>
-						{% endif %} {% endcomment %}
+						 {% endcomment %}
 					{% endfor %}
 				</ul>				
 			</div>

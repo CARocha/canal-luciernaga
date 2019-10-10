@@ -502,9 +502,7 @@ a.close_collapse {
 .nav.nav-custom li.active a{
 	color: black;
 }
-.nav.nav-custom li.active a:after{
-	background: transparent;
-}
+
 .plyr__video-embed iframe {
     top: -50%;
     height: 200%;
@@ -616,6 +614,12 @@ select[class*='serieselect']:focus{
     color: #b6b6b6;
     margin-top: -10px;
 }
+
+.programacion time small{
+	background-color: #e76115;
+	padding: 3px 5px;
+	color: white;
+}
 .programacion p{
 	color: #fff;
     font-size: 18px;
@@ -632,4 +636,60 @@ select[class*='serieselect']:focus{
 	padding: 0;
 	font-size: 85%;
 	color: #e0e0e0;
+	background-color:#323232;
+	padding: 10px;
+}
+/***buscar***/
+.heading .f-text{
+	display: flex;
+	float: right;
+	margin-top: 10px;
+	margin-right: 5px;
+}
+.heading .f-text input{
+	background-color: transparent;
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	border-bottom-style: dotted;
+	border-radius: 0%; 
+	color: white;
+	width: 120px;
+	-webkit-transition: width 1s; /* For Safari 3.1 to 6.0 */
+  	transition: width 1s;
+}
+.heading .f-text input:hover{
+	width:160px;
+}
+.heading .f-text input:focus{
+	border-color: transparent;
+	background-color: white;
+	color: #555;
+	width: 160px;
+
+}
+.heading .search{
+	margin-top: 10px;
+	padding-left: 10px;
+}
+.heading .search button{
+	background: transparent;
+	border: none;
+	height: 32px;
+	line-height: 32px;
+	
+}
+.heading .search i{
+	font-size: 20px;
+}
+
+.heading .search button:hover i{
+	color:#e76115;
+}
+/***videos***/
+
+.up-video{
+	font-size: 20px;
+	padding: 20px 40px;
+	margin-bottom: 10px;
 }

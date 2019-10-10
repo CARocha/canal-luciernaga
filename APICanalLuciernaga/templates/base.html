@@ -30,17 +30,20 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-12">
-							<div class="search">
+							
 								<!--<a href="#">
 									<i class="material-icons">search</i>
 								</a> -->
 								<form method="get" class="searchform search-form form-inline" action="/buscador/">
-							        <div class="form-group bottommargin_0"> 
-							        	<input type="text" value="" name="search" class="form-control" placeholder="buscador" id="modal-search-input"> 
-							        </div> 
-							        <button type="submit">search</button>
+							        
+									<div class="search">
+										<button class="" type="submit"><i class="material-icons">search</i></button>
+									</div>
+									<div class="form-group f-text"> 
+							        	<input type="text" value="" name="search" class="form-control" placeholder="buscar" id="modal-search-input"> 
+									</div>
 							    </form>
-							</div>
+							
 							
 						</div>
 					</div>
@@ -206,11 +209,13 @@
 				responsive: {
 					0: {
 						items: 1,
-						nav: true
+						nav: true,
+						margin: 20
 					},
 					600: {
 						items: 3,
-						nav: true
+						nav: true,
+						margin: 20
 					},
 					1000: {
 						items: 4,
