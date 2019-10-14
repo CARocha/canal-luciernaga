@@ -459,35 +459,46 @@
 										<div class="row">
 											<div class="col-sm-12 col-xs-12">
 												<div class="owl-carousel owl-theme slick-slide">
+
 													{% for similar in similares %}
-											
-													<div class="movie-poster grow">
-														<aside>
-															<div class="hover-tab">
-																<a href="{% url 'episodio_detail' similar.slug similar.temporada_set.first.temporada similar.temporada_set.first.episodio_set.first.slug %}" class="play">
-																	<i class="material-icons">play_arrow</i>
-																</a>
-																<a class="titulo">{{similar}}</a>
-																<span class="date">
-																	{% for cat in similar.categoria.all|slice:"3" %}
-																		<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
-																	{% endfor%}
-																</span>
-																
+														<div class="item">
+															<div class="movie-poster similar grow mt-10">
+																<aside>
+																	<div class="hover-tab">
+																		<a href="{% if similar.tipo.nombre == 'Series' %}
+																			{% url 'episodio_detail' similar.slug similar.temporada_set.first.temporada similar.temporada_set.first.episodio_set.first.slug %}
+																		{% else %}
+																		{% url 'Video_detail' video.slug %}
+																		{% endif %}" class="play">
+																			<i class="material-icons">play_arrow</i>
+																		</a>
+																		<span class="date">
+																			{% for cat in similar.categoria.all|slice:"3" %}
+																				<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
+																			{% endfor%}
+																		</span>
+																		
+																	</div>
+																</aside>
+															
+																{% thumbnail similar.imagen "1280x720" crop="center" as im %}
+																<img src="{{im.url}}" alt="">
+
+																{%empty%}
+																<img src="http://via.placeholder.com/1280x720" alt="">
+																{% endthumbnail%}
 															</div>
-														</aside>
-													
-														{% thumbnail similar.imagen "1280x720" crop="center" as im %}
-														<img class="owl-lazy" data-src="{{im.url}}" data-src-retina="{{im.url}}" alt="">
-	
-														{%empty%}
-														<img src="http://via.placeholder.com/1280x720" alt="">
-														{% endthumbnail%}
-														
-													
-													</div>
+															<a class="title-movie" href="{% if similar.tipo.nombre == 'Series' %}
+																			{% url 'episodio_detail' similar.slug similar.temporada_set.first.temporada similar.temporada_set.first.episodio_set.first.slug %}
+																		{% else %}
+																		{% url 'Video_detail' video.slug %}
+																		{% endif %}">
+																<h4 id="" class="no-underline white-color hg_video">
+																	{{similar}}
+																</h4>
+															</a>
+														</div>
 													{% endfor %}
-					
 												</div>
 											</div>
 										</div>

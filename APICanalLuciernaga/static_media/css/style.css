@@ -455,7 +455,7 @@ hr.space-40 {
 
 #hero .container .blurb h1,
 #content_hero .container .blurb h1 {
-    font-size: 52px;
+    font-size: 40px;
     font-weight: 300;
 
     padding: 0;
@@ -603,8 +603,8 @@ hr.space-40 {
 }
 
 #content_hero .container .blurb {
-    margin-top: 200px;
-    margin-bottom: 100px;
+    margin-top: 150px;
+    margin-bottom: 50px;
 }
 
 #content_hero .container .blurb h1 {
