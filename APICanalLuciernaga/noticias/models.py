@@ -4,6 +4,7 @@ from taggit_autosuggest.managers import TaggableManager
 from lugar.models import Pais
 from sorl.thumbnail import ImageField
 from usuario.models import User
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 
@@ -49,7 +50,7 @@ class Comunicacion(models.Model):
     fecha = models.DateField()
     banner = ImageField('Banner',upload_to='banner/noticias',null=True,blank=True)
     foto = ImageField('Imagen',upload_to='fotos/noticias')
-    descripcion = models.TextField()
+    descripcion = RichTextUploadingField()
     pais = models.ForeignKey(Pais, on_delete = 255)
     fuente = models.CharField(max_length = 225)
     tags = TaggableManager(blank=True)
