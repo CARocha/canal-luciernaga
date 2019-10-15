@@ -60,30 +60,34 @@
 		<div class="col-sm-8">
 			{% paginate 5 news_list %}
 			{% for all_news in news_list %}
-			
-			<article>
-				<span class="categories">{{all_news.categoria}}</span>
-
-				<h2 class="no-underline"><a href="{% url 'news_detail' all_news.slug %}" class="white-color">{{all_news}}</a></h2>
-				<div class="col-sm-4">
-					<a href="{% url 'news_detail' all_news.slug %}" class="img">
-						<aside>
-							<div>
-								<i class="material-icons">link</i>
-								<span class="date">{{all_news.fecha|date:"d"}} {{all_news.fecha|date:"M"}}, {{all_news.fecha|date:"Y"}} por {{all_news.autor}}</span>
-							</div>
-						</aside>
-						{% thumbnail all_news.foto "187x187" crop="center" as im%}
-						<img src="{{im.url}}" alt=""/>
-						{%endthumbnail%}
-					</a>
+			<div class="row">
+				<div class="col-lg-12">
+					<article>
+						<span class="categories">{{all_news.categoria}}</span>
+		
+						<h2 class="no-underline"><a href="{% url 'news_detail' all_news.slug %}" class="white-color">{{all_news}}</a></h2>
+						<div class="col-sm-4">
+							<a href="{% url 'news_detail' all_news.slug %}" class="img">
+								<aside>
+									<div>
+										<i class="material-icons">link</i>
+										<span class="date">{{all_news.fecha|date:"d"}} {{all_news.fecha|date:"M"}}, {{all_news.fecha|date:"Y"}} por {{all_news.autor}}</span>
+									</div>
+								</aside>
+								{% thumbnail all_news.foto "187x187" crop="center" as im%}
+								<img src="{{im.url}}" alt=""/>
+								{%endthumbnail%}
+							</a>
+						</div>
+		
+						<p style="max-height: 192px; overflow: hidden;">{{all_news.descripcion|striptags|truncatechars:470}}<a href="{% url 'news_detail' all_news.slug %}" class="">
+							<span>Leer más</span>
+						</a></p>
+		
+					</article>
 				</div>
-
-				<p style="max-height: 192px; overflow: hidden;">{{all_news.descripcion|striptags|truncatechars:470}}<a href="{% url 'news_detail' all_news.slug %}" class="">
-					<span>Leer más</span>
-				</a></p>
-
-			</article>
+			</div>
+			
 			{% endfor %}
 
 		</div>
