@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load thumbnail %}
 {% load el_pagination_tags %}
 
 {% block content %}
@@ -22,38 +23,57 @@
 
 </div>
 
-<div class="container section">
+<div class="container section news">
 	<div class="row">
 		<div class="col-sm-8 ">
 			<ul>
-			{% paginate 8 b_list %}
+			{% paginate 4 b_list %}
 			{% for doc in b_list %}
-			<div class="col-md-6 customcard bottom_padd_30">
-				<li class="">{{doc}}</li>
-				<div>
-					<i class="material-icons">
-						cloud_download
-					</i>
-					<a target="_blank" href="/media/{{doc.archivo}}">Descargar</a>
-				</div>
+			<div class="row">
+				<article class="col-lg-12">
+					<span class="categories">{{doc.categoria}}</span>
+					<h2 class="no-underline"><a href="/media/{{doc.archivo}}" class="white-color" target="_blank">{{doc}}</a></h2>
+					<div class="row">
+							<div class="col-sm-4">
+								{% if doc.foto %}
+									{% thumbnail doc.foto "300" crop="center" as im%}
+									<img src="{{im.url}}" width="100%" alt=""/>
+									{%endthumbnail%}
+								{% else %}
+									<img src="http://via.placeholder.com/200x200" width="100%" alt=""/>
+								{% endif %}	
+							</div>
+							<div class="col-sm-8">
+								<div style="max-height: 170px; overflow: hidden;">
+									{{doc.descripcion|safe|truncatechars:470}}
+								</div>
+								{% comment %} <div class="dropdown mt-10">
+									<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									Descargar
+									<span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+										<li><a href="/media/{{doc.archivo}}">Action</a></li>
+									</ul>
+								</div> {% endcomment %}
+								<a href="/media/{{doc.archivo}}" class="btn btn-default mt-10" target="_blank"><span>Descargar</span></a>
+							</div>
+					</div>
+				</article>
 			</div>
-
-			{% endfor %}
-			</ul>
-
-			{% show_pages %}		
+			<hr>
+			{% endfor %}				
 
 		</div>
 
 
 		<aside class="col-sm-3 col-sm-push-1 sidebar">
-			<div class="widget">
-				<form method="get" action="{% url 'buscador_biblioteca' %}">
-					<input type="text" placeholder="{% if q %}{{q}}{% else %}Buscar...{% endif %}" class="search" name="search" />
-					<i class="material-icons">search</i>
-					<button type="submit">buscar</button>
-				</form>
-			</div>
+				<div class="widget">
+					<form class="form-inline" method="get" action="">
+						<input type="text" placeholder="" class="search" name="search" />
+						<button class="btn btn-default btn-noticia" type="submit"><i class="material-icons">search</i></button>
+					</form>
+				</div>
 			<div class="widget">
 				<h3>Categorías</h3>
 				<ul>
@@ -64,6 +84,39 @@
 				</ul>
 			</div>
 		</aside>
+	</div>
+</div>
+
+<!-- Paginacion -->
+
+<div class="section">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<ul class="pagination">
+					{% get_pages %}
+
+					<li>
+						<a href="{{ pages.previous.path }}">
+							<i class="material-icons">arrow_back_ios</i>
+						</a>
+					</li>
+
+					{% for page in pages %}
+
+					<li><a href="./{{ page.url }}" class="{% if page.is_current %} active {% endif %}">{{page.number}}</a></li>
+
+					{% endfor %}
+
+					<li>
+						<a href="{{ pages.next.path }}">
+							<i class="material-icons">arrow_forward_ios</i>
+						</a>
+					</li>
+
+				</ul>
+			</div>
+		</div>
 	</div>
 </div>
 {% endblock content %}

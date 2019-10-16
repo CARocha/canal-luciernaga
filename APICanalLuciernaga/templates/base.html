@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% block share %}{% endblock share %}
 	<title>Nativa Media</title>
 	<!-- insert in below line favicon-->
 	<link rel="icon" type="image/png" href="" />
@@ -133,15 +134,15 @@
 					<div class="col-sm-4">
 						<h6>Contáctanos</h6>
 						<ul>
-							<li><a href="#"><i class="fa fa-location-arrow"></i> Sumedico 1 c. al Oeste, Managua, Nicaragua</a></li>
-							<li><a href="#"><i class="fa fa-envelope-o"></i>luciernaga@gmail.com</a></li>
-							<li><a href="#"><i class="fa fa-facebook"></i> Facebook</a></li>
-							<li><a href="#"><i class="fa fa-youtube"></i> Youtube</a></li>
+							<li><a href="#" target="_blank"><i class="fa fa-location-arrow"></i> Sumedico 1 c. al Oeste, Managua, Nicaragua</a></li>
+							<li><a href="#" target="_blank"><i class="fa fa-envelope-o"></i>luciernaga@gmail.com</a></li>
+							<li><a href="#" target="_blank"><i class="fa fa-facebook"></i> Facebook</a></li>
+							<li><a href="#" target="_blank"><i class="fa fa-youtube"></i> Youtube</a></li>
 						</ul>
 					</div>
 				</div>
 				<div class="copyright">
-					<p>2019 &copy; <a href="https://fundacionluciernaga.org/" target="_blank">Luciernaga</a> /  <a href="http://www.simas.org.ni/">Desarrollado por SIMAS</a></p>
+					<p>2019 &copy; <a href="https://fundacionluciernaga.org/" target="_blank">Luciernaga</a> /  <a href="http://www.simas.org.ni/" target="_blank">Desarrollado por SIMAS</a></p>
 				</div>
 			</div>
 		</footer>
@@ -213,7 +214,7 @@
 						margin: 20
 					},
 					600: {
-						items: 3,
+						items: 1,
 						nav: true,
 						margin: 20
 					},

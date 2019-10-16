@@ -8,7 +8,15 @@
 
 <div id="hero" class="carousel slide carousel-fade" data-ride="carousel">
 
-	<!-- Indicators -->
+	<!-- Indicators
+	<div class="container">	
+		<ol class="carousel-indicators">
+			{% for news in banner %}
+			<li data-target="#hero" data-slide-to="1" class="{% if forloop.first %}active{% endif %}"></li>
+			{% endfor %}
+		</ol>
+	</div> -->
+
 	<div class="container">	
 		<ol class="carousel-indicators">
 			<li data-target="#hero" data-slide-to="0" class="active"></li>
@@ -22,11 +30,11 @@
 
 		{% for news in banner %}
 		{% if news.banner %}
-			{% thumbnail news.banner "1350x600" crop="center" as im %}
+			{% thumbnail news.banner "1280x720" crop="center" as im %}
 			<div class="item {% if forloop.first %}active{% endif %} " style="background-image: url({{im.url}})">
 			{% endthumbnail %}
 		{% elif news.foto %}
-			{% thumbnail news.foto "1350x600" crop="center" as im %}
+			{% thumbnail news.foto "1280x720" crop="center" as im %}
 			<div class="item {% if forloop.first %}active{% endif %} " style="background-image: url({{im.url}})">
 			{% endthumbnail %}
 		{% endif %}
@@ -41,10 +49,7 @@
 
 						<div class="buttons top_padd_20 ">
 
-							<a class="venobox btn btn-ghost">
-
-								<span>{{news.categoria}}</span>
-							</a>
+							<a href="{% url 'news_detail' news.slug %}" class="btn btn-ghost"><span>Leer más</span></a>
 
 						</div>						
 					</div>
@@ -62,15 +67,15 @@
 
 <div class="container section news">
 	<div class="row">
-		<div class="col-sm-8">
+		<div class="col-sm-9">
 			{% paginate 5 news_list %}
 			{% for all_news in news_list %}
 			<div class="row">
-				<div class="col-lg-12">
-					<article>
-						<span class="categories">{{all_news.categoria}}</span>
-		
-						<h2 class="no-underline"><a href="{% url 'news_detail' all_news.slug %}" class="white-color">{{all_news}}</a></h2>
+				<article class="col-lg-12">
+					<span class="categories">{{all_news.categoria}}</span>
+	
+					<h2 class="no-underline"><a href="{% url 'news_detail' all_news.slug %}" class="white-color">{{all_news}}</a></h2>
+					<div class="row">
 						<div class="col-sm-4">
 							<a href="{% url 'news_detail' all_news.slug %}" class="img">
 								<aside>
@@ -79,30 +84,36 @@
 										<span class="date">{{all_news.fecha|date:"d"}} {{all_news.fecha|date:"M"}}, {{all_news.fecha|date:"Y"}} por {{all_news.autor}}</span>
 									</div>
 								</aside>
-								{% thumbnail all_news.foto "187x187" crop="center" as im%}
-								<img src="{{im.url}}" alt=""/>
-								{%endthumbnail%}
+								{% if all_news.foto %}
+									{% thumbnail all_news.foto "200" crop="center" as im%}
+									<img src="{{im.url}}" width="100%" alt=""/>
+									{%endthumbnail%}
+								{% else %}
+									<img src="http://via.placeholder.com/200x200" width="100%" alt=""/>
+								{% endif %}
+								
 							</a>
 						</div>
-		
-						<p style="max-height: 192px; overflow: hidden;">{{all_news.descripcion|striptags|truncatechars:470}}<a href="{% url 'news_detail' all_news.slug %}" class="">
-							<span>Leer más</span>
-						</a></p>
-		
-					</article>
-				</div>
+						<div class="col-sm-8">
+							<div style="max-height: 170px; overflow: hidden;">
+								{{all_news.descripcion|safe|truncatechars:470}}
+								<br>
+								<a href="{% url 'news_detail' all_news.slug %}" class=""><span>Leer más</span></a>
+							</div>
+						</div>
+					</div>
+				</article>
 			</div>
-			
+			<hr>
 			{% endfor %}
 
 		</div>
 
-		<aside class="col-sm-3 col-sm-push-1 sidebar">
+		<aside class="col-sm-3 sidebar">
 			<div class="widget">
-				<form method="get" action="{% url 'buscador_news' %}">
+				<form class="form-inline" method="get" action="{% url 'buscador_news' %}">
 					<input type="text" placeholder="{% if q %}{{q}}{% else %}Buscar...{% endif %}" class="search" name="search" />
-					<i class="material-icons">search</i>
-					<button type="submit">buscar</button>
+					<button class="btn btn-default btn-noticia" type="submit"><i class="material-icons">search</i></button>
 				</form>
 			</div>
 
@@ -141,8 +152,7 @@
 
 <!-- Paginacion -->
 
-{% if pages.paginated %}
-<div class="section small-padding border-top">
+<div class="section">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 text-center">
@@ -172,6 +182,6 @@
 		</div>
 	</div>
 </div>
-{% endif %}
+
 
 {% endblock content %}

@@ -1,5 +1,18 @@
 {% extends "base.html" %}
+{% load thumbnail %}
+{% block share %}
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@FLuciernaga">
+	<meta name="twitter:creator" content="@FLuciernaga">
+	<meta name="twitter:title" content="{{object.titulo}}">
+	<meta name="twitter:description" content="{{object.descripcion|truncatechars:40|striptags}}">
+	<meta name="twitter:image" content="https://nativamedia.net/media/{{object.foto}}">
 
+    <meta property="og:title" content="{{object.titulo}}" />
+    <meta property="og:description" content="{{object.descripcion|truncatechars:40|striptags}}" />
+    <meta property="og:url" content="https://nativamedia.net{{request.path}}" />
+    <meta property="og:locale" content="es_ES" />
+{% endblock share %}
 {% block content %}
 
 <div id="content_hero" style="background-image: url(/static/img/newsbanner.jpg)">
@@ -26,35 +39,36 @@
 
 <div class="container section news">
 	<div class="row">
-		<div class="col-sm-8">
+		<div class="col-sm-9">
 			<article>
 				<span class="categories">{{object.categoria}}</span>
 				<h2 class="no-underline white-color">{{object.titulo}}</h2>
-				<div class="bottom_padd_30">
+				<div class="bottom_padd_30 news_data">
 					<div class="d-inline-block">
 						<i class="material-icons genrecolor">person</i>
 						<span>{{object.autor}}</span>
-					</div class="d-inline-block">
+					</div>
 
-					<div class="d-inline-block ">
+					{% comment %} <div class="d-inline-block ">
 						<i class="material-icons genrecolor">
 						account_balance
 						</i>
 						<span>{{object.autor.org.siglas}}</span>
-					</div class="d-inline-block">
+					</div> {% endcomment %}
 
 					<div class="d-inline-block">
 						<i class="material-icons genrecolor">
 						calendar_today
 						</i>
 						<span>{{object.fecha}}</span>
-					</div class="d-inline-block">
+					</div>
 					
 				</div>
+				{% thumbnail object.foto "800" crop="center" as im %}
+				<img src="{{im.url}}" class="news-single-img img-detalle-nota" width="100%" alt="" />
+				{% endthumbnail %}
 
-				<img src="{{object.foto.url}}" class="news-single-img img-detalle-nota" alt="" />
-
-				<p class="white-color">{{object.descripcion}}</p>
+				<div class="white-color news_contenido">{{object.descripcion|safe}}</div>
 
 				<div class="bordered">
 					<div class="single-tags">
@@ -66,17 +80,11 @@
 							<i class="material-icons">share</i>
 						</a>
 						<div class="share">
-							<a href="#">
+							<a class="customer" href="https://www.facebook.com/sharer.php?u=https://nativamedia.net{{request.path}}">
 								<i class="fa fa-facebook"></i>
 							</a>
-							<a href="#">
+							<a class="customer" href="https://twitter.com/share?url=https://nativamedia.net{{request.path}}&amp;hashtags=nativamedia">
 								<i class="fa fa-twitter"></i>
-							</a>
-							<a href="#">
-								<i class="fa fa-pinterest"></i>
-							</a>
-							<a href="#">
-								<i class="fa fa-google-plus"></i>
 							</a>
 						</div>
 					</div>
@@ -87,12 +95,11 @@
 		</div>
 
 		<!-- Sidebar-->
-		<aside class="col-sm-3 col-sm-push-1 sidebar">
+		<aside class="col-sm-3 sidebar">
 			<div class="widget">
-				<form>
-					<input type="text" placeholder="Buscar..." class="search" />
-					<i class="material-icons">search</i>
-				</form>
+				<form class="form-inline" method="get" action="{% url 'buscador_news' %}">
+					<input type="text" placeholder="{% if q %}{{q}}{% else %}Buscar...{% endif %}" class="search" name="search" />
+					<button class="btn btn-default btn-noticia" type="submit"><i class="material-icons">search</i></button>
 			</div>
 			<div class="widget">
 				<h3>Temas</h3>
@@ -118,3 +125,6 @@
 </div>
 
 {% endblock content %}
+{% block extra_js %}
+<script src="/static/js/social.js"></script>
+{% endblock extra_js %}
