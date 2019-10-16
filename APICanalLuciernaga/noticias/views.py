@@ -50,7 +50,7 @@ def home(request,template='index.html'):
 def news(request,template='news.html'):
 	news_list = Comunicacion.objects.order_by('-id')
 	thematic_list = Categoria.objects.filter(id__in = news_list.values_list('categoria',flat=True)).order_by('id')
-
+	banner = Comunicacion.objects.filter(portada = True).order_by('-id')[:3]
 	ids = news_list.values_list('id',flat=True)
 	common_tags = Comunicacion.tags.most_common(min_count=2,extra_filters={'id__in': ids})[:6]
 
@@ -63,6 +63,24 @@ def news_detail(request,slug,template='news_detail.html'):
 	ids = news_list.values_list('id',flat=True)
 	common_tags = Comunicacion.tags.most_common(min_count=2,extra_filters={'id__in': ids})[:6]
 
+	return render(request,template,locals())
+
+def filtro_tipo(request,tipo,template='news.html'):
+	news_list = Comunicacion.objects.filter(tipo = tipo).order_by('-id')
+	thematic_list = Categoria.objects.filter(id__in = news_list.values_list('categoria',flat=True)).order_by('id')
+	banner = Comunicacion.objects.filter(tipo = tipo,portada = True).order_by('-id')[:3]
+	ids = news_list.values_list('id',flat=True)
+	common_tags = Comunicacion.tags.most_common(min_count=2,extra_filters={'id__in': ids})[:6]
+
+	return render(request,template,locals())
+
+def filtro_categoria_news(request,categoria,template='news.html'):
+	news_list = Comunicacion.objects.filter(categoria__slug = categoria).order_by('-id')
+	thematic_list = Categoria.objects.filter(id__in = news_list.values_list('categoria',flat=True)).order_by('id')
+	banner = Comunicacion.objects.filter(categoria__slug = categoria,portada = True).order_by('-id')[:3]
+	ids = news_list.values_list('id',flat=True)
+	common_tags = Comunicacion.tags.most_common(min_count=2,extra_filters={'id__in': ids})[:6]
+	
 	return render(request,template,locals())
 
 def buscador_news(request,template='news.html'):

@@ -20,12 +20,18 @@
 	<!-- Wrapper for slides -->
 	<div class="carousel-inner">
 
-		{% for news in news_list %}
+		{% for news in banner %}
+		{% if news.banner %}
+			{% thumbnail news.banner "1350x600" crop="center" as im %}
+			<div class="item {% if forloop.first %}active{% endif %} " style="background-image: url({{im.url}})">
+			{% endthumbnail %}
+		{% elif news.foto %}
+			{% thumbnail news.foto "1350x600" crop="center" as im %}
+			<div class="item {% if forloop.first %}active{% endif %} " style="background-image: url({{im.url}})">
+			{% endthumbnail %}
+		{% endif %}
 
-		{% if news.portada %}
-		{% thumbnail news.banner "1350x600" crop="center" as im %}
-		<div class="item {% if forloop.first %}active{% endif %} " style="background-image: url({{im.url}})">
-		{% endthumbnail %}
+		
 			<div class="container">
 				<div class="row blurb scrollme animateme" data-when="exit" data-from="0" data-to="1" data-opacity="0" data-translatey="100">
 					<div class="col-md-9 main-items">
@@ -45,7 +51,6 @@
 				</div>
 			</div>
 		</div>
-		{% endif %}
 
 		{% endfor %}
 
@@ -100,12 +105,21 @@
 					<button type="submit">buscar</button>
 				</form>
 			</div>
+
+			<div class="widget">
+				<h3>Tipos</h3>
+				<ul>
+					<li><a href="{% url 'filtro_tipo' 1 %}" >Noticias</a></li>
+					<li><a href="{% url 'filtro_tipo' 2 %}" >Reportajes</a></li>
+				</ul>				
+			</div>
+
 			<div class="widget">
 				<h3>Categorías</h3>
 				<ul>
 					{% for themat in thematic_list %}
 						
-					<li><a href="#">{{themat.nombre}}</a></li>
+					<li><a href="{% url 'filtro_categoria_news' themat.slug %}">{{themat.nombre}}</a></li>
 
 					{% endfor %}
 				</ul>
