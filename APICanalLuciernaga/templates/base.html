@@ -54,7 +54,7 @@
 			<div class="container">
 				<div class="navbar-header">
 					<a href="/" class="logo" title="Inicio">
-						<img src="/static/img/nativa.png" alt="Nativa Media" width="40%">
+						<img src="/static/img/nativanegativo.png" alt="Nativa Media">
 					</a>
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 						<span class="sr-only">Toggle navigation</span>
@@ -71,15 +71,13 @@
 								{% for x in tipos %}
 									<li><a href="{% url 'list_videos' x.slug %}" class="white-color">{{x}}</a></li>
 								{% endfor %}
-								{% if biblioteca %}
-									<li><a href="/biblioteca/" class="white-color">Biblioteca</a></li>
-								{% endif %}
+								
 								
 							</ul>
 						</li>
 						{% if directo == True %}
 						<li>
-							<a href="whats-on.html">
+							<a class="directo-icon" href="/en-directo">
 								<i class="material-icons" style="font-size: 10px; color: #FF0000">
 									<div class="ball">
 									<span></span>
@@ -99,7 +97,9 @@
 						</li>
 						{% endif %}
 						
-						
+						{% if biblioteca %}
+							<li><a href="/biblioteca/" class="white-color">Biblioteca</a></li>
+						{% endif %}
 						<li>
 							<a href="/conocenos">Conocenos</a>
 						</li>
