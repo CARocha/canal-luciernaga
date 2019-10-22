@@ -28,3 +28,9 @@ def validate_urls(request):
 	biblioteca = Biblioteca.objects.all()
 	
 	return {'biblioteca':biblioteca,'noticias':noticias}
+
+def ultimo_momento(request):
+	ultimo_momento = Comunicacion.objects.filter(ultimo_momento = True).order_by('-id')[:3]
+
+	return {'ultimo_momento':ultimo_momento}
+
