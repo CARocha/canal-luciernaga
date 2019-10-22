@@ -36,7 +36,7 @@ def list_videos(request,tipo,template='movies.html'):
 					similares = Video.objects.filter(tipo = vid.tipo,categoria__in = vid.categoria.all()).exclude(id = vid.id)
 					videos[vid] = similares
 				if videos_list:
-					cat[x.nombre] = videos
+					cat[x] = videos
 	else:
 		form = CategoriasFilter(tipo = tipo)
 		cat = {}
@@ -47,7 +47,7 @@ def list_videos(request,tipo,template='movies.html'):
 				similares = Video.objects.filter(tipo = vid.tipo,categoria__in = vid.categoria.all()).exclude(id = vid.id)
 				videos[vid] = similares
 			if videos_list:
-				cat[x.nombre] = videos
+				cat[x] = videos
 
 	return render(request,template,locals())
 

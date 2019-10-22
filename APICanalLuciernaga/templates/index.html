@@ -57,6 +57,33 @@
 	</div>
 </div>
 
+<!-- Breaking news -->
+
+<div class="bg-bnews" style="">
+	<div class="row bnews-padding">
+		<div class="container-fluid">
+			<div class="col-md-1">
+				<span class="badge bnews-title">Última hora:</span>
+			</div>
+			<div class="col-md-11">
+				<div class="bnews-slider nobottommargin">
+					<div class="slide flex-active-slide">
+						<marquee >
+							<div class="d-inline-block white-color">
+								<ul class="list-inline bnew-list">
+								{% for x in ultimo_momento %}
+									<li><a href="{% url 'news_detail' x.slug %}">{{x}}</a></li>
+								{% endfor %}
+								</ul>
+							</div>
+						</marquee>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="nuevos" >			
 	<div class="container section">
 		<div class="row">

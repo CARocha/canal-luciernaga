@@ -61,7 +61,7 @@
 													<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
 												{% endfor%}
 											</span>
-											<a class="material-icons expand-more" data-toggle="collapse" href="#serie{{k}}_{{serie.id}}" onClick="reply_click(this.href)">
+											<a class="material-icons expand-more" data-toggle="collapse" href="#serie{{k.slug}}_{{serie.id}}" onClick="reply_click(this.href)">
 												keyboard_arrow_down
 											</a>
 										</div>
@@ -88,8 +88,8 @@
 				</div>
 			</div>
 			{% for video,similares in v.items %}
-			<section class="dark collapse" id="serie{{k}}_{{video.id}}" data-parent="#accordion">
-				<a class="close_collapse" data-toggle="collapse" data-target="#serie{{k}}_{{video.id}}" aria-expanded="false" aria-controls="nuevo_{{video.id}}">
+			<section class="dark collapse" id="serie{{k.slug}}_{{video.id}}" data-parent="#accordion">
+				<a class="close_collapse" data-toggle="collapse" data-target="#serie{{k.slug}}_{{video.id}}" aria-expanded="false" aria-controls="nuevo_{{video.id}}">
 					<span class="material-icons">close</span>
 				</a>
 				<div class="container remove-bottom-padding">
@@ -99,19 +99,19 @@
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs nav-custom" role="tablist">
 									<li role="presentation" class="active">
-										<a href="#{{k}}{{video.id}}-detalles" aria-controls="#{{k}}{{video.id}}-detalles" role="tab" data-toggle="tab">{{video.nombre}}</a>
+										<a href="#{{k}}{{video.id}}-detalles" aria-controls="#{{k.slug}}{{video.id}}-detalles" role="tab" data-toggle="tab">{{video.nombre}}</a>
 									</li>
 									<li role="presentation">
-										<a href="#{{k}}{{video.id}}-episodio" aria-controls="#{{k}}{{video.id}}-episodio" role="tab" data-toggle="tab">Episodios</a>
+										<a href="#{{k}}{{video.id}}-episodio" aria-controls="#{{k.slug}}{{video.id}}-episodio" role="tab" data-toggle="tab">Episodios</a>
 									</li>
 									{% if similares %}
 									<li role="presentation">
-										<a href="#{{k}}{{video.id}}-similares" aria-controls="#{{k}}{{video.id}}-similares" role="tab" data-toggle="tab">Similares</a>
+										<a href="#{{k}}{{video.id}}-similares" aria-controls="#{{k.slug}}{{video.id}}-similares" role="tab" data-toggle="tab">Similares</a>
 									</li>
 									{% endif %}
 								</ul>
 								<div class="tab-content">
-									<div role="tabpanel" class="tab-pane active" id="{{k}}{{video.id}}-detalles">
+									<div role="tabpanel" class="tab-pane active" id="{{k.slug}}{{video.id}}-detalles">
 										<div class="row single-slide">
 											<div class="col-sm-5 col-xs-12 slide-content">
 												{% for cat in video.categoria.all|slice:"3" %}
@@ -143,19 +143,19 @@
 										</div>
 									</div>
 									
-									<div role="tabpanel" class="tab-pane" id="{{k}}{{video.id}}-episodio">
+									<div role="tabpanel" class="tab-pane" id="{{k.slug}}{{video.id}}-episodio">
 										<div class="row">
 											<div class="col-sm-12 col-xs-12 slide-content">
 												<!-- Select dropdown -->
-												<select class="form-control serieselect_{{k}}{{video.id}}" name="floorplan">
+												<select class="form-control serieselect_{{k.slug}}{{video.id}}" name="floorplan">
 												{% for temp in video.temporada_set.all %}
-													<option value="serietabs_{{k}}{{video.id}}_temp{{temp.temporada}}">Temporada {{temp.temporada}}</option>
+													<option value="serietabs_{{k.slug}}{{video.id}}_temp{{temp.temporada}}">Temporada {{temp.temporada}}</option>
 												{% endfor %}			
 												</select>
 												<!-- End Select -->									
 												<div class="tab-content">
 												{% for temp in video.temporada_set.all %}
-													<div role="seretemporadas" class="tab-pane fade serietabs_{{k}}{{video.id}}_temp{{temp.temporada}} {% if forloop.first %}active in{% endif %}" id="serietabs_{{k}}{{video.id}}_temp{{temp.temporada}}">
+													<div role="seretemporadas" class="tab-pane fade serietabs_{{k.slug}}{{video.id}}_temp{{temp.temporada}} {% if forloop.first %}active in{% endif %}" id="serietabs_{{k.slug}}{{video.id}}_temp{{temp.temporada}}">
 														<div class="row">
 															<div class="col-lg-12">
 																<h2 class="mb-10"></h2>
@@ -197,7 +197,7 @@
 										</div>
 									</div>
 									
-									<div role="tabpanel" class="tab-pane" id="{{k}}{{video.id}}-similares">
+									<div role="tabpanel" class="tab-pane" id="{{k.slug}}{{video.id}}-similares">
 										<div class="row">
 											<div class="col-sm-12 col-xs-12">
 												<div class="owl-carousel owl-theme slick-slide">
@@ -276,7 +276,7 @@
 													<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
 												{% endfor%}
 											</span>
-											<a class="material-icons expand-more" data-toggle="collapse" href="#{{k}}_{{peli.id}}" onClick="reply_click(this.href)">
+											<a class="material-icons expand-more" data-toggle="collapse" href="#{{k.slug}}_{{peli.id}}" onClick="reply_click(this.href)">
 													keyboard_arrow_down
 											</a>
 											
@@ -303,8 +303,8 @@
 				</div>
 			</div>
 			{% for video,similares in v.items %}
-			<section class="dark collapse" id="{{k}}_{{video.id}}" data-parent="#accordion">
-				<a class="close_collapse" data-toggle="collapse" data-target="#{{k}}_{{video.id}}" aria-expanded="false" aria-controls="nuevo_{{video.id}}">
+			<section class="dark collapse" id="{{k.slug}}_{{video.id}}" data-parent="#accordion">
+				<a class="close_collapse" data-toggle="collapse" data-target="#{{k.slug}}_{{video.id}}" aria-expanded="false" aria-controls="nuevo_{{video.id}}">
 					<span class="material-icons">close</span>
 				</a>
 				<div class="container remove-bottom-padding">
@@ -314,17 +314,17 @@
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs nav-custom" role="tablist">
 									<li role="presentation" class="active">
-										<a href="#{{k}}{{video.id}}-detalles" aria-controls="#{{k}}{{video.id}}-detalles" role="tab" data-toggle="tab">{{video.nombre}}</a>
+										<a href="#{{k.slug}}{{video.id}}-detalles" aria-controls="#{{k.slug}}{{video.id}}-detalles" role="tab" data-toggle="tab">{{video.nombre}}</a>
 									</li>
 									{% if similares %}
 									<li role="presentation">
-										<a href="#{{k}}{{video.id}}-similares" aria-controls="#{{k}}{{video.id}}-similares" role="tab" data-toggle="tab">Similares</a>
+										<a href="#{{k.slug}}{{video.id}}-similares" aria-controls="#{{k.slug}}{{video.id}}-similares" role="tab" data-toggle="tab">Similares</a>
 									</li>
 									{% endif %}
 									
 								</ul>
 								<div class="tab-content">
-									<div role="tabpanel" class="tab-pane active" id="{{k}}{{video.id}}-detalles">
+									<div role="tabpanel" class="tab-pane active" id="{{k.slug}}{{video.id}}-detalles">
 										<div class="row single-slide">
 											<div class="col-sm-5 col-xs-12 slide-content">
 												{% for cat in video.categoria.all|slice:"3" %}
@@ -355,7 +355,7 @@
 											</div>
 										</div>
 									</div>
-									<div role="tabpanel" class="tab-pane" id="{{k}}{{video.id}}-similares">
+									<div role="tabpanel" class="tab-pane" id="{{k.slug}}{{video.id}}-similares">
 										<div class="row">
 											<div class="col-sm-12 col-xs-12">
 												<div class="owl-carousel owl-theme slick-slide">
@@ -415,8 +415,8 @@
 {% for k,v in cat.items %}
 {% for video,similares in v.items %}
 {% for temp in video.temporada_set.all %}
-	$('.serieselect_{{k}}{{video.id}}').on('change', function(e) {
-		$('.serietabs_{{k}}{{video.id}}_temp{{temp.temporada}}').removeClass('active in')
+	$('.serieselect_{{k.slug}}{{video.id}}').on('change', function(e) {
+		$('.serietabs_{{k.slug}}{{video.id}}_temp{{temp.temporada}}').removeClass('active in')
 		$('#' + $(e.currentTarget).val()).addClass("active in");
 	})
 {% endfor %}
