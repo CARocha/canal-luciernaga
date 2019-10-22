@@ -13,6 +13,6 @@ class User(AbstractUser):
 		return self.username
 
 	class Meta(object):
-		unique_together = ('email',)
+		unique_together = ('email','username')
 		verbose_name = 'Usuario'
 		verbose_name_plural = 'Usuarios'
