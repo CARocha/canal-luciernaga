@@ -826,7 +826,10 @@ ul.pagination li:first-of-type a .material-icons, ul.pagination li:last-of-type 
 	padding: 10px;
 	float: right;
 }
-
+/***Banner***/
+#hero .container .blurb p{
+ max-width: 500px;
+}
 /*****/
 .expand-more{
 	color: white !important;
@@ -878,6 +881,9 @@ Responsive
 	.section .columns{
 		margin: 0 10px;
 	}
+	#hero .container .blurb p{
+		max-width: 500px;
+	   }
 	
 }
     

@@ -10,13 +10,13 @@
 			<div class="row">
 				<div class="dark up-video">
 					<div class="row">
-						<div class="col-lg-6">
+						<div class="col-lg-6 col-sm-6">
 							<a href="/" >
 								<i class="material-icons">arrow_back</i> Inicio
 							</a>
 						</div>
 						{% if episodio %}
-						<div class="col-lg-6 text-right">
+						<div class="col-lg-6 col-sm-6 text-right">
 							<div class="btn-group">
 								<i class="material-icons">view_list</i> 
 								<a  class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,7 +32,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-12 text-center">
+		<div class="col-lg-12 text-center video-content ">
 			{% video object.url '982x552' %}
 		</div>
 	{% comment %} {% if episodio %}
