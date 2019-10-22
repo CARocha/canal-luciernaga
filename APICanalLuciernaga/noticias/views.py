@@ -34,7 +34,7 @@ def home(request,template='index.html'):
 	#resto de tipos
 	tipo = {}
 	for x in Tipo.objects.all():
-		videos_list = Video.objects.filter(tipo__nombre=x).order_by('-id')
+		videos_list = Video.objects.filter(tipo__nombre=x).order_by('-id')[:10]
 		videos = {}
 		for vid in videos_list:
 			similares = Video.objects.filter(tipo = vid.tipo,categoria__in = vid.categoria.all()).exclude(id = vid.id)
