@@ -693,11 +693,13 @@ a:focus{
 	min-width: 200px;
 	font-size: 16px;
 	border-radius: 0;
+	margin-bottom: 10px;
 }
 .form-cat .btn{
 	padding: 8px 11px;
 	border-width: 0;
 	border-radius: 0;
+	margin-bottom: 10px;
 }
 .news article p{
 	margin: 0;
@@ -814,7 +816,7 @@ ul.pagination li:first-of-type a .material-icons, ul.pagination li:last-of-type 
 /***Ultimas noticias***/
 
 .bg-bnews{
-	background-image: linear-gradient(to right,#ab2034,#F05B66);
+	background-color: #e58900;
 	margin-bottom: 10px;
 }
 .bnews-padding{
@@ -825,19 +827,25 @@ ul.pagination li:first-of-type a .material-icons, ul.pagination li:last-of-type 
 	min-height: 0;
 }
 .bnew-list{
-	margin-bottom: 0;
+	margin-bottom: 5px;
 }
 .bnew-list li{
 	padding: 0;
 }
 .bnew-list li a{
 	color: white;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 10px;
+	border-radius: 40px;
+	background-color: transparent;
 }
 .bnew-list li a:hover{
-	color: #FFD528;
+	color: #ffffff;
+    background: #e40202;
 }
 .bnews-title{
-	background-color: #e48b02 ;
+	background-color: #e40202;
 }
 .bnew-list li+li{
 }

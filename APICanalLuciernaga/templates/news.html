@@ -47,11 +47,11 @@
 						<h3 class="no-underline white-color bann_name">{{news}}</h3>
 						<p class="bann_name">{{news.descripcion|safe|striptags|truncatechars:100}}</p>
 
-						<div class="buttons top_padd_20 ">
+						
 
-							<a href="{% url 'news_detail' news.slug %}" class="btn btn-ghost"><span>Leer más</span></a>
+							<a href="{% url 'news_detail' news.slug %}" class="btn btn-default"><span>Leer más</span></a>
 
-						</div>						
+											
 					</div>
 				</div>
 			</div>
