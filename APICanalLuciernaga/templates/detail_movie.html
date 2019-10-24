@@ -3,11 +3,7 @@
 {% load embed_video_tags %}
 
 {% block content %}
-<style>
-	.navbar{
-		display: none;
-	}
-</style>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-12">
@@ -64,5 +60,6 @@
 	function goBack() {
 		window.history.back();
 	}
+	$('.navbar').remove();
 </script>
 {% endblock extra_js %}

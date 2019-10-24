@@ -3,11 +3,6 @@
 {% load embed_video_tags %}
 
 {% block content %}
-<style>
-	.navbar{
-		display: none;
-	}
-</style>
 
 <div class="page-wrap">
 
@@ -65,5 +60,6 @@
 	$('.exit').click(function(){
     	$('.sidebar_episodios').removeClass("open");
 	});
+	$('.navbar').remove();
 </script>
 {% endblock extra_js %}
