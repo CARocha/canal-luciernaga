@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load flatpages %}
 
 <html lang="en">
 <head>
@@ -120,15 +121,25 @@
 					<div class="col-sm-4">
 						<h6>Sobre Nosotros</h6>
 						<ul>
-							<li><a href="/conocenos/"><p> Plataforma con recursos audiovisuales que promueven la comunicación como eje principal para motivar el cambio social.</p></a></li>
+							{% get_flatpages as flatpages %}
+							{% for page in flatpages %}
+								{% if page.url == '/conocenos/' %}
+									<li><a href="/conocenos/">{{ page.content|safe|striptags|truncatewords:40}}</a></li>
+								{% endif %}
+							{% endfor	%}
+							
 						</ul>
 					</div>
 					<div class="col-sm-4">
 						<h6>Nuevos lanzamientos</h6>
 						<ul>
-							<li><a href="#">Loma verde</a></li>
-							<li><a href="#">Compromiso con la VIHda</a></li>
-							<li><a href="#">Los hijos del rio</a></li>
+							{% for video in lanzamientos %}
+							<li><a href="{% if video.tipo.nombre == 'Series' %}
+											{% url 'episodio_detail' video.slug video.temporada_set.first.temporada video.temporada_set.first.episodio_set.first.slug %}
+											{% else %}
+											{% url 'Video_detail' video.slug %}
+											{% endif %}">{{video}}</a></li>
+							{% endfor %}
 						</ul>
 					</div>
 					<div class="col-sm-4">

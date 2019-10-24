@@ -26,8 +26,11 @@ def tipos_video(request):
 def validate_urls(request):
 	noticias = Comunicacion.objects.all()
 	biblioteca = Biblioteca.objects.all()
+
+	#footer
+	lanzamientos = Video.objects.order_by('-id')[:3]
 	
-	return {'biblioteca':biblioteca,'noticias':noticias}
+	return {'biblioteca':biblioteca,'noticias':noticias,'lanzamientos':lanzamientos}
 
 def ultimo_momento(request):
 	ultimo_momento = Comunicacion.objects.filter(ultimo_momento = True).order_by('-id')[:3]
