@@ -66,4 +66,3 @@ class Comunicacion(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.titulo)
         super(Comunicacion, self).save(*args, **kwargs)
-    

@@ -22,7 +22,6 @@ admin.site.register(Categoria, CategoriaAdmin)
 # admin.site.register(Clasificacion, ClasificacionAdmin)
 admin.site.register(Comunicacion, ComunicacionAdmin)
 
-#paginas estaticas
 from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 
