@@ -28,6 +28,13 @@
 			<div class="white-color news_contenido">{{ flatpage.content }}</div>
 		</div>
 	</div>
+	
+	<!-- lista de orgs -->
+	<div class="row">
+		{% for org in orgs %}
+			{{org}}
+		{% endfor %}
+	</div>
 </div>
 	
 	
