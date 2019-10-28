@@ -41,16 +41,13 @@
 				{% for org in orgs %}
 				<div class="item">
 					<div class="movie-poster grow">
-						
-						{% thumbnail org.logo.url "200x200" crop="center" as im %}
-						<p>{{ im}}</p>
-						<img src="{{ im }}" alt="">
+						{% thumbnail org.logo "200x200" crop="center" format="PNG" as im %}
+						<img src="{{ im.url }}" alt="">
 						{% endthumbnail %}
 					</div>
 					<h4 id="" class="no-underline white-color hg_video">
 						{{org.siglas}}
 					</h4>
-					<p>{{org.logo.url}}</p>
 				</div>
 				{% endfor %}
 			</div>
