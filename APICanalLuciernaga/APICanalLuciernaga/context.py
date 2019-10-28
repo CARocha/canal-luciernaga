@@ -3,6 +3,7 @@ import datetime
 from videoteca.models import *
 from noticias.models import *
 from biblioteca.models import *
+from organizacion.models import *
 
 def directo(request):
 	hoy = datetime.date.today()
@@ -37,3 +38,6 @@ def ultimo_momento(request):
 
 	return {'ultimo_momento':ultimo_momento}
 
+def organizaciones(request):
+	orgs = Organizacion.objects.order_by('nombre')
+	return {'orgs':orgs}

@@ -76,6 +76,7 @@ TEMPLATES = [
                 'APICanalLuciernaga.context.tipos_video',
                 'APICanalLuciernaga.context.validate_urls',
                 'APICanalLuciernaga.context.ultimo_momento',
+                'APICanalLuciernaga.context.organizaciones',
             ],
         },
     },
