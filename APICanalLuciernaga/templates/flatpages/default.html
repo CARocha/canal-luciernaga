@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load thumbnail %}
 
 {% block content %}
 <div id="content_hero" style="background-image: url(/static/img/newsbanner.jpg)">
@@ -28,15 +29,69 @@
 			<div class="white-color news_contenido">{{ flatpage.content }}</div>
 		</div>
 	</div>
-	
-	<!-- lista de orgs -->
-	<div class="row">
-		{% for org in orgs %}
-			{{org}}
-		{% endfor %}
-	</div>
 </div>
-	
-	
-{% endblock content %}
 
+{% if orgs %}
+<!-- lista de orgs -->
+<div class="container section">
+	<div class="row">
+		<div class="large-12 columns">
+			<h2>Alianzas</h2>
+			<div class="owl-carousel owl-theme slick-slide">
+				{% for org in orgs %}
+				<div class="item">
+					<div class="movie-poster grow">
+						
+						{% thumbnail org.logo.url "200x200" crop="center" as im %}
+						<p>{{ im}}</p>
+						<img src="{{ im }}" alt="">
+						{% endthumbnail %}
+					</div>
+					<h4 id="" class="no-underline white-color hg_video">
+						{{org.siglas}}
+					</h4>
+					<p>{{org.logo.url}}</p>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>		
+{% endif %}	
+{% endblock content %}
+{% block extra_js %}
+<script>
+	$(document).ready(function(){
+		$('.owl-carousel').owlCarousel({
+			loop: true,
+			rewind: true,
+			margin: 10,
+			responsiveClass: true,
+			nav: true,
+			lazyLoad:true,
+			responsive: {
+				0: {
+					items: 1,
+					nav: true,
+					margin: 20
+				},
+				600: {
+					items: 1,
+					nav: true,
+					margin: 20
+				},
+				760: {
+					items: 3,
+					nav: true,
+					margin: 20
+				},
+				1000: {
+					items: 6,
+					margin: 20
+				}
+			}
+		});
+
+	});
+</script>
+{% endblock extra_js %}

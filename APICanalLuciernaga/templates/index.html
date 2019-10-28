@@ -702,6 +702,41 @@
 {% endblock content %}
 
 {% block extra_js %}
+<script>
+	$(document).ready(function(){
+		$('.owl-carousel').owlCarousel({
+			loop: false,
+			rewind: true,
+			margin: 10,
+			responsiveClass: true,
+			nav: true,
+			lazyLoad:true,
+			responsive: {
+				0: {
+					items: 1,
+					nav: true,
+					margin: 20
+				},
+				600: {
+					items: 1,
+					nav: true,
+					margin: 20
+				},
+				760: {
+					items: 3,
+					nav: true,
+					margin: 20
+				},
+				1000: {
+					items: 4,
+					loop: false,
+					margin: 20
+				}
+			}
+		});
+
+	});
+	</script>
 {% for k,v in tipo.items %}
 	{% if k == 'Series' %}
 		{% for video in v %}
