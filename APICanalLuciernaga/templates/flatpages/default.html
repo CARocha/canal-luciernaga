@@ -37,18 +37,18 @@
 	<div class="row">
 		<div class="large-12 columns">
 			<h2>Alianzas</h2>
-			<div class="owl-carousel owl-theme slick-slide">
+			<div class="owl-carousel owl-theme slick-slide list-org">
 				{% for org in orgs %}
-				<div class="item">
-					<div class="movie-poster grow">
-						{% thumbnail org.logo "200x200" crop="center" format="PNG" as im %}
+				<a class="item"href="mailto:{{org.correo}}">
+					<div class="movie-poster logo-item">
+						{% thumbnail org.logo "200" crop="center" format="PNG" as im %}
 						<img src="{{ im.url }}" alt="">
 						{% endthumbnail %}
 					</div>
 					<h4 id="" class="no-underline white-color hg_video">
 						{{org.siglas}}
 					</h4>
-				</div>
+				</a>
 				{% endfor %}
 			</div>
 		</div>
@@ -60,7 +60,7 @@
 <script>
 	$(document).ready(function(){
 		$('.owl-carousel').owlCarousel({
-			loop: true,
+			loop: false,
 			rewind: true,
 			margin: 10,
 			responsiveClass: true,

@@ -747,7 +747,22 @@ ul.pagination li:first-of-type a .material-icons, ul.pagination li:last-of-type 
 .news_data .d-inline-block .material-icons{
 	font-size: 20px;
 }
-
+.news_contenido h1:after,
+.news_contenido h2:after,
+.news_contenido h3:after,
+.news_contenido h4:after,
+.news_contenido h5:after,
+.news_contenido h6:after{
+	display: none;
+}
+.news_contenido h1,
+.news_contenido h2,
+.news_contenido h3,
+.news_contenido h4,
+.news_contenido h5,
+.news_contenido h6{
+	border-bottom: none;
+}
 .news_contenido img{
 	height: auto !important;
 }
@@ -888,6 +903,18 @@ a:hover{
 	background:#FFD528;
 }
 
+/**********organizaciones************/
+.list-org .item{
+	padding: 0.5rem;
+}
+
+.slick-slide .logo-item{
+	min-height: 175px;
+}
+.slick-slide .logo-item img{
+	padding: .5rem;
+
+}
 /*=============================================
 Responsive
 =============================================*/
