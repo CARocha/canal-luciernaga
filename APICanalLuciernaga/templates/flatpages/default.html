@@ -2,6 +2,14 @@
 {% load thumbnail %}
 
 {% block content %}
+{% if not img_conocenos %}
+<style>
+	#hero .carousel-inner .item:before, #content_hero:before{
+		background-image: none;
+	}
+</style>
+{% endif %}
+
 
 {% thumbnail img_conocenos.0 "1350x280" crop="center" format="PNG" as im %}
 <div id="content_hero" style="background-image: url({{im.url}})">
