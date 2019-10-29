@@ -11,7 +11,7 @@
 {% endif %}
 
 
-{% thumbnail img_conocenos.0 "1350x280" crop="center" format="PNG" as im %}
+{% thumbnail img_conocenos.0 "1350x300" crop="center" format="PNG" as im %}
 <div id="content_hero" style="background-image: url({{im.url}})">
 {% empty %}
 <div id="content_hero">
@@ -27,6 +27,9 @@
 						<li class="breadcrumb-item"><a href="/">Inicio</a></li>
 						<li class="breadcrumb-item active white-color" aria-current="page">Conócenos</li>
 					</ol>-->
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"></li>
+					</ol>
 
 			</div>
 		</div>
