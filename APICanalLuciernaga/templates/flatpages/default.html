@@ -2,8 +2,12 @@
 {% load thumbnail %}
 
 {% block content %}
-<div id="content_hero" style="background-image: url(/static/img/newsbanner.jpg)">
-				
+
+{% thumbnail img_conocenos.0 "1350x280" crop="center" format="PNG" as im %}
+<div id="content_hero" style="background-image: url({{im.url}})">
+{% empty %}
+<div id="content_hero">
+{% endthumbnail %}		
 
 	<!-- Content -->
 	<div class="container">
@@ -11,10 +15,10 @@
 			<div class="col-md-9">
 				<span class="title"></span>
 				<p class="banner_det_name bann_name">{{object}}</p>
-					<ol class="breadcrumb">
+					<!--<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="/">Inicio</a></li>
 						<li class="breadcrumb-item active white-color" aria-current="page">Conócenos</li>
-					</ol>
+					</ol>-->
 
 			</div>
 		</div>

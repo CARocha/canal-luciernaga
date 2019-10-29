@@ -4,6 +4,7 @@ from videoteca.models import *
 from noticias.models import *
 from biblioteca.models import *
 from organizacion.models import *
+from configuracion.models import *
 
 def directo(request):
 	hoy = datetime.date.today()
@@ -40,4 +41,6 @@ def ultimo_momento(request):
 
 def organizaciones(request):
 	orgs = Organizacion.objects.order_by('nombre')
-	return {'orgs':orgs}
+	img_conocenos = ConocenosImg.objects.values_list('imagen',flat=True)
+
+	return {'orgs':orgs,'img_conocenos':img_conocenos}
