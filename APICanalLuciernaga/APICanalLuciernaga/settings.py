@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'programacion',
     'organizacion',
     'usuario',
+    'configuracion',
     # terceros
     'nested_admin',
     'taggit',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'embed_video',
     'ckeditor',
     'ckeditor_uploader',
+    'solo',
 ]
 
 AUTH_USER_MODEL = 'usuario.User'
