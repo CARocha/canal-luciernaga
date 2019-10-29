@@ -680,6 +680,7 @@ a:focus{
 	text-decoration: none;
 }
 /****categorias***/
+
 .form-cat h3{
 	border:none;
 	color: white;
@@ -714,10 +715,11 @@ a:focus{
 .widget .form-inline input{
 	width: auto;
 	margin-bottom: 10px;
+	padding: 12px 7px;
 }
 
 .widget .form-inline .btn-noticia{
-	padding: 12px 15px;
+	padding: 12px 12px;
 	top: -2px;
 	border-radius: 0;
 	border: 1px solid #d8d8d8;

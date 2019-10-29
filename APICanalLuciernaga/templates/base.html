@@ -131,13 +131,13 @@
 					<div class="col-sm-4">
 						<h6>Sobre Nosotros</h6>
 						<ul>
-							{% get_flatpages as flatpages %}
+							{% comment %} {% get_flatpages as flatpages %}
 							{% for page in flatpages %}
 								{% if page.url == '/conocenos/' %}
 									<li><a href="/conocenos/">{{ page.content|striptags|safe|truncatewords:25}}</a></li>
 								{% endif %}
-							{% endfor	%}
-							
+							{% endfor	%} {% endcomment %}
+							<li><a href="/conocenos/">Es una plataforma digital con contenido centroamericano que retrata los problemas que afectan a los países de la región, promueve la recuperación de la memoria histórica y la integración cultural de nuestros pueblos en búsqueda de la equidad.</a></li>
 						</ul>
 					</div>
 					<div class="col-sm-4">
