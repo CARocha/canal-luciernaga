@@ -19,7 +19,7 @@ class HoraProgramacion(models.Model):
 	programacion = models.ForeignKey(Programacion, on_delete = models.CASCADE)
 	titulo = models.CharField(max_length = 225)
 	# categoria_p = models.ForeignKey(Categoria,on_delete=models.DO_NOTHING,null=True,verbose_name='Categoría')
-	descripcion = models.CharField("Descripción", max_length=200, blank=True, null=True)
+	descripcion = models.TextField("Descripción", blank=True, null=True)
 	hora_inicio = models.TimeField()
 	hora_fin = models.TimeField()
 
