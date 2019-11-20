@@ -98,8 +98,9 @@
 							<div style="max-height: 170px; overflow: hidden;">
 								{{all_news.descripcion|safe|truncatechars:470}}
 								<br>
-								<a href="{% url 'news_detail' all_news.slug %}" class=""><span>Leer más</span></a>
+								
 							</div>
+							<a href="{% url 'news_detail' all_news.slug %}" class=""><span>Leer más</span></a>
 						</div>
 					</div>
 				</article>
