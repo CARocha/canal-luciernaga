@@ -97,10 +97,12 @@
 						<div class="col-sm-8">
 							<div style="max-height: 170px; overflow: hidden;">
 								{{all_news.descripcion|safe|truncatechars:470}}
-								<br>
-								
 							</div>
-							<a href="{% url 'news_detail' all_news.slug %}" class=""><span>Leer más</span></a>
+							<div class="clearfix"></div>
+							<div class="clearfix mt-10">
+								<a href="{% url 'news_detail' all_news.slug %}" class=""><span>Leer más</span></a>
+							</div>
+							
 						</div>
 					</div>
 				</article>
