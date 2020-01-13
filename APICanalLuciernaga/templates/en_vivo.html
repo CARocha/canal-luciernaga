@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{% for directo in v_directo|slice:"1" %}
+{% for directo in v_directo|dictsortreversed:"id"|slice:"1" %}
 <div class="container section" style="margin-top:120px;">
 
 		
