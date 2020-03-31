@@ -2,6 +2,23 @@
 {% load thumbnail %}
 {% load embed_video_tags %}
 
+{% block share %}
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@FLuciernaga">
+	<meta name="twitter:creator" content="@FLuciernaga">
+	<meta name="twitter:title" content="{{object.nombre}}">
+	<meta name="twitter:description" content="{{object.sinopsis|truncatechars:40|striptags}}">
+	<meta name="twitter:image" content="https://nativamedia.net/media/{{object.foto}}">
+	{% video object.url as video %}
+		<meta name="twitter:image" content="{{video.thumbnail}}">
+    	<meta property="og:image" content="{{video.thumbnail}}">
+	{% endvideo %}
+    <meta property="og:title" content="{{object.nombre}}" />
+    <meta property="og:description" content="{{object.sinopsis|truncatechars:40|striptags}}" />
+    <meta property="og:url" content="https://nativamedia.net{{request.path}}" />
+    <meta property="og:locale" content="es_ES" />
+{% endblock share %}
+
 {% block content %}
 
 <div class="container-fluid">
