@@ -523,7 +523,7 @@
 															<a class="title-movie" href="{% if similar.tipo.nombre == 'Series' %}
 																			{% url 'episodio_detail' similar.slug similar.temporada_set.first.temporada similar.temporada_set.first.episodio_set.first.slug %}
 																		{% else %}
-																		{% url 'Video_detail' video.slug %}
+																		{% url 'Video_detail' similar.slug %}
 																		{% endif %}">
 																<h4 id="" class="no-underline white-color hg_video">
 																	{{similar}}
@@ -654,7 +654,7 @@
 														<div class="movie-poster grow mt-10">
 															<aside>
 																<div class="hover-tab">
-																	<a href="{% url 'Video_detail' video.slug %}" class="play">
+																	<a href="{% url 'Video_detail' similar.slug %}" class="play">
 																		<i class="material-icons">play_arrow</i>
 																	</a>
 																	<span class="date">
