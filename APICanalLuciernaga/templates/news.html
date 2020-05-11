@@ -155,31 +155,54 @@
 
 <!-- Paginacion -->
 
+<style>
+ul.pagination.endless_page_current {
+    border-color: #FFD528;
+}
+ul.pagination>a,ul.pagination>span{
+    line-height: 32px;
+    position: relative;
+    width: 48px;
+    height: 48px;
+    color: #4a4a4a;
+    border: solid 2px #e8e8e8;
+    border-radius: 50%;
+    
+}
+ul.pagination>.endless_page_current {
+	border-color: #FFD528 !important;
+}
+.pagination>a, .pagination>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: 8px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+ul.pagination>a:hover {
+    color: #FFD528;
+    border-color: #FFD528;
+    background: transparent;
+}
+
+ul.pagination {
+     width: auto !important; 
+    margin: 0;
+    text-align: center;
+}
+</style>
 <div class="section">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 text-center">
 				<ul class="pagination">
-					{% get_pages %}
-
-					<li>
-						<a href="{{ pages.previous.path }}">
-							<i class="material-icons">arrow_back_ios</i>
-						</a>
-					</li>
-
-					{% for page in pages %}
-
-					<li><a href="./{{ page.url }}" class="{% if page.is_current %} active {% endif %}">{{page.number}}</a></li>
-
-					{% endfor %}
-
-					<li>
-						<a href="{{ pages.next.path }}">
-							<i class="material-icons">arrow_forward_ios</i>
-						</a>
-					</li>
-
+					{% show_pages %}
+					
 				</ul>
 			</div>
 		</div>
