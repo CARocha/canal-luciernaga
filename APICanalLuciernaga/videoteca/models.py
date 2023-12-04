@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.utils.safestring import mark_safe
 from lugar.models import Pais
 from sorl.thumbnail import ImageField
 from noticias.models import Categoria
@@ -50,7 +51,11 @@ class Video(models.Model):
 
     def __str__(self):
         return self.nombre
-    
+
+    def image_tag(self):
+        return mark_safe('<img src="/media/%s" width="150" height="150" />' % (self.imagen))
+
+    image_tag.short_description = 'Imagen'
     class Meta:
         verbose_name = "Video"
         verbose_name_plural = "Videos"

@@ -25,6 +25,10 @@ class TemporadaInline(nested_admin.NestedStackedInline):
 class VideoAdmin(nested_admin.NestedModelAdmin):
     autocomplete_fields = ['tipo','director','categoria', 'pais']
     inlines = [TemporadaInline,]
+    list_display = ['nombre','fecha','director','url','image_tag']
+    list_filter = ('tipo__nombre','pais__nombre',)
+    search_fields = ['nombre','pais__nombre','tipo__nombre']
+    list_per_page = 15
 
     class Media:
         js = ('js/video/ocultar.js',)
