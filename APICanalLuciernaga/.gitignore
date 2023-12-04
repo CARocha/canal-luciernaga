@@ -131,3 +131,4 @@ dmypy.json
 
 #visual code
 ../.vscode
+*.sql
