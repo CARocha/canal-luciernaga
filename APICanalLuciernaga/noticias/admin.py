@@ -14,6 +14,13 @@ class PaisAdmin(admin.ModelAdmin):
 class ComunicacionAdmin(admin.ModelAdmin):
     autocomplete_fields = ['categoria','pais' ]
     
+    list_display = ['titulo',
+                    'autor','fecha','image_tag',
+                    'pais','fuente',
+                    ]
+    list_filter = ('categoria__nombre','pais__nombre', 'tipo')
+    search_fields = ['titulo']
+    
     class Media:
         js = ('js/noticia/check.js',)
 

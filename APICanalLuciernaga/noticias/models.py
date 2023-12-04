@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.utils.safestring import mark_safe
 from taggit_autosuggest.managers import TaggableManager
 from lugar.models import Pais
 from sorl.thumbnail import ImageField
@@ -14,25 +15,25 @@ class Categoria(models.Model):
 
     def __str__(self):
         return self.nombre
-    
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nombre)
         super(Categoria, self).save(*args, **kwargs)
-        
+
     class Meta:
         verbose_name = "Categoria"
         verbose_name_plural = "Categorias"
 
 # class Clasificacion(models.Model):
 #     nombre = models.CharField(max_length = 225)
-    
+
 #     def __str__(self):
 #         return self.nombre
-    
+
 #     class Meta:
 #         verbose_name = "Clasificacion"
 #         verbose_name_plural = "Clasificaciones"
-        
+
 
 TIPO_COMUNICACION_CHOICE = [
     (1, 'Noticia'),
@@ -58,11 +59,15 @@ class Comunicacion(models.Model):
 
     def __str__(self):
         return self.titulo
-    
+
+    def image_tag(self):
+        return mark_safe('<img src="/media/%s" width="150" height="150" />' % (self.banner))
+
+    image_tag.short_description = 'banner'
     class Meta:
         verbose_name = "Noticia/Reportaje"
         verbose_name_plural = "Noticias/Reportajes"
-    
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.titulo)
         super(Comunicacion, self).save(*args, **kwargs)

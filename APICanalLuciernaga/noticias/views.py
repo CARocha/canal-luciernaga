@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
+from django.db.models import Prefetch
+
+from configuracion.models import BannerSitio
 from .models import *
 from .serializers import ComunicacionSerializer, CategoriaSerializer
 
@@ -22,14 +25,23 @@ class CategoriaNoticiaViewSet(viewsets.ModelViewSet):
 
 # Web Views
 def home(request,template='index.html'):
-	highlight_news = Comunicacion.objects.filter(ultimo_momento=1,tipo=1)[:5]
+	# highlight_news = Comunicacion.objects.filter(ultimo_momento=1,tipo=1)[:5]
 
 	#lo nuevo
-	latest_video = Video.objects.order_by('-id')[:10]
-	dict = {}
-	for x in latest_video:
-		similares = Video.objects.filter(tipo = x.tipo,categoria__in = x.categoria.all()).exclude(id = x.id)
-		dict[x] = similares
+	# latest_video = Video.objects.order_by('-id')[:10]
+	# dict = {}
+	# for x in latest_video:
+	# 	similares = Video.objects.filter(tipo = x.tipo,categoria__in = x.categoria.all()).exclude(id = x.id)
+	# 	dict[x] = similares
+	# Prefetch videos for each Tipo
+	# videos_prefetch = Prefetch(
+	# 	'video_set',
+	# 	queryset=Video.objects.order_by('-id').select_related('tipo')[:15],
+	# 	to_attr='latest_videos'
+	# )
+ 
+	# Fetch all Tipo objects with their related videos
+	# tipos = Tipo.objects.all().prefetch_related(videos_prefetch)
 
 	#resto de tipos
 	tipo = {}
@@ -43,7 +55,7 @@ def home(request,template='index.html'):
 			tipo[x.nombre] = videos
 	####
 
-	bann_vid = Video.objects.filter(portada=True).order_by('-id')[:3]
+	bann_vid = BannerSitio.objects.all().prefetch_related('inlinesimages_set')
 
 	return render(request,template,locals())
 
