@@ -2,61 +2,140 @@
 {% load thumbnail %}
 
 {% block content %}
-
+<style>
+	#vidtop-content {
+		top: 0;
+		color: #fff;
+	}
+	.vid-info {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0,0.3);
+		color: #fff;
+		padding: 1rem;
+		font-family: Avenir, Helvetica, sans-serif;
+	}
+	.vid-info h1 {
+		font-size: 2rem;
+		font-weight: 700;
+		margin-top: 25%;
+		line-height: 1.2;
+		border-bottom: none !important;
+	}
+	.vid-info a {
+		display: block;
+		color: #fff;
+		text-decoration: none;
+		background: rgba(0,0,0,0.5);
+		transition: .6s background;
+		border-bottom: none;
+		margin: 1rem auto;
+		text-align: center;
+	}
+	@media all and (max-width: 600px) {
+		.vid-info { width: 50%; padding: .5rem; }
+		.vid-info h1 { margin-bottom: .2rem; }
+	}
+	@media all and (max-width: 500px) {
+		.vid-info .acronym { display: none; }
+	}
+	.index p {
+		margin-top: 40px;
+		color: #000 !important;
+		font-family: 'Roboto', sans-serif;
+		font-weight: 300;
+		font-size: 17px;
+	}
+	.index a {
+		color: white !important;
+	}
+	.btn-index {
+		background: green;
+	}
+	.btn-index:hover {
+		background: lightgreen;
+		color: black;
+	}
+	.white-color p {
+		font-style: italic;
+		font-size: 18px;
+		color: #333;
+	}
+</style>
 <!-- Hero -->
 <div id="hero" class="carousel slide carousel-fade" data-ride="carousel">
 	
-	<div class="container">	
+	<div class="container">
 		<ol class="carousel-indicators">
 			<li data-target="#hero" data-slide-to="0" class="active"></li>
 			<li data-target="#hero" data-slide-to="1"></li>
 			<li data-target="#hero" data-slide-to="2"></li>
 		</ol>
 	</div>
-	
+
 	<div class="carousel-inner">
 
-		{% for banner in bann_vid %}
-		{% if banner.imagen %}
-			{% thumbnail banner.imagen "1280x720" crop="center" as im %}	
-			<div class="item {% if forloop.first %} active {% endif %}" style="background-image: url({{im.url}})">
+	{% for bann in bann_vid %}
+		{% if bann.tipo == 1 %}
+			{% for banner in bann.inlinesimages_set.all%}
+			{% thumbnail banner.imagen "1280x720" crop="center" as im %}
+			<div class="item {% if forloop.first %} active {% endif %}" style="background-image: url('{{im.url}}')">
 			{% endthumbnail %}
-		{% else %}
-			<div class="item {% if forloop.first %} active {% endif %}" style="background-image: url(http://via.placeholder.com/1280x720)">
-		{% endif %}
-			
+
 			<div class="container">
 				<div class="row blurb scrollme animateme" data-when="exit" data-from="0" data-to="1" data-opacity="0" data-translatey="100">
 					<div class="col-md-9 main-items">
-						
-						<h3 class="no-underline white-color bann_name">{{banner}}</h3>
+
+						<h3 class="no-underline white-color bann_name">{{banner.titulo_img}}</h3>
 						<div class="buttons top_padd_10">
-							<div>
-								{% for cat in banner.categoria.all|slice:"3" %}
-								<span class="title">{{cat}}</span>{% if not forloop.last %},{% endif %}
-								{% endfor%}
-							</div>
 							<p>
-								{{banner.sinopsis|truncatechars:100}}
+								{{banner.descripcion_img|truncatechars:100}}
 							</p>
-							
-							<a href="{% if banner.tipo.nombre == 'Series' %}
-										{% url 'episodio_detail' banner.slug banner.temporada_set.first.temporada banner.temporada_set.first.episodio_set.first.slug %}
-										{% else %}
-										{% url 'Video_detail' banner.slug %}
-										{% endif %}"  class="btn btn-default">
-								<i class="material-icons">play_arrow</i>
-								<span>Reproducir</span>
-							</a>
+
 						</div>
 					</div>
 				</div>
 			</div>
+			</div>
+			{% endfor %}
+		{% else %}
+		<div class="embed-responsive embed-responsive-16by9">
+			<iframe src="https://www.youtube.com/embed/es7npgTATLY?si=gOwAInUCOMlTawea&amp;autoplay=1&amp;loop=1&amp;controls=0&amp;mute=1&amp;playsinline=1" frameborder="0" allowfullscreen></iframe>
 		</div>
-		{% endfor %}
-	</div>
+		<div id="vidtop-content">
+			<div class="vid-info">
+				<h1 class="text-center" >{{bann.titulo}}</h1>
+				<p class="text-center" >{{bann.descripcion}}</p>
+			</div>
+		</div>
+		{% endif %}
+	{% endfor %}
+	</div> <!-- Carousel inner end-->
+
 </div>
 
+<!-- Conocenos	-->
+<div class="container section index" style="background-color: white; width: 100%;">
+	<div class="row">
+		<div class="container">
+		<div class="col-md-12">
+			<div class="white-color">
+				<p>
+					NATIVA MEDIA es una plataforma digital con contenido
+					centroamericano que retrata los problemas que afectan a los
+					países de la región, promueve la recuperación de la memoria
+					histórica y la integración cultural de nuestros pueblos en
+					búsqueda de la equidad.
+				</p>
+				<a href="/conocenos" class="btn btn-index pull-right">conocenos</a>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
 <!-- Breaking news -->
 {% if ultimo_momento %}
 <div class="bg-bnews" style="">

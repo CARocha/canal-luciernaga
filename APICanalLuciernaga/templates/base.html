@@ -2,186 +2,234 @@
 {% load flatpages %}
 
 <html lang="en">
-<head>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151048675-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-151048675-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-	  gtag('config', 'UA-151048675-1');
-	</script>
+      gtag("config", "UA-151048675-1");
+    </script>
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	{% block share %}{% endblock share %}
-	<title>Nativa Media</title>
-	<!-- insert in below line favicon-->
-	<link rel="shortcut icon" href="/static/img/nativaicon.png">
-	<link href="/static/css/slick.css" rel="stylesheet">
-	<link href="/static/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/static/css/venobox.css" rel="stylesheet">
-	<link href="/static/css/style.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="/static/css/customstyle.css" rel="stylesheet">
-	<link rel="stylesheet" href="/static/css/owlcarousel/owl.carousel.min.css">
-	<link rel="stylesheet" href="/static/css/owlcarousel/owl.theme.default.min.css">
-	{% block extra_css %}{% endblock extra_css %}
-		
-</head>
-<body>
-
-	<div class="wrapper">
-		<!-- Navigation -->
-		<div class="navbar" role="navigation">
-			<!-- Heading -->
-			<div class="heading">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-12">
-							
-								<!--<a href="#">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% block share %}{% endblock share %}
+    <title>Nativa Media</title>
+    <!-- insert in below line favicon-->
+    <link rel="shortcut icon" href="/static/img/nativaicon.png" />
+    <link href="/static/css/slick.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/venobox.css" rel="stylesheet" />
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link href="/static/css/customstyle.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="/static/css/owlcarousel/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/css/owlcarousel/owl.theme.default.min.css"
+    />
+    {% block extra_css %}{% endblock extra_css %}
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Navigation -->
+      <div class="navbar" role="navigation">
+        <!-- Heading -->
+        <div class="heading">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <!--<a href="#">
 									<i class="material-icons">search</i>
 								</a> -->
-								<form method="get" class="searchform search-form form-inline" action="/buscador/">
-							        
-									<div class="search">
-										<button class="" type="submit"><i class="material-icons">search</i></button>
-									</div>
-									<div class="form-group f-text"> 
-							        	<input type="text" value="" name="search" class="form-control" placeholder="buscar" id="modal-search-input"> 
-									</div>
-							    </form>
-							
-							
-						</div>
-					</div>
-				</div>
-			</div>
+                <form
+                  method="get"
+                  class="searchform search-form form-inline"
+                  action="/buscador/"
+                >
+                  <div class="search">
+                    <button class="" type="submit">
+                      <i class="material-icons">search</i>
+                    </button>
+                  </div>
+                  <div class="form-group f-text">
+                    <input
+                      type="text"
+                      value=""
+                      name="search"
+                      class="form-control"
+                      placeholder="buscar"
+                      id="modal-search-input"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
 
-			<div class="container">
-				<div class="navbar-header">
-					<a href="/" class="logo" title="Inicio">
-						<img src="/static/img/nativanegativo.png" alt="Nativa Media">
-					</a>
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar top-bar"></span>
-						<span class="icon-bar middle-bar"></span>
-						<span class="icon-bar bottom-bar"></span>
-					</button>
-				</div>  
-				<div class="navbar-collapse collapse">
-					<ul id="menu-primary" class="nav navbar-nav">
-						<li class="dropdown">
-							<a href="/">Inicio</a>
-							<ul class="dropdown-menu">
-								{% for x in tipos %}
-									<li><a href="{% url 'list_videos' x.slug %}" class="white-color">{{x}}</a></li>
-								{% endfor %}
-								
-								
-							</ul>
-						</li>
-						{% if directo == True %}
-						<li>
-							<a class="directo-icon" href="/en-directo">
-								<i class="material-icons" style="font-size: 10px; color: #FF0000">
-									<div class="ball">
-									<span></span>
-									</div>
-								</i>
-							</a>
-							<a href="/en-directo" style="padding-left: 5px;">En Directo</a>
-						</li>
-						{% endif %}
-						
-						{% if noticias %}
-						<li class="dropdown">
-							<a href="/noticias">Noticias</a>
-							<!--<ul class="dropdown-menu">
+        <div class="container">
+          <div class="navbar-header">
+            <a href="/" class="logo" title="Inicio">
+              <img src="/static/img/nativanegativo.png" alt="Nativa Media" />
+            </a>
+            <button
+              type="button"
+              class="navbar-toggle"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+            >
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar top-bar"></span>
+              <span class="icon-bar middle-bar"></span>
+              <span class="icon-bar bottom-bar"></span>
+            </button>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul id="menu-primary" class="nav navbar-nav">
+              <li class="dropdown">
+                <a href="/">Inicio</a>
+                <ul class="dropdown-menu">
+                  {% for x in tipos %}
+                  <li>
+                    <a href="{% url 'list_videos' x.slug %}" class="white-color"
+                      >{{x}}</a
+                    >
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+              {% if directo == True %}
+              <li>
+                <a class="directo-icon" href="/en-directo">
+                  <i
+                    class="material-icons"
+                    style="font-size: 10px; color: #ff0000"
+                  >
+                    <div class="ball">
+                      <span></span>
+                    </div>
+                  </i>
+                </a>
+                <a href="/en-directo" style="padding-left: 5px">En Directo</a>
+              </li>
+              {% endif %} {% if noticias %}
+              <li class="dropdown">
+                <a href="/noticias">Noticias</a>
+                <!--<ul class="dropdown-menu">
 								<li><a href="#">Reportaje</a></li>
 							</ul>-->
-						</li>
-						{% endif %}
-						
-						{% if biblioteca %}
-							<li><a href="/biblioteca/" class="white-color">Biblioteca</a></li>
-						{% endif %}
-						<li>
-							<a href="/conocenos">Conocenos</a>
-						</li>
-						<!--<li>
+              </li>
+              {% endif %} {% if biblioteca %}
+              <li><a href="/biblioteca/" class="white-color">Biblioteca</a></li>
+              {% endif %}
+             <!-- <li>
+                <a href="/conocenos">Conocenos</a>
+              </li>-->
+              <!--<li>
 							<a href="">Radio</a>
 						</li>-->
-					</ul>
-				</div>
-			</div>
-		</div>
-		
+            </ul>
+          </div>
+        </div>
+      </div>
 
-		{% block content %}{% endblock content %}
+      {% block content %}{% endblock content %}
 
-		<footer class="" style="margin-top:75px;">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-4">
-						<h6>Sobre Nosotros</h6>
-						<ul>
-							{% comment %} {% get_flatpages as flatpages %}
-							{% for page in flatpages %}
-								{% if page.url == '/conocenos/' %}
-									<li><a href="/conocenos/">{{ page.content|striptags|safe|truncatewords:25}}</a></li>
-								{% endif %}
-							{% endfor	%} {% endcomment %}
-							<li><a href="/conocenos/">Es una plataforma digital con contenido centroamericano que retrata los problemas que afectan a los países de la región, promueve la recuperación de la memoria histórica y la integración cultural de nuestros pueblos en búsqueda de la equidad.</a></li>
-						</ul>
-					</div>
-					<div class="col-sm-4">
-						<h6>Nuevos lanzamientos</h6>
-						<ul>
-							{% for video in lanzamientos %}
-							<li><a href="{% if video.tipo.nombre == 'Series' %}
+      <footer class="" style="margin-top: 75px">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6">
+              <h6>Nuevos lanzamientos</h6>
+              <ul>
+                {% for video in lanzamientos %}
+                <li>
+                  <a
+                    href="{% if video.tipo.nombre == 'Series' %}
 											{% url 'episodio_detail' video.slug video.temporada_set.first.temporada video.temporada_set.first.episodio_set.first.slug %}
 											{% else %}
 											{% url 'Video_detail' video.slug %}
-											{% endif %}">{{video}}</a></li>
-							{% endfor %}
-						</ul>
-					</div>
-					<div class="col-sm-4">
-						<h6>Contáctanos</h6>
-						<ul>
-							<li><a href="nativamediaorg@gmail.com" target="_blank"><i class="fa fa-envelope-o"></i>nativamediaorg@gmail.com</a></li>
-							<li><a href="https://www.facebook.com/Nativa-Media-116123946466772/" target="_blank"><i class="fa fa-facebook"></i> Facebook</a></li>
-							<li><a href="https://www.youtube.com/channel/UCPK0k00OQa-zmO40gQU4CFg?view_as=subscriber" target="_blank"><i class="fa fa-youtube"></i> Youtube</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="copyright">
-					<div class="row">
-						<div class="col-lg-6 col-md-12 col-xs-12">
-							<p style="padding-top: 30px;">2019 &copy; <a href="https://nativamedia.net/" target="_blank">Nativa Media</a> /  <a href="http://www.simas.org.ni/" target="_blank">Desarrollado por SIMAS</a></p>
-						</div>
-						<div class="col-lg-6 col-md-12 col-xs-12">
-							<ul class="list-inline" style="text-align: center;">
-								<li><img src="/static/img/logos1.png" alt="" width="150px"></li>
-								<li><img src="/static/img/logos2.png" alt="" width="150px"></li>
-							</ul>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-		</footer>
+											{% endif %}"
+                    >{{video}}</a
+                  >
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <h6>Contáctanos</h6>
+              <ul>
+                <li>
+                  <a href="nativamediaorg@gmail.com" target="_blank"
+                    ><i class="fa fa-envelope-o"></i>nativamediaorg@gmail.com</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.facebook.com/Nativa-Media-116123946466772/"
+                    target="_blank"
+                    ><i class="fa fa-facebook"></i> Facebook</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.youtube.com/channel/UCPK0k00OQa-zmO40gQU4CFg?view_as=subscriber"
+                    target="_blank"
+                    ><i class="fa fa-youtube"></i> Youtube</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="copyright">
+            <div class="row">
+              <div class="col-lg-6 col-md-12 col-xs-12">
+                <p style="padding-top: 30px">
+                  2019 &copy;
+                  <a href="https://nativamedia.net/" target="_blank"
+                    >Nativa Media</a
+                  >
+                  /
+                  <a href="http://www.simas.org.ni/" target="_blank"
+                    >Desarrollado por SIMAS</a
+                  >
+                </p>
+              </div>
+              <!-- <div class="col-lg-6 col-md-12 col-xs-12">
+                <ul class="list-inline" style="text-align: center">
+                  <li>
+                    <img src="/static/img/logos1.png" alt="" width="150px" />
+                  </li>
+                  <li>
+                    <img src="/static/img/logos2.png" alt="" width="150px" />
+                  </li>
+                </ul>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
 
-	</div>
-
-
-	<!-- <script type="text/javascript">
+    <!-- <script type="text/javascript">
 	var prev_det;
 
 	function showmore(idvid, cat){
@@ -216,31 +264,29 @@
 	}
 	</script> -->
 
-	<script src="/static/js/jquery-2.2.4.min.js"></script>
-	<script src="/static/js/jquery-ui.min.js"></script>
-	<script src="/static/js/bootstrap.min.js"></script>
-	<script src="/static/js/headhesive.min.js"></script>
-	<script src="/static/js/matchHeight.min.js"></script>
-	<script src="/static/js/modernizr.custom.js"></script>
-	<script src="/static/js/slick.min.js"></script>
-	<script src="/static/js/venobox.min.js"></script>
-	<script src="https://use.fontawesome.com/4dfd2d448a.js"></script>
-	<script src="/static/js/owl.carousel.min.js"></script>
-	<script src="/static/js/custom.js"></script>
-	<script src="/static/js/vendors/highlight.js"></script>
-	<script src="/static/js/app.js"></script>
+    <script src="/static/js/jquery-2.2.4.min.js"></script>
+    <script src="/static/js/jquery-ui.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/headhesive.min.js"></script>
+    <script src="/static/js/matchHeight.min.js"></script>
+    <script src="/static/js/modernizr.custom.js"></script>
+    <script src="/static/js/slick.min.js"></script>
+    <script src="/static/js/venobox.min.js"></script>
+    <script src="https://use.fontawesome.com/4dfd2d448a.js"></script>
+    <script src="/static/js/owl.carousel.min.js"></script>
+    <script src="/static/js/custom.js"></script>
+    <script src="/static/js/vendors/highlight.js"></script>
+    <script src="/static/js/app.js"></script>
 
-	
-	<script type="text/javascript">
-		function reply_click(clicked_id)
-		{	
-			$('.collapse').removeClass('in');
-			var selectedUrl = clicked_id.split('#')[1];
-			//var prueba = selectedUrl.split('_')[0];
-			//alert(selectedUrl);
-		}
-	</script> 
+    <script type="text/javascript">
+      function reply_click(clicked_id) {
+        $(".collapse").removeClass("in");
+        var selectedUrl = clicked_id.split("#")[1];
+        //var prueba = selectedUrl.split('_')[0];
+        //alert(selectedUrl);
+      }
+    </script>
 
-	{% block extra_js %}{% endblock extra_js %}
-</body>
+    {% block extra_js %}{% endblock extra_js %}
+  </body>
 </html>
