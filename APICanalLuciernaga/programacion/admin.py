@@ -8,5 +8,8 @@ class HoraProgramacionInline(admin.StackedInline):
 
 class ProgramacionAdmin(admin.ModelAdmin):
     inlines = [HoraProgramacionInline,]
+    search_fields = ['titulo']
+    list_display = ['titulo','fecha','link']
+    list_filter = ('fecha',)
 
 admin.site.register(Programacion, ProgramacionAdmin)
