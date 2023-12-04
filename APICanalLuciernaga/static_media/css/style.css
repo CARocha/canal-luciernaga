@@ -740,7 +740,7 @@ hr.space-40 {
 
     padding: 20px 24px;
 
-    letter-spacing: 3px;
+    letter-spacing: 1px;
     text-transform: uppercase;
 
     color: #fff;
@@ -1010,7 +1010,7 @@ a.arrow-button:after {
 
     content: 'chevron_right';
     text-transform: none;
-
+    font-feature-settings: 'chevron_right';
     -webkit-font-feature-settings: 'chevron_right';
 }
 
@@ -1041,6 +1041,7 @@ a.arrow-button:hover {
             transition: all 300ms ease-in-out;
 
     background: -webkit-linear-gradient(#e58900, #FFD528);
+    background-clip: text;
     -webkit-background-clip: text;
 
     -webkit-text-fill-color: transparent;
@@ -2794,7 +2795,7 @@ footer .copyright a:hover {
         opacity: 0;
     }
     100% {
-        transform: scale(1)
+        transform: scale(1);
 
         opacity: 1;
     }
