@@ -3,45 +3,44 @@
 
 {% block content %}
 <style>
-	#vidtop-content {
-		top: 0;
-		color: #fff;
+	.position-relative {
+		position: relative;
 	}
-	.vid-info {
+	.overlay {
 		position: absolute;
 		top: 0;
-		right: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
-		background: rgba(0,0,0,0.3);
+		background: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad según sea necesario */
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 		color: #fff;
-		padding: 1rem;
-		font-family: Avenir, Helvetica, sans-serif;
-	}
-	.vid-info h1 {
-		font-size: 2rem;
-		font-weight: 700;
-		margin-top: 25%;
-		line-height: 1.2;
-		border-bottom: none !important;
-	}
-	.vid-info a {
-		display: block;
-		color: #fff;
-		text-decoration: none;
-		background: rgba(0,0,0,0.5);
-		transition: .6s background;
-		border-bottom: none;
-		margin: 1rem auto;
 		text-align: center;
 	}
+	.overlay-title {
+		font-size: 2rem;
+		font-weight: 700;
+		margin-bottom: 10px;
+	}
+	.overlay-description {
+		font-size: 1rem;
+		margin: 0;
+	}
 	@media all and (max-width: 600px) {
-		.vid-info { width: 50%; padding: .5rem; }
-		.vid-info h1 { margin-bottom: .2rem; }
+		.overlay {
+			padding: 20px;
+		}
+		.overlay-title {
+			font-size: 1.5rem;
+		}
+		.overlay-description {
+			font-size: 0.8rem;
+		}
 	}
-	@media all and (max-width: 500px) {
-		.vid-info .acronym { display: none; }
-	}
+
 	.index p {
 		margin-top: 40px;
 		color: #000 !important;
@@ -64,22 +63,32 @@
 		font-size: 18px;
 		color: #333;
 	}
+
+    .embed-responsive-16by9 {
+        position: relative;
+        height: 0 !important;
+        overflow: hidden;
+        padding-bottom: 56.25%; /* Proporción 16:9 */
+    }
+
+    .embed-responsive-16by9 iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
 </style>
 <!-- Hero -->
-<div id="hero" class="carousel slide carousel-fade" data-ride="carousel">
-	
-	<div class="container">
-		<ol class="carousel-indicators">
-			<li data-target="#hero" data-slide-to="0" class="active"></li>
-			<li data-target="#hero" data-slide-to="1"></li>
-			<li data-target="#hero" data-slide-to="2"></li>
-		</ol>
-	</div>
-
-	<div class="carousel-inner">
-
-	{% for bann in bann_vid %}
-		{% if bann.tipo == 1 %}
+{% for bann in bann_vid %}
+	{% if bann.tipo == 1 %}
+	<div id="hero" class="carousel slide carousel-fade" data-ride="carousel">
+		<div class="container">
+			<ol class="carousel-indicators">
+				<li data-target="#hero" data-slide-to="0" class="active"></li>
+				<li data-target="#hero" data-slide-to="1"></li>
+				<li data-target="#hero" data-slide-to="2"></li>
+			</ol>
+		</div>
+		<div class="carousel-inner">
 			{% for banner in bann.inlinesimages_set.all%}
 			{% thumbnail banner.imagen "1280x720" crop="center" as im %}
 			<div class="item {% if forloop.first %} active {% endif %}" style="background-image: url('{{im.url}}')">
@@ -101,21 +110,19 @@
 			</div>
 			</div>
 			{% endfor %}
-		{% else %}
-		<div class="embed-responsive embed-responsive-16by9">
-			<iframe src="https://www.youtube.com/embed/{{bann.youtube_link}}?si=gOwAInUCOMlTawea&amp;autoplay=1&amp;loop=1&amp;controls=0&amp;mute=1&amp;playsinline=1" frameborder="0" allowfullscreen></iframe>
+		</div> <!-- Carousel inner end-->
+	</div>
+	{% else %}
+	<div class="embed-responsive embed-responsive-16by9 position-relative">
+		<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{bann.youtube_link}}?si=gOwAInUCOMlTawea&amp;autoplay=1&amp;loop=1&amp;controls=0&amp;mute=1&amp;playsinline=1" frameborder="0" allowfullscreen></iframe>
+		
+		<div class="overlay">
+			<h1 class="overlay-title">{{bann.titulo}}</h1>
+			<p class="overlay-description">{{bann.descripcion}}</p>
 		</div>
-		<div id="vidtop-content">
-			<div class="vid-info">
-				<h1 class="text-center" >{{bann.titulo}}</h1>
-				<p class="text-center" >{{bann.descripcion}}</p>
-			</div>
-		</div>
-		{% endif %}
-	{% endfor %}
-	</div> <!-- Carousel inner end-->
-
-</div>
+	</div>
+	{% endif %}
+{% endfor %}
 
 <!-- Conocenos	-->
 <div class="container section index" style="background-color: white; width: 100%;">
@@ -835,5 +842,12 @@
 	{% endif %}
 {% endfor %}
 
-	
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var heroCarousel = document.getElementById('hero');
+        if (heroCarousel) {
+            heroCarousel.style.height = 'auto';
+        }
+    });
+</script>
 {% endblock extra_js %}
