@@ -16,4 +16,5 @@ class BannerSitioAdmin(SingletonModelAdmin):
         js = ('js/admin/banner.js',)
 
 admin.site.register(ConocenosImg,SingletonModelAdmin)
+admin.site.register(NoticiaImg,SingletonModelAdmin)
 admin.site.register(BannerSitio,BannerSitioAdmin)

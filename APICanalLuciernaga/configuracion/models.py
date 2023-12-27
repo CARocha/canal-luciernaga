@@ -11,7 +11,11 @@ class ConocenosImg(SingletonModel):
 	class Meta:
 		verbose_name = "Imágen conócenos"
 
+class NoticiaImg(SingletonModel):
+	imagen = ImageField(upload_to='banner/conocenos',help_text='1350x280',null=True,blank=True)
 
+	class Meta:
+		verbose_name = "Imágen de noticias"
 # class Opciones(Enum):
 #     IMAGEN = "IMAGEN"
 #     VIDEO = "VIDEO"
