@@ -29,7 +29,7 @@
 			{% for all_news in news_list %}
 			<div class="row">
 				<article class="col-lg-12">
-					<span class="categories">{{all_news.categoria}} {{img_noticia.0}}</span>
+					<span class="categories">{{all_news.categoria}}</span>
 	
 					<h2 class="no-underline"><a href="{% url 'news_detail' all_news.slug %}" class="white-color">{{all_news}}</a></h2>
 					<div class="row">
