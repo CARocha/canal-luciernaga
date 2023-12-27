@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from django.db.models import Prefetch
 
-from configuracion.models import BannerSitio
+from configuracion.models import BannerSitio, NoticiaImg
 from .models import *
 from .serializers import ComunicacionSerializer, CategoriaSerializer
 
@@ -46,7 +46,7 @@ def home(request,template='index.html'):
 	#resto de tipos
 	tipo = {}
 	for x in Tipo.objects.all():
-		videos_list = Video.objects.filter(tipo__nombre=x).order_by('-id')[:15]
+		videos_list = Video.objects.filter(tipo__nombre=x).order_by('-fecha')[:15]
 		videos = {}
 		for vid in videos_list:
 			similares = Video.objects.filter(tipo = vid.tipo,categoria__in = vid.categoria.all()).exclude(id = vid.id)
@@ -65,7 +65,7 @@ def news(request,template='news.html'):
 	banner = Comunicacion.objects.filter(portada = True).order_by('-id')[:3]
 	ids = news_list.values_list('id',flat=True)
 	common_tags = Comunicacion.tags.most_common(min_count=2,extra_filters={'id__in': ids})[:6]
-
+	img_noticia = NoticiaImg.objects.values_list('imagen',flat=True)
 	return render(request,template,locals())
 
 def news_detail(request,slug,template='news_detail.html'):

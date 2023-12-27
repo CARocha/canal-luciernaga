@@ -49,6 +49,12 @@
     {% block extra_css %}{% endblock extra_css %}
   </head>
   <body>
+    <style>
+      footer .copyright {
+        margin-top: 0px !important;
+        padding: 0px !important;
+      }
+    </style>
     <div class="wrapper">
       <!-- Navigation -->
       <div class="navbar" role="navigation">
@@ -156,61 +162,12 @@
 
       <footer class="" style="margin-top: 75px">
         <div class="container">
-          <div class="row">
-            <div class="col-sm-6">
-              <h6>Nuevos lanzamientos</h6>
-              <ul>
-                {% for video in lanzamientos %}
-                <li>
-                  <a
-                    href="{% if video.tipo.nombre == 'Series' %}
-											{% url 'episodio_detail' video.slug video.temporada_set.first.temporada video.temporada_set.first.episodio_set.first.slug %}
-											{% else %}
-											{% url 'Video_detail' video.slug %}
-											{% endif %}"
-                    >{{video}}</a
-                  >
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
-            <div class="col-sm-6">
-              <h6>Contáctanos</h6>
-              <ul>
-                <li>
-                  <a href="nativamediaorg@gmail.com" target="_blank"
-                    ><i class="fa fa-envelope-o"></i>nativamediaorg@gmail.com</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://www.facebook.com/Nativa-Media-116123946466772/"
-                    target="_blank"
-                    ><i class="fa fa-facebook"></i> Facebook</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://www.youtube.com/channel/UCPK0k00OQa-zmO40gQU4CFg?view_as=subscriber"
-                    target="_blank"
-                    ><i class="fa fa-youtube"></i> Youtube</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
           <div class="copyright">
             <div class="row">
               <div class="col-lg-6 col-md-12 col-xs-12">
                 <p style="padding-top: 30px">
-                  2019 &copy;
-                  <a href="https://nativamedia.net/" target="_blank"
-                    >Nativa Media</a
-                  >
-                  /
-                  <a href="http://www.simas.org.ni/" target="_blank"
-                    >Desarrollado por SIMAS</a
-                  >
+                  &copy; <span id="currentYear"></span> Nativa Media. Todos los
+                  derechos reservados.
                 </p>
               </div>
               <!-- <div class="col-lg-6 col-md-12 col-xs-12">
@@ -285,6 +242,9 @@
         //var prueba = selectedUrl.split('_')[0];
         //alert(selectedUrl);
       }
+      
+        document.getElementById('currentYear').innerHTML = new Date().getFullYear();
+    
     </script>
 
     {% block extra_js %}{% endblock extra_js %}

@@ -5,63 +5,20 @@
 {% block content %}
 
 <!-- banner -->
-
 <div id="hero" class="carousel slide carousel-fade" data-ride="carousel">
-
-	<!-- Indicators
-	<div class="container">	
-		<ol class="carousel-indicators">
-			{% for news in banner %}
-			<li data-target="#hero" data-slide-to="1" class="{% if forloop.first %}active{% endif %}"></li>
-			{% endfor %}
-		</ol>
-	</div> -->
-
-	<div class="container">	
-		<ol class="carousel-indicators">
-			<li data-target="#hero" data-slide-to="0" class="active"></li>
-			<li data-target="#hero" data-slide-to="1"></li>
-			<li data-target="#hero" data-slide-to="2"></li>
-		</ol>
-	</div>
 	
 	<!-- Wrapper for slides -->
 	<div class="carousel-inner">
-
-		{% for news in banner %}
-		{% if news.banner %}
-			{% thumbnail news.banner "1280x720" crop="center" as im %}
-			<div class="item {% if forloop.first %}active{% endif %} " style="background-image: url({{im.url}})">
-			{% endthumbnail %}
-		{% elif news.foto %}
-			{% thumbnail news.foto "1280x720" crop="center" as im %}
-			<div class="item {% if forloop.first %}active{% endif %} " style="background-image: url({{im.url}})">
-			{% endthumbnail %}
-		{% endif %}
-
-		
-			<div class="container">
-				<div class="row blurb scrollme animateme" data-when="exit" data-from="0" data-to="1" data-opacity="0" data-translatey="100">
-					<div class="col-md-9 main-items">
-
-						<h3 class="no-underline white-color bann_name">{{news}}</h3>
-						<p class="bann_name">{{news.descripcion|safe|striptags|truncatechars:100}}</p>
-
-						
-
-							<a href="{% url 'news_detail' news.slug %}" class="btn btn-default"><span>Leer más</span></a>
-
-											
-					</div>
-				</div>
-			</div>
-		</div>
-
-		{% endfor %}
-
+		{% if img_noticia %}
+      <div class="item active" style="background-image: url('/media/{{img_noticia.0}}')"></div>
+    {% else %}
+			<!-- Placeholder o imagen predeterminada aquí -->
+			<div class="item active" style="background-image: url('https://placehold.co/1280x720')"></div>
+    {% endif %}
 	</div>
 
 </div>
+
 
 <!-- contenido -->
 
@@ -72,7 +29,7 @@
 			{% for all_news in news_list %}
 			<div class="row">
 				<article class="col-lg-12">
-					<span class="categories">{{all_news.categoria}}</span>
+					<span class="categories">{{all_news.categoria}} {{img_noticia.0}}</span>
 	
 					<h2 class="no-underline"><a href="{% url 'news_detail' all_news.slug %}" class="white-color">{{all_news}}</a></h2>
 					<div class="row">

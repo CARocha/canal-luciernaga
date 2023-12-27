@@ -41,7 +41,7 @@ class Video(models.Model):
     nombre = models.CharField('Nombre',max_length = 225)
     imagen = ImageField('Imagen',upload_to='fotos/videos')
     sinopsis = models.TextField('Sinopsis')
-    fecha = models.DateField('Fecha') 
+    fecha = models.DateField('Fecha')
     director = models.ForeignKey(Director, on_delete = models.CASCADE,verbose_name='Director')
     produccion = models.CharField('Producción',max_length = 255)
     pais = models.ForeignKey(Pais, on_delete = models.CASCADE,verbose_name='País')
@@ -59,7 +59,7 @@ class Video(models.Model):
     class Meta:
         verbose_name = "Video"
         verbose_name_plural = "Videos"
-        ordering = ['-id']
+        ordering = ordering = ['-fecha']
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nombre)
