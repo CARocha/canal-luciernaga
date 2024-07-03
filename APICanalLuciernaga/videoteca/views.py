@@ -53,7 +53,7 @@ def list_videos(request,tipo,template='movies.html'):
 
 def Video_detail(request,slug,template='detail_movie.html'):
 	object = Video.objects.get(slug=slug)
-	if object.tipo.nombre == 'Series':
+	if object.tipo.filter(nombre='Series').exists():
 		episodio = Episodio.objects.filter(temporada__info_video = object).order_by('id').first()
 		temporadas = Temporada.objects.filter(info_video = object)
 	return render(request,template,locals())
