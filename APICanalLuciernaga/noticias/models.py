@@ -52,7 +52,7 @@ class Comunicacion(models.Model):
     banner = ImageField('Banner',upload_to='banner/noticias',null=True,blank=True)
     foto = ImageField('Imagen',upload_to='fotos/noticias')
     descripcion = RichTextUploadingField()
-    pais = models.ForeignKey(Pais, on_delete = 255)
+    pais = models.ForeignKey(Pais, on_delete = models.CASCADE)
     fuente = models.CharField(max_length = 225)
     tags = TaggableManager(blank=True)
     slug = models.SlugField(max_length=250, unique=True, editable= False)

@@ -26,7 +26,7 @@ class VideoAdmin(nested_admin.NestedModelAdmin):
     autocomplete_fields = ['tipo','director','categoria', 'pais']
     inlines = [TemporadaInline,]
     list_display = ['nombre','fecha','director','url','image_tag']
-    list_filter = ('tipo__nombre','pais__nombre',)
+    list_filter = ('pais','tipo','categoria')
     search_fields = ['nombre','pais__nombre','tipo__nombre']
     list_per_page = 15
 
