@@ -49,7 +49,7 @@ def home(request,template='index.html'):
 		videos_list = Video.objects.filter(tipo__nombre=x).order_by('-fecha')[:15]
 		videos = {}
 		for vid in videos_list:
-			similares = Video.objects.filter(tipo = vid.tipo,categoria__in = vid.categoria.all()).exclude(id = vid.id)
+			similares = Video.objects.filter(tipo__in = vid.tipo.all(),categoria__in = vid.categoria.all()).exclude(id = vid.id).distinct()
 			videos[vid] = similares
 		if videos_list:
 			tipo[x.nombre] = videos
