@@ -8,8 +8,8 @@ from noticias.models import Categoria
 #Create your models here.
 
 class Tipo(models.Model):
-    nombre = models.CharField(max_length = 255)
-    slug = models.SlugField(max_length = 250, editable = False)
+    nombre = models.CharField(max_length = 255, unique=True)
+    slug = models.SlugField(max_length = 250, editable = False, unique = True)
     
     class Meta:
          ordering = ['-id']
@@ -22,7 +22,7 @@ class Tipo(models.Model):
         super(Tipo, self).save(*args, **kwargs)
 
 class Director(models.Model):
-    nombre = models.CharField(max_length = 255)
+    nombre = models.CharField(max_length = 255, unique=True)
     # fecha_nacimiento = models.DateField('Fecha de nacimiento')
 
     def __str__(self):
@@ -38,7 +38,7 @@ class Video(models.Model):
     tipo = models.ForeignKey(Tipo,on_delete=models.CASCADE)
     portada = models.BooleanField('Portada',default=False)
     categoria = models.ManyToManyField(Categoria,verbose_name='Categoría')
-    nombre = models.CharField('Nombre',max_length = 225)
+    nombre = models.CharField('Nombre',max_length = 225, unique=True)
     imagen = ImageField('Imagen',upload_to='fotos/videos')
     sinopsis = models.TextField('Sinopsis')
     fecha = models.DateField('Fecha')
@@ -47,7 +47,7 @@ class Video(models.Model):
     pais = models.ForeignKey(Pais, on_delete = models.CASCADE,verbose_name='País')
     duracion = models.CharField('Duración',max_length=20)
     url = models.URLField(null = True, blank = True)
-    slug = models.SlugField(max_length = 250,editable= False)
+    slug = models.SlugField(max_length = 250,editable= False, unique=True)
 
     def __str__(self):
         return self.nombre
@@ -90,10 +90,10 @@ class Episodio(models.Model):
     temporada = models.ForeignKey(Temporada, on_delete = models.CASCADE)
     link = models.URLField(max_length = 225)
     imagen = ImageField('Imagen',upload_to='fotos/videos')
-    titulo = models.CharField('Título',max_length = 225)
+    titulo = models.CharField('Título',max_length = 225, unique=True)
     sinopsis = models.TextField('Sinopsis',max_length=200)
     duracion = models.CharField('Duración',max_length=20)
-    slug = models.SlugField(max_length = 250, editable= False)
+    slug = models.SlugField(max_length = 250, editable= False, unique=True)
 
     def __str__(self):
         return self.titulo

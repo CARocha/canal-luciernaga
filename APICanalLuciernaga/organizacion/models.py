@@ -6,10 +6,10 @@ from lugar.models import Pais
 # Create your models here.
 
 class Organizacion(models.Model):
-	nombre = models.CharField('Nombre',max_length=200)
+	nombre = models.CharField('Nombre',max_length=200, unique=True)
 	siglas = models.CharField("Siglas",help_text="Siglas o nombre corto de la oganización",max_length=200)
 	logo = ImageField(upload_to='contrapartes/logos/',null=True, blank=True)
-	slug = models.SlugField(max_length=200,editable=False)
+	slug = models.SlugField(max_length=200,editable=False, unique=True)
 	pais = models.ForeignKey(Pais,on_delete=models.DO_NOTHING)
 	correo = models.EmailField(blank=True, null=True)
 
