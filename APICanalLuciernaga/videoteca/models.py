@@ -35,7 +35,7 @@ class Director(models.Model):
 
 
 class Video(models.Model):
-    tipo = models.ForeignKey(Tipo,on_delete=models.CASCADE)
+    tipo = models.ManyToManyField(Tipo,related_name='temas',verbose_name='Temas')
     portada = models.BooleanField('Portada',default=False)
     categoria = models.ManyToManyField(Categoria,verbose_name='Categoría')
     nombre = models.CharField('Nombre',max_length = 225, unique=True)
