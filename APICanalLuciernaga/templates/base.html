@@ -111,8 +111,11 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul id="menu-primary" class="nav navbar-nav">
-              <li class="dropdown">
+              <li>
                 <a href="/">Inicio</a>
+              </li>
+              <li class="dropdown">
+                <a href="/">Categorias</a>
                 <ul class="dropdown-menu">
                   {% for x in tipos %}
                   <li>
@@ -137,22 +140,36 @@
                 </a>
                 <a href="/en-directo" style="padding-left: 5px">En Directo</a>
               </li>
-              {% endif %} {% if noticias %}
-              <li class="dropdown">
-                <a href="/noticias">Noticias</a>
-                <!--<ul class="dropdown-menu">
-								<li><a href="#">Reportaje</a></li>
-							</ul>-->
-              </li>
-              {% endif %} {% if biblioteca %}
-              <li><a href="/biblioteca/" class="white-color">Biblioteca</a></li>
               {% endif %}
-             <!-- <li>
-                <a href="/conocenos">Conocenos</a>
-              </li>-->
-              <!--<li>
-							<a href="">Radio</a>
-						</li>-->
+              {% comment %} {% if noticias %}
+                <li class="dropdown">
+                  <a href="/noticias">Noticias</a>
+                  <!--<ul class="dropdown-menu">
+                  <li><a href="#">Reportaje</a></li>
+                </ul>-->
+                </li>
+              {% endif %}  {% endcomment %}
+              {% comment %} {% if biblioteca %}
+              <li><a href="/biblioteca/" class="white-color">Biblioteca</a></li>
+              {% endif %} {% endcomment %}
+              <li>
+                <a href="/videos/documental">Documentales</a>
+              </li>
+              <li>
+                <a href="/videos/peliculas">Peliculas</a>
+              </li>
+              <li>
+                <a href="/videos/series">Series</a>
+              </li>
+              <li>
+                <a href="">Radio-Podcast</a>
+              </li>
+              <li>
+                <a href="">Publicaciones</a>
+              </li>
+              <li>
+                <a href="/conocenos">Sobre Nativa</a>
+              </li>
             </ul>
           </div>
         </div>

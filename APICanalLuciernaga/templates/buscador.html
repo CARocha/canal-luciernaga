@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-	{% for obj in videos %}
-		{{obj}}
-	{% endfor %}
+<div class="container section news" style="margin-top: 430px;">
+	<div class="row">
+		<div class="col-sm-12">
+			<h1>Resultados de la busqueda</h1>
+			{% for obj in videos %}
+				<li><a href="{% url 'Video_detail' obj.slug %}">{{obj}}</a></li>
+			{% endfor %}
+		</div>
+	</div>
+</div>
 {% endblock content %}
