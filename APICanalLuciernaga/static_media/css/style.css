@@ -817,6 +817,8 @@ hr.space-40 {
     visibility: hidden;
 
     width: 100%;
+    min-width: max-content;
+    white-space: nowrap;
     padding: 0;
 
     -webkit-transition: all .25s ease-in-out;
