@@ -350,10 +350,15 @@ a:hover.light_hover{
 	vertical-align: middle;
 }
 
+.slick-slide .movie-poster:hover {
+    border: 3px solid #fff;
+    border-radius: 6px;
+}
+
 .slick-slide .movie-poster:hover img {
-	filter: grayscale(0%);
-	 filter:brightness(0.3);
-	background-color: rgba(0,0,0,1.5);
+	/* filter: grayscale(0%); */
+	filter:brightness(0.7);
+	/* background-color: rgba(0,0,0,.5); */
 }
 
 /* altos definidos */
