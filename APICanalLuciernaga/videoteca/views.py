@@ -33,7 +33,7 @@ def list_videos(request,tipo,template='movies.html'):
 				videos_list = Video.objects.filter(categoria=x,tipo__slug=tipo).order_by('-id')
 				videos = {}
 				for vid in videos_list:
-					similares = Video.objects.filter(tipo = vid.tipo,categoria__in = vid.categoria.all()).exclude(id = vid.id)
+					similares = Video.objects.filter(tipo__in = vid.tipo.all(),categoria__in = vid.categoria.all()).exclude(id = vid.id)
 					videos[vid] = similares
 				if videos_list:
 					cat[x] = videos
@@ -44,7 +44,7 @@ def list_videos(request,tipo,template='movies.html'):
 			videos_list = Video.objects.filter(categoria=x,tipo__slug=tipo).order_by('-id')
 			videos = {}
 			for vid in videos_list:
-				similares = Video.objects.filter(tipo = vid.tipo,categoria__in = vid.categoria.all()).exclude(id = vid.id)
+				similares = Video.objects.filter(tipo__in = vid.tipo.all(),categoria__in = vid.categoria.all()).exclude(id = vid.id)
 				videos[vid] = similares
 			if videos_list:
 				cat[x] = videos
@@ -53,6 +53,7 @@ def list_videos(request,tipo,template='movies.html'):
 
 def Video_detail(request,slug,template='detail_movie.html'):
 	object = Video.objects.get(slug=slug)
+	similares = Video.objects.filter(tipo__in = object.tipo.all(),categoria__in = object.categoria.all().values_list('id', flat=True)).exclude(id = object.id)
 	if object.tipo.filter(nombre='Series').exists():
 		episodio = Episodio.objects.filter(temporada__info_video = object).order_by('id').first()
 		temporadas = Temporada.objects.filter(info_video = object)
