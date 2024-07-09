@@ -3,6 +3,7 @@ from .models import *
 from .serializers import VideoSerializer, EpisodioSerializer, CategoriaSerializer, TipoSerializer
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.db.models import Q, Prefetch
 from .forms import *
 
 class VideoViewSet(viewsets.ModelViewSet):
@@ -53,10 +54,15 @@ def list_videos(request,tipo,template='movies.html'):
 
 def Video_detail(request,slug,template='detail_movie.html'):
 	object = Video.objects.get(slug=slug)
-	similares = Video.objects.filter(tipo__in = object.tipo.all(),categoria__in = object.categoria.all().values_list('id', flat=True)).exclude(id = object.id)
-	if object.tipo.filter(nombre='Series').exists():
-		episodio = Episodio.objects.filter(temporada__info_video = object).order_by('id').first()
-		temporadas = Temporada.objects.filter(info_video = object)
+	similares = Video.objects.filter(
+        Q(tipo__in=object.tipo.all()) | 
+		Q(categoria__in=object.categoria.all().values_list('id', flat=True))
+    ).exclude(id=object.id).select_related('director', 'pais').prefetch_related('tipo', 'categoria')[:10]
+	if object.categoria.filter(nombre='Series').exists():
+		#episodio = Episodio.objects.filter(temporada__info_video = object).order_by('id').first()
+		episodios_prefetch = Prefetch('episodio_set', queryset=Episodio.objects.order_by('id'))
+		#temporadas = Temporada.objects.filter(info_video = object)
+		temporadas = Temporada.objects.filter(info_video=object).prefetch_related(episodios_prefetch)
 	return render(request,template,locals())
 
 def episodio_detail(request,slug,temporada,episodio,template='detail_episodio.html'):
