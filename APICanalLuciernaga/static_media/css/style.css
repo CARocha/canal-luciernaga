@@ -256,7 +256,8 @@ i.material-icons {
 
 .wrapper {
     overflow-x: hidden;
-    background-color: #1f1e1e;
+    /* background-color: #1f1e1e; */
+    background-color: #101010;
 }
 
 hr.space-40 {
