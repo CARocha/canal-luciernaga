@@ -467,8 +467,8 @@ a.close_collapse {
 	z-index: 100;
 }
 .owl-theme .owl-next span,.owl-theme .owl-prev span {
-	font-size: 2.5rem;
-	color: #cecece;
+	font-size: 3.5rem;
+	color: #fff !important;
 }
 .owl-theme .owl-prev {
 	position: absolute;
@@ -901,7 +901,7 @@ a:hover{
 	color: #8BC53F;
 }
 .owl-theme .owl-next span, .owl-theme .owl-prev span{
-	color: rgb(141, 141, 141) !important;
+	color: #fff !important;
 }
 .owl-theme .owl-nav [class*=owl-]:hover{
 	background: #38376a52 !important;
