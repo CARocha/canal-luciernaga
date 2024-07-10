@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+
+{% load thumbnail %}
+
+{% block content %}
+<div id="content_hero" style="background-image: url(/static/img/movie-main_banner.jpg)">
+    <!-- Content -->
+    <div class="container">
+        <div class="row blurb scrollme animateme " data-when="exit" data-from="0" data-to="1" data-opacity="0"
+            data-translatey="100">
+            <div class="col-md-6">
+                <h1>{{name}}</h1>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                    <li class="breadcrumb-item active white-color" aria-current="page">{{name}}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-20">
+    <div class="container section">
+        <div class="row">
+            <div class="col-lg-12 columns">
+                <form class="form-inline form-cat" action="." method="POST">{% csrf_token %}
+                    <h3>Temas</h3>
+                    {{form.tipos}}
+                    <button class="btn btn-default" type="submit">Consultar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% for k,v in cat.items %}
+	<!-- series -->
+	{% if name.nombre == 'Series' %}
+		<div class="series">
+			<div class="container section">
+				<div class="row">
+					<div class="large-12 columns">
+						<h2>{{k}}</h2>
+						<div class="owl-carousel owl-theme slick-slide">
+							{% for serie in v %}
+							<div class="item">
+								<div class="movie-poster">
+									{% thumbnail serie.imagen "1280x720" crop="center" as im %}
+									<img src="{{ im.url }}" alt="{{serie.nombre}}">
+									{% empty %}
+									<img src="http://via.placeholder.com/1280x720 " alt="">
+									{% endthumbnail %}
+								</div>
+								<a class="title-movie" href="{% if serie.tipo.nombre == 'Series' %}
+													{% url 'episodio_detail' serie.slug serie.temporada_set.first.temporada serie.temporada_set.first.episodio_set.first.slug %}
+													{% else %}
+													{% url 'Video_detail' serie.slug %}
+													{% endif %}">
+									<h4 id="" class="no-underline white-color hg_video">
+										{{serie.nombre}}
+									</h4>
+								</a>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% else %}
+		<div class="{{k}}">
+			<!-- peliculas -->
+			<div class="container section">
+				<div class="row">
+					<div class="large-12 columns">
+						<h2>{{k}}</h2>
+						<div class="owl-carousel owl-theme slick-slide">
+							{% for peli in v %}
+							<div class="item">
+								<div class="movie-poster">
+                                    <a href="{% url 'Video_detail' peli.slug %}" class="play">
+                                        <aside>
+                                            <div>
+                                            </div>
+                                        </aside>
+                                        </a>
+									{% thumbnail peli.imagen "1280x720" crop="center" as im %}
+									<img src="{{ im.url }}" alt="{{peli.nombre}}">
+									{% empty %}
+									<img src="http://via.placeholder.com/1280x720 " alt="{{peli.nombre}}">
+									{% endthumbnail %}
+								</div>
+								<a class="title-movie" href="{% url 'Video_detail' peli.slug %}">
+									<h4 id="" class="no-underline white-color hg_video">
+										{{peli.nombre}}
+									</h4>
+								</a>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endfor %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+	$(document).ready(function(){
+		$('.owl-carousel').owlCarousel({
+			loop: false,
+			rewind: true,
+			margin: 10,
+			responsiveClass: true,
+			nav: true,
+			lazyLoad:true,
+			responsive: {
+				0: {
+					items: 1,
+					nav: true,
+					margin: 20
+				},
+				600: {
+					items: 1,
+					nav: true,
+					margin: 20
+				},
+				760: {
+					items: 3,
+					nav: true,
+					margin: 20
+				},
+				1000: {
+					items: 4,
+					loop: false,
+					margin: 20
+				}
+			}
+		});
+
+	});
+</script>
+<script type="text/javascript">
+	
+{% for k,v in cat.items %}
+{% for video,similares in v.items %}
+{% for temp in video.temporada_set.all %}
+	$('.serieselect_{{k.slug}}{{video.id}}').on('change', function(e) {
+		$('.serietabs_{{k.slug}}{{video.id}}_temp{{temp.temporada}}').removeClass('active in')
+		$('#' + $(e.currentTarget).val()).addClass("active in");
+	})
+{% endfor %}
+{% endfor %}
+{% endfor %}
+
+$('#id_tipos').addClass('form-control');
+</script>
+{% endblock extra_js %}
