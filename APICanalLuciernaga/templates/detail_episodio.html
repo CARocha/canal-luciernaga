@@ -31,13 +31,13 @@
 	</div>
 	{% for temp in temporadas %}
 		<div>
-			<a class="collapse_temp" data-toggle="collapse" data-target="#{{temp.temporada}}" aria-expanded="false" aria-controls="{{temp.temporada}}" >
+			<a class="collapse_temp" data-toggle="collapse" data-target="#{{temp.temporada}}" aria-expanded="true" aria-controls="{{temp.temporada}}" >
 				Temporada {{temp.temporada}}
 			</a>
 			<div class="collapse container_list" id="{{temp.temporada}}">
 				<ul class="list-episocios">
 					{% for ep in temp.episodio_set.all|dictsort:'id' %}
-						<li><a href="{% url 'episodio_detail' slug temp.temporada ep.slug %}">{{ep}}</a></li>
+						<li><a href="{% url 'episodio_detail' episodio=ep.slug temporada=temp.temporada  %}">{{ep}}</a></li>
 					{% endfor %}
 				</ul>
 			</div>
@@ -54,7 +54,7 @@
 				<div class="dark up-video">
 					<div class="row">
 						<div class="col-lg-6 col-xs-6">
-							<a href="/" >
+							<a href="{% url 'Video_detail' video_slug%}" >
 								<i class="material-icons">arrow_back</i> Inicio
 							</a>
 						</div>
