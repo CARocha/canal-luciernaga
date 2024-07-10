@@ -119,7 +119,7 @@
                 <ul class="dropdown-menu">
                   {% for x in tipos %}
                   <li>
-                    <a href="{% url 'list_videos' x.slug %}" class="white-color"
+                    <a href="{% url 'list_videos' tipo=x.slug %}" class="white-color"
                       >{{x}}</a
                     >
                   </li>
@@ -153,19 +153,19 @@
               <li><a href="/biblioteca/" class="white-color">Biblioteca</a></li>
               {% endif %} {% endcomment %}
               <li>
-                <a href="/videos/documental">Documentales</a>
+                <a href="{% url 'list_videos_categoria' categoria='documentales' %}">Documentales</a>
               </li>
               <li>
-                <a href="/videos/peliculas">Peliculas</a>
+                <a href="{% url 'list_videos_categoria' categoria='peliculas' %}">Peliculas</a>
               </li>
               <li>
-                <a href="/videos/series">Series</a>
+                <a href="{% url 'list_videos_categoria' categoria='series' %}">Series</a>
               </li>
               <li>
-                <a href="">Radio-Podcast</a>
+                <a href="{% url 'list_videos_categoria' categoria='radio-podcast' %}">Radio-Podcast</a>
               </li>
               <li>
-                <a href="">Publicaciones</a>
+                <a href="{% url 'list_videos_categoria' categoria='publicaciones' %}">Publicaciones</a>
               </li>
               <li>
                 <a href="/conocenos">Sobre Nativa</a>
