@@ -181,7 +181,7 @@
 													<img src="http://via.placeholder.com/1280x720" alt="{{episodios}}">
 												{% endthumbnail%}
 											</div>
-											<a class="title-movie" href="#">
+											<a class="title-movie" href="{% url 'episodio_detail' episodio=episodios.slug temporada=episodios.temporada.temporada %}">
 												<h4 id="" class="no-underline white-color hg_video">
 													{{episodios}}
 												</h4>
