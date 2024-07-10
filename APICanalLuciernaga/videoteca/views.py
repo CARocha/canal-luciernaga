@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from .models import *
 from .serializers import VideoSerializer, EpisodioSerializer, CategoriaSerializer, TipoSerializer
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import JsonResponse
 from django.db.models import Q, Prefetch
 from .forms import *
@@ -24,6 +24,7 @@ class TipoVideoTecaViewSet(viewsets.ModelViewSet):
 
 def list_videos(request,tipo,template='movies.html'):
 	name = Tipo.objects.get(slug = tipo)
+
 
 	if request.method == 'POST':
 		form = CategoriasFilter(request.POST,tipo = tipo)
@@ -52,6 +53,36 @@ def list_videos(request,tipo,template='movies.html'):
 
 	return render(request,template,locals())
 
+def list_videos_categoria(request,categoria,template='movies_categorias.html'):
+	name = get_object_or_404(Categoria, slug=categoria)
+
+	if request.method == 'POST':
+		form = TiposFilter(request.POST,categoria = categoria)
+		if form.is_valid():
+			cate = form.cleaned_data['tipos']
+			cat = {}
+			for x in Categoria.objects.filter(id = cate.id):
+				videos_list = Video.objects.filter(categoria=x,tipo__slug=categoria).order_by('-id')
+				videos = {}
+				for vid in videos_list:
+					similares = Video.objects.filter(tipo__in = vid.tipo.all(),categoria__in = vid.categoria.all()).exclude(id = vid.id)
+					videos[vid] = similares
+				if videos_list:
+					cat[x] = videos
+	else:
+		form = TiposFilter(categoria = categoria)
+		cat = {}
+		for x in Tipo.objects.all():
+			videos_list = Video.objects.filter(tipo=x,categoria__slug=categoria).order_by('-id')
+			videos = {}
+			for vid in videos_list:
+				similares = Video.objects.filter(tipo__in = vid.tipo.all(),categoria__in = vid.categoria.all()).exclude(id = vid.id)
+				videos[vid] = similares
+			if videos_list:
+				cat[x] = videos
+
+	return render(request,template,locals())
+
 def Video_detail(request,slug,template='detail_movie.html'):
 	object = Video.objects.get(slug=slug)
 	similares = Video.objects.filter(
@@ -65,11 +96,25 @@ def Video_detail(request,slug,template='detail_movie.html'):
 		temporadas = Temporada.objects.filter(info_video=object).prefetch_related(episodios_prefetch)
 	return render(request,template,locals())
 
-def episodio_detail(request,slug,temporada,episodio,template='detail_episodio.html'):
-	episodio = Episodio.objects.get(temporada__info_video__slug = slug,temporada__temporada = temporada,slug=episodio)
-	temporadas = Temporada.objects.filter(info_video__slug = slug)
+def episodio_detail(request,episodio,temporada,template='detail_episodio.html'):
+	episodio = Episodio.objects.get(
+								 temporada__temporada = temporada,
+								 slug=episodio)
+	temporadas = Temporada.objects.filter(temporada = temporada)
+	if temporadas.exists():
+		temporada_obj = temporadas.first()
+		video_slug = temporada_obj.info_video.slug
+	else:
+		video_slug = None
 
-	return render(request,template,locals())
+    # Pasar video_slug a la plantilla
+	context = {
+        'episodio': episodio,
+        'temporadas': temporadas,
+        'video_slug': video_slug,
+    }
+
+	return render(request,template,context)
 
 def GetVideoInfo(request):
 	if request.method == "GET" and request.is_ajax():
