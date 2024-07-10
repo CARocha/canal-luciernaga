@@ -651,16 +651,10 @@
 									</aside>
 									</a>
 									{% thumbnail peli.imagen "1280x720" crop="center" as im %}
-									<a href="{% url 'Video_detail' peli.slug %}">
 										<img src="{{ im.url }}" alt="{{peli.nombre}}">
-									</a>
 									{% empty %}
-									<a href="{% url 'Video_detail' peli.slug %}">
 										<img src="http://via.placeholder.com/1280x720 " alt="{{peli.nombre}}">
-									</a>
 									{% endthumbnail %}
-									
-								
 								</div>
 								<a class="title-movie" href="{% url 'Video_detail' peli.slug %}">
 									<h4 id="" class="no-underline white-color hg_video">
