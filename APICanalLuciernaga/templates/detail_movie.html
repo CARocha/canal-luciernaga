@@ -123,18 +123,13 @@
 										{% for similar in similares %}
 										<div class="item">
 											<div class="movie-poster grow mt-10">
-												<aside>
-													<div class="hover-tab">
-														<a href="#" class="play">
-															<i class="material-icons">play_arrow</i>
-														</a>
-														<span class="date">
-															{% for cat in similar.categoria.all|slice:"3" %}
-															<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
-															{% endfor %}
-														</span>
-													</div>
-												</aside>
+												<a href="{% url 'Video_detail' similar.slug %}">
+													<aside>
+														<div>
+															
+														</div>
+													</aside>
+												</a>
 												{% thumbnail similar.imagen "1280x720" crop="center" as im %}
 													<img src="{{im.url}}" alt="{{similar}}">
 
@@ -162,18 +157,13 @@
 										{% for episodios in temp.episodio_set.all %}
 										<div class="item">
 											<div class="movie-poster grow mt-10">
-												<aside>
-													<div class="hover-tab">
-														<a href="#" class="play">
-															<i class="material-icons">play_arrow</i>
-														</a>
-														<span class="date">
-															{% for cat in temp.info_video.categoria.all|slice:"3" %}
-															<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
-															{% endfor %}
-														</span>
-													</div>
-												</aside>
+												<a href="{% url 'episodio_detail' episodio=episodios.slug temporada=episodios.temporada.temporada %}">
+													<aside>
+														<div>
+															
+														</div>
+													</aside>
+												</a>
 												{% thumbnail episodios.imagen "1280x720" crop="center" as im %}
 													<img src="{{im.url}}" alt="{{episodios}}">
 
