@@ -111,6 +111,11 @@ def buscador_news(request,template='news.html'):
 def buscador(request,template = 'buscador.html'):
 	if request.GET.get('search'):
 		q = request.GET['search']
-		videos = Video.objects.filter(Q(nombre__icontains = q)| Q(categoria__nombre__icontains = q)).order_by('-id')
+		videos = Video.objects.filter(
+			Q(nombre__icontains = q) | 
+			Q(categoria__nombre__icontains = q) |
+			Q(tipo__nombre__icontains = q) |
+			Q(director__nombre__icontains = q) |
+			Q(pais__nombre__icontains = q)).order_by('-id')
 	
 	return render(request,template,locals())

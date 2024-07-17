@@ -90,10 +90,10 @@ class Episodio(models.Model):
     temporada = models.ForeignKey(Temporada, on_delete = models.CASCADE)
     link = models.URLField(max_length = 225)
     imagen = ImageField('Imagen',upload_to='fotos/videos')
-    titulo = models.CharField('Título',max_length = 225, unique=True)
+    titulo = models.CharField('Título',max_length = 225)
     sinopsis = models.TextField('Sinopsis',max_length=200)
     duracion = models.CharField('Duración',max_length=20)
-    slug = models.SlugField(max_length = 250, editable= False, unique=True)
+    slug = models.SlugField(max_length = 250, editable= False)
 
     def __str__(self):
         return self.titulo

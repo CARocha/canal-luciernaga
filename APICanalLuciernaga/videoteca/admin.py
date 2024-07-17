@@ -27,7 +27,7 @@ class VideoAdmin(nested_admin.NestedModelAdmin):
     inlines = [TemporadaInline,]
     list_display = ['nombre','fecha','director','url','image_tag']
     list_filter = ('pais','tipo','categoria')
-    search_fields = ['nombre','pais__nombre','tipo']
+    search_fields = ['nombre','pais__nombre','tipo__nombre','categoria__nombre','director__nombre']
     list_per_page = 15
 
     class Media:

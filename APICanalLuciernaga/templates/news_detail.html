@@ -6,11 +6,11 @@
 	<meta name="twitter:creator" content="@FLuciernaga">
 	<meta name="twitter:title" content="{{object.titulo}}">
 	<meta name="twitter:description" content="{{object.descripcion|truncatechars:40|striptags}}">
-	<meta name="twitter:image" content="https://nativamedia.net/media/{{object.foto}}">
+	<meta name="twitter:image" content="https://nativamedia.org/media/{{object.foto}}">
 
     <meta property="og:title" content="{{object.titulo}}" />
     <meta property="og:description" content="{{object.descripcion|truncatechars:40|striptags}}" />
-    <meta property="og:url" content="https://nativamedia.net{{request.path}}" />
+    <meta property="og:url" content="https://nativamedia.org{{request.path}}" />
     <meta property="og:locale" content="es_ES" />
 {% endblock share %}
 {% block content %}
@@ -58,10 +58,10 @@
 							<i class="material-icons">share</i>
 						</a>
 						<div class="share">
-							<a class="customer" href="https://www.facebook.com/sharer.php?u=https://nativamedia.net{{request.path}}">
+							<a class="customer" href="https://www.facebook.com/sharer.php?u=https://nativamedia.org{{request.path}}">
 								<i class="fa fa-facebook"></i>
 							</a>
-							<a class="customer" href="https://twitter.com/share?url=https://nativamedia.net{{request.path}}&amp;hashtags=nativamedia">
+							<a class="customer" href="https://twitter.com/share?url=https://nativamedia.org{{request.path}}&amp;hashtags=nativamedia">
 								<i class="fa fa-twitter"></i>
 							</a>
 						</div>

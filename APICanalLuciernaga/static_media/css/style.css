@@ -256,7 +256,8 @@ i.material-icons {
 
 .wrapper {
     overflow-x: hidden;
-    background-color: #1f1e1e;
+    /* background-color: #1f1e1e; */
+    background-color: #101010;
 }
 
 hr.space-40 {
@@ -732,13 +733,13 @@ hr.space-40 {
 }
 
 .nav li a {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: normal;
     line-height: .8em;
 
     display: inline-block;
 
-    padding: 20px 24px;
+    padding: 20px 9px;
 
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -817,6 +818,8 @@ hr.space-40 {
     visibility: hidden;
 
     width: 100%;
+    min-width: max-content;
+    white-space: nowrap;
     padding: 0;
 
     -webkit-transition: all .25s ease-in-out;
@@ -2832,11 +2835,11 @@ footer .copyright a:hover {
     }
 
     .nav li a {
-        font-size: 14px;
+        font-size: 9px;
 
-        padding: 20px 14px;
+        padding: 20px 10px;
 
-        letter-spacing: 2px;
+        letter-spacing: 0px;
     }
 
     .tabs ul li a {

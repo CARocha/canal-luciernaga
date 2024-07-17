@@ -47,6 +47,15 @@
       href="/static/css/owlcarousel/owl.theme.default.min.css"
     />
     {% block extra_css %}{% endblock extra_css %}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9J0F1HX06V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-9J0F1HX06V');
+    </script>
   </head>
   <body>
     <style>
@@ -111,12 +120,15 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul id="menu-primary" class="nav navbar-nav">
-              <li class="dropdown">
+              <li>
                 <a href="/">Inicio</a>
+              </li>
+              <li class="dropdown">
+                <a href="/">Temas</a>
                 <ul class="dropdown-menu">
                   {% for x in tipos %}
                   <li>
-                    <a href="{% url 'list_videos' x.slug %}" class="white-color"
+                    <a href="{% url 'list_videos' tipo=x.slug %}" class="white-color"
                       >{{x}}</a
                     >
                   </li>
@@ -137,22 +149,36 @@
                 </a>
                 <a href="/en-directo" style="padding-left: 5px">En Directo</a>
               </li>
-              {% endif %} {% if noticias %}
-              <li class="dropdown">
-                <a href="/noticias">Noticias</a>
-                <!--<ul class="dropdown-menu">
-								<li><a href="#">Reportaje</a></li>
-							</ul>-->
-              </li>
-              {% endif %} {% if biblioteca %}
-              <li><a href="/biblioteca/" class="white-color">Biblioteca</a></li>
               {% endif %}
-             <!-- <li>
-                <a href="/conocenos">Conocenos</a>
-              </li>-->
-              <!--<li>
-							<a href="">Radio</a>
-						</li>-->
+              {% comment %} {% if noticias %}
+                <li class="dropdown">
+                  <a href="/noticias">Noticias</a>
+                  <!--<ul class="dropdown-menu">
+                  <li><a href="#">Reportaje</a></li>
+                </ul>-->
+                </li>
+              {% endif %}  {% endcomment %}
+              {% comment %} {% if biblioteca %}
+              <li><a href="/biblioteca/" class="white-color">Biblioteca</a></li>
+              {% endif %} {% endcomment %}
+              <li>
+                <a href="{% url 'list_videos_categoria' categoria='documentales' %}">Documentales</a>
+              </li>
+              <li>
+                <a href="{% url 'list_videos_categoria' categoria='peliculas' %}">Peliculas</a>
+              </li>
+              <li>
+                <a href="{% url 'list_videos_categoria' categoria='series' %}">Series</a>
+              </li>
+              <li>
+                <a href="{% url 'list_videos_categoria' categoria='radio-podcast' %}">Radio-Podcast</a>
+              </li>
+              <li>
+                <a href="{% url 'list_videos_categoria' categoria='publicaciones' %}">Publicaciones</a>
+              </li>
+              <li>
+                <a href="/conocenos">Sobre Nativa</a>
+              </li>
             </ul>
           </div>
         </div>

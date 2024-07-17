@@ -350,10 +350,15 @@ a:hover.light_hover{
 	vertical-align: middle;
 }
 
+.slick-slide .movie-poster:hover {
+    border: 3px solid #fff;
+    border-radius: 6px;
+}
+
 .slick-slide .movie-poster:hover img {
-	filter: grayscale(0%);
-	 filter:brightness(0.3);
-	background-color: rgba(0,0,0,1.5);
+	/* filter: grayscale(0%); */
+	filter:brightness(0.7);
+	/* background-color: rgba(0,0,0,.5); */
 }
 
 /* altos definidos */
@@ -462,8 +467,8 @@ a.close_collapse {
 	z-index: 100;
 }
 .owl-theme .owl-next span,.owl-theme .owl-prev span {
-	font-size: 2.5rem;
-	color: #cecece;
+	font-size: 3.5rem;
+	color: #fff !important;
 }
 .owl-theme .owl-prev {
 	position: absolute;
@@ -696,6 +701,12 @@ a:focus{
 	border-radius: 0;
 	margin-bottom: 10px;
 }
+.form-cat #id_tipos{
+	min-width: 200px;
+	font-size: 16px;
+	border-radius: 0;
+	margin-bottom: 10px;
+}
 .form-cat .btn{
 	padding: 8px 11px;
 	border-width: 0;
@@ -896,7 +907,7 @@ a:hover{
 	color: #8BC53F;
 }
 .owl-theme .owl-next span, .owl-theme .owl-prev span{
-	color: rgb(141, 141, 141) !important;
+	color: #fff !important;
 }
 .owl-theme .owl-nav [class*=owl-]:hover{
 	background: #38376a52 !important;

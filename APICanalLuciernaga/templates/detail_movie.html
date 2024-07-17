@@ -3,80 +3,271 @@
 {% load embed_video_tags %}
 
 {% block share %}
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:site" content="@FLuciernaga">
-	<meta name="twitter:creator" content="@FLuciernaga">
-	<meta name="twitter:title" content="{{object.nombre}}">
-	<meta name="twitter:description" content="{{object.sinopsis|truncatechars:40|striptags}}">
-	<meta name="twitter:image" content="https://nativamedia.net/media/{{object.foto}}">
-	{% video object.url as video %}
-		<meta name="twitter:image" content="{{video.thumbnail}}">
-    	<meta property="og:image" content="{{video.thumbnail}}">
-	{% endvideo %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@FLuciernaga">
+    <meta name="twitter:creator" content="@FLuciernaga">
+    <meta name="twitter:title" content="{{object.nombre}}">
+    <meta name="twitter:description" content="{{object.sinopsis|truncatechars:40|striptags}}">
+    <meta name="twitter:image" content="https://nativamedia.org/media/{{object.foto}}">
+    {% video object.url as video %}
+        <meta name="twitter:image" content="{{video.thumbnail}}">
+        <meta property="og:image" content="{{video.thumbnail}}">
+    {% endvideo %}
     <meta property="og:title" content="{{object.nombre}}" />
     <meta property="og:description" content="{{object.sinopsis|truncatechars:40|striptags}}" />
-    <meta property="og:url" content="https://nativamedia.net{{request.path}}" />
+    <meta property="og:url" content="https://nativamedia.org{{request.path}}" />
     <meta property="og:locale" content="es_ES" />
 {% endblock share %}
 
 {% block content %}
+<style>
+    .space-margin {
+        margin-top: 200px;
+    }
+	.modal {
+		text-align: center;
+	  }
+	
+	  @media screen and (min-width: 768px) { 
+		.modal:before {
+		  display: inline-block;
+		  vertical-align: middle;
+		  content: " ";
+		  height: 100%;
+		}
+	  }
+	
+	  .modal-dialog {
+		display: inline-block;
+		text-align: left;
+		vertical-align: middle;
+	  }
+	  .video-responsive {
+		overflow: hidden;
+		padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+		position: relative;
+		height: 0;
+	  }
+	  .video-responsive iframe {
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
+		position: absolute;
+	  }
+</style>
+<div class="container comingSoon-slides">
+    <section class="dark space-margin">
+        <div class="row single-slide">
+            <div class="col-sm-5 col-xs-12">
+                {% for cat in object.categoria.all|slice:"3" %}
+                <span class="title">{{cat}}</span>{% if not forloop.last %},{% endif %}
+                {% endfor %}
+                <h3 class="no-underline">{{object.nombre}}</h3>
+                <div class="date">
+                    <i class="material-icons">date_range</i> {{object.fecha|date:"d F Y"}}
+                    <i class="material-icons" style="margin-left: 5px;">
+                        av_timer
+                    </i>{{object.duracion}}
+                    <i class="material-icons" style="margin-left: 5px;">
+                        person
+                    </i>{{object.director}}
+                </div>
+                <p>{{object.sinopsis}} </p>
+                <p>
+                    <span class="details">Productora: {{object.produccion}}</span>
+                    <span class="">|</span>
+                    <span class="details">Pais: {{object.pais}}</span>
+				</p>
+					
+            </div>
+            <div class="col-sm-6 col-xs-12 col-sm-push-1 slide-video">
+                <a href="#" data-vbtype="video" class="video">
+                    {% thumbnail object.imagen "1280x720" crop="center" as im %}
+                    <img src="{{ im.url }}" alt="{{object.nombre}}">
+                    {% empty %}
+                    <img src="http://via.placeholder.com/1280x720" alt="{{object.nombre}}">
+                    {% endthumbnail %}
+                </a>
+                <div class="text-center" style="margin-top: 20px;">
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#videoModal">
+                        Reproducir video
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Tabs con contenido adicional -->
+        <div class="row">
+            <div class="col-sm-12">
+				<div role="tabpanel">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs nav-custom" role="tablist">
+						<li role="presentation" class="active">
+							<a href="#peli{{object.id}}-similares" aria-controls="#peli{{object.id}}-similares" role="tab">Similares</a>
+						</li>
+						{% if temporadas.count > 0 %}
+							{% for temp in temporadas %}
+							<li role="presentation" >
+								<a href="#temporada-{{temp.id}}" aria-controls="#temporada-{{object.id}}" role="tab">{{temp.get_temporada_display}}</a>
+							</li>
+							{% endfor %}
+						{% endif %}
+						
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="peli{{object.id}}-similares">
+							<div class="row">
+								<div class="col-sm-12 col-xs-12">
+									<div class="owl-carousel owl-theme slick-slide">
+										{% for similar in similares %}
+										<div class="item">
+											<div class="movie-poster grow mt-10">
+												<a href="{% url 'Video_detail' similar.slug %}">
+													<aside>
+														<div>
+															
+														</div>
+													</aside>
+												</a>
+												{% thumbnail similar.imagen "1280x720" crop="center" as im %}
+													<img src="{{im.url}}" alt="{{similar}}">
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="row">
-				<div class="dark up-video">
-					<div class="row">
-						<div class="col-lg-6 col-sm-6">
-							<a href="/" >
-								<i class="material-icons">arrow_back</i> Inicio
-							</a>
-						</div>
-						{% if episodio %}
-						<div class="col-lg-6 col-sm-6 text-right">
-							<div class="btn-group">
-								<i class="material-icons">view_list</i> 
-								<a  class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Episodios <span class="caret"></span>
-								</a>
-								<ul class="dropdown-menu">
-									<li><a href="{% url 'episodio_detail' slug temp.temporada ep.slug %}">{{ep}}</a></li>
-								</ul>
+												{%empty%}
+													<img src="http://via.placeholder.com/1280x720" alt="{{similar}}">
+												{% endthumbnail%}
+											</div>
+											<a class="title-movie" href="{% url 'Video_detail' similar.slug %}">
+												<h4 id="" class="no-underline white-color hg_video">
+													{{similar}}
+												</h4>
+											</a>
+										</div>
+										{% endfor %}
+									</div>
+								</div>
 							</div>
 						</div>
-						{% endif %}
+						
+						{% for temp in temporadas %}
+						<div role="tabpanel" class="tab-pane" id="temporada-{{temp.id}}">
+							<div class="row">
+								<div class="col-sm-12 col-xs-12">
+									<div class="owl-carousel owl-theme slick-slide">
+										{% for episodios in temp.episodio_set.all %}
+										<div class="item">
+											<div class="movie-poster grow mt-10">
+												<a href="{% url 'episodio_detail' episodio=episodios.slug temporada=episodios.temporada.temporada %}">
+													<aside>
+														<div>
+															
+														</div>
+													</aside>
+												</a>
+												{% thumbnail episodios.imagen "1280x720" crop="center" as im %}
+													<img src="{{im.url}}" alt="{{episodios}}">
+
+												{%empty%}
+													<img src="http://via.placeholder.com/1280x720" alt="{{episodios}}">
+												{% endthumbnail%}
+											</div>
+											<a class="title-movie" href="{% url 'episodio_detail' episodio=episodios.slug temporada=episodios.temporada.temporada %}">
+												<h4 id="" class="no-underline white-color hg_video">
+													{{episodios}}
+												</h4>
+											</a>
+										</div>
+										{% endfor %}
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}		
 					</div>
 				</div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+	  <div class="dark modal-content">
+		<div class="modal-header">
+		  <h4 class="modal-title" id="videoModalLabel">{{object.nombre}}</h4>
+		</div>
+		<div class="modal-body">
+			<div class="video-responsive">
+				{% video object.url '982x552' %}
 			</div>
 		</div>
-		<div class="col-lg-12 text-center video-content ">
-			{% video object.url '982x552' %}
-		</div>
-	{% comment %} {% if episodio %}
-		{% video episodio.link '854x480' %}
-		<br>
-
-		Temporadas <br>
-		{% for temp in temporadas %}
-			Temporada {{temp.temporada}} <br>
-			<br>
-			{% for ep in temp.episodio_set.all %}
-				<a href="{% url 'episodio_detail' slug temp.temporada ep.slug %}">{{ep}}</a> <br>
-			{% endfor %}
-		{% endfor %}
-
-	{% else %} 
-
-	{% endif %}{% endcomment %}
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		  </div>
+	  </div>
 	</div>
 </div>
 
 {% endblock content %}
 {% block extra_js %}
 <script>
-	function goBack() {
-		window.history.back();
-	}
-	$('.navbar').remove();
+	$(document).ready(function(){
+		$('.owl-carousel').owlCarousel({
+			loop: false,
+			rewind: true,
+			margin: 10,
+			responsiveClass: true,
+			nav: true,
+			lazyLoad:true,
+			responsive: {
+				0: {
+					items: 1,
+					nav: true,
+					margin: 20
+				},
+				600: {
+					items: 1,
+					nav: true,
+					margin: 20
+				},
+				760: {
+					items: 3,
+					nav: true,
+					margin: 20
+				},
+				1000: {
+					items: 4,
+					loop: false,
+					margin: 20
+				}
+			}
+		});
+
+	});
+</script>
+<script>
+$(document).ready(function() {
+    // Cuando se hace clic en cualquier enlace de pestaña
+    $('.nav-tabs a').click(function(e) {
+        e.preventDefault();
+
+        // Desactiva todas las pestañas y paneles
+        $('.nav-tabs li').removeClass('active');
+        $('.tab-pane').removeClass('active');
+
+        // Activa la pestaña clickeada
+        $(this).parent('li').addClass('active');
+        var currentTab = $(this).attr('href');
+        
+        // Corrige el href para que coincida con el ID del panel
+        currentTab = currentTab.replace('#', '');
+        $('#'+currentTab).addClass('active');
+    });
+	$("#close").click(function(){
+		console.log("cerrando modal");
+	});
+});
+
 </script>
 {% endblock extra_js %}
