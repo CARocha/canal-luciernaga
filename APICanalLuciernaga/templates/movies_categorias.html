@@ -44,6 +44,12 @@
 							{% for serie in v %}
 							<div class="item">
 								<div class="movie-poster">
+									<a href="{% url 'Video_detail' serie.slug %}">
+                                        <aside>
+                                            <div>
+                                            </div>
+                                        </aside>
+                                    </a>
 									{% thumbnail serie.imagen "1280x720" crop="center" as im %}
 									<img src="{{ im.url }}" alt="{{serie.nombre}}">
 									{% empty %}
@@ -77,12 +83,12 @@
 							{% for peli in v %}
 							<div class="item">
 								<div class="movie-poster">
-                                    <a href="{% url 'Video_detail' peli.slug %}" class="play">
+                                    <a href="{% url 'Video_detail' peli.slug %}">
                                         <aside>
                                             <div>
                                             </div>
                                         </aside>
-                                        </a>
+                                    </a>
 									{% thumbnail peli.imagen "1280x720" crop="center" as im %}
 									<img src="{{ im.url }}" alt="{{peli.nombre}}">
 									{% empty %}

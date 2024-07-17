@@ -266,23 +266,12 @@
 							{% for peli in v %}
 							<div class="item">
 								<div class="movie-poster grow">
+									<a href="{% url 'Video_detail' peli.slug %}">
 									<aside>
 										<div>
-											<a href="{% url 'Video_detail' peli.slug %}" class="play">
-												<i class="material-icons">play_arrow</i>
-											</a>
-											<span class="date">
-												{% for cat in peli.categoria.all|slice:"3" %}
-													<i class="material-icons" style="font-size: 8px;">fiber_manual_record</i>{{cat}}
-												{% endfor%}
-											</span>
-											<a class="material-icons expand-more" data-toggle="collapse" href="#{{k.slug}}_{{peli.id}}" onClick="reply_click(this.href)">
-													keyboard_arrow_down
-											</a>
-											
 										</div>
 									</aside>
-								
+									</a>
 									{% thumbnail peli.imagen "1280x720" crop="center" as im %}
 									<img src="{{ im.url }}" alt="">
 									{% empty %}
