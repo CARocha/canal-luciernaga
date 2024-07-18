@@ -96,6 +96,10 @@ def Video_detail(request,slug,template='detail_movie.html'):
 		temporadas = Temporada.objects.filter(info_video=object).prefetch_related(episodios_prefetch)
 	return render(request,template,locals())
 
+def detail_video(request,slug,template='detail_video.html'):
+	object = Video.objects.get(slug=slug)
+	return render(request,template,locals())
+
 def episodio_detail(request,episodio,temporada,template='detail_episodio.html'):
 	episodio = Episodio.objects.get(
 								 temporada__temporada = temporada,
