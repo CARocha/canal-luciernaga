@@ -90,9 +90,9 @@
                     {% endthumbnail %}
                 </a>
                 <div class="text-center" style="margin-top: 20px;">
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#videoModal">
+                    <a href="{% url 'detail_video' object.slug %}" class="btn btn-primary btn-lg">
                         Reproducir video
-                    </button>
+					</a>
                 </div>
             </div>
         </div>
@@ -190,25 +190,6 @@
     </section>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel">
-	<div class="modal-dialog modal-lg" role="document">
-	  <div class="dark modal-content">
-		<div class="modal-header">
-		  <h4 class="modal-title" id="videoModalLabel">{{object.nombre}}</h4>
-		</div>
-		<div class="modal-body">
-			<div class="video-responsive">
-				{% video object.url '982x552' %}
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-		  </div>
-	  </div>
-	</div>
-</div>
-
 {% endblock content %}
 {% block extra_js %}
 <script>
@@ -264,9 +245,6 @@ $(document).ready(function() {
         currentTab = currentTab.replace('#', '');
         $('#'+currentTab).addClass('active');
     });
-	$("#close").click(function(){
-		console.log("cerrando modal");
-	});
 });
 
 </script>
