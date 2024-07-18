@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load embed_video_tags %}
+
+{% block share %}
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@FLuciernaga">
+	<meta name="twitter:creator" content="@FLuciernaga">
+	<meta name="twitter:title" content="{{object.nombre}}">
+	<meta name="twitter:description" content="{{object.sinopsis|truncatechars:40|striptags}}">
+	<meta name="twitter:image" content="https://nativamedia.org/media/{{object.foto}}">
+	{% video object.url as video %}
+		<meta name="twitter:image" content="{{video.thumbnail}}">
+    	<meta property="og:image" content="{{video.thumbnail}}">
+	{% endvideo %}
+    <meta property="og:title" content="{{object.nombre}}" />
+    <meta property="og:description" content="{{object.sinopsis|truncatechars:40|striptags}}" />
+    <meta property="og:url" content="https://nativamedia.org{{request.path}}" />
+    <meta property="og:locale" content="es_ES" />
+{% endblock share %}
+
+{% block content %}
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="row">
+				<div class="dark up-video">
+					<div class="row">
+						<div class="col-lg-6 col-sm-6">
+							<a href="{% url 'Video_detail' object.slug %}" >
+								<i class="material-icons">arrow_back</i> Inicio
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12 text-center video-content ">
+			{% video object.url '982x552' %}
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
+{% block extra_js %}
+<script>
+	function goBack() {
+		window.history.back();
+	}
+	$('.navbar').remove();
+</script>
+{% endblock extra_js %}
