@@ -63,6 +63,15 @@
 	#hero {
 		height: 300px !important;
 	}
+	#title-new {
+		font-size: 1rem;
+		font-weight: 400;
+		margin-bottom: 10px;
+	}
+	#title-new-sub {
+		font-size: 0.875rem;
+		font-weight: 400;
+	}
 </style>
 <!-- Hero -->
 {% for bann in bann_vid %}
@@ -657,9 +666,10 @@
 									{% endthumbnail %}
 								</div>
 								<a class="title-movie" href="{% url 'Video_detail' peli.slug %}">
-									<h4 id="" class="no-underline white-color hg_video">
-										{{peli.nombre}}({{peli.fecha|date:"Y"}})
+									<h4 id="title-new" class="no-underline white-color hg_video">
+										{{peli.nombre}}
 									</h4>
+									<h4 id="title-new-sub" class="no-underline white-color hg_video">{{peli.fecha|date:"Y"}}</h4>
 								</a>
 							</div>
 							{% endfor %}
