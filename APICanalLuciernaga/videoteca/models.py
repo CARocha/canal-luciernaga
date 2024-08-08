@@ -10,9 +10,12 @@ from noticias.models import Categoria
 class Tipo(models.Model):
     nombre = models.CharField(max_length = 255, unique=True)
     slug = models.SlugField(max_length = 250, editable = False, unique = True)
+    portada = ImageField('Portada', upload_to='fotos/portadas', blank=True, null=True)
     
     class Meta:
-         ordering = ['-id']
+        verbose_name = "Tema"
+        verbose_name_plural = "Temas"
+        ordering = ['-id']
 
     def __str__(self):
         return self.nombre
