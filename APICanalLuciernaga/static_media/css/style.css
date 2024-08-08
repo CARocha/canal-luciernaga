@@ -593,8 +593,29 @@ hr.space-40 {
        -moz-transition: all 300ms ease-in-out;
             transition: all 300ms ease-in-out;
 
-    background-position: center;
+    background-position: center center;
     background-size: cover;
+    height: 60vh; /* lo agregue a peticion de wendy 60% of the viewport height */
+}
+
+/* Media query para dispositivos móviles pequeños */
+@media (max-width: 480px) {
+    #content_hero {
+        height: 35vh; /* Altura para pantallas muy pequeñas */
+    }
+}
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+    #content_hero {
+        height: 36vh; /* Altura para pantallas pequeñas */
+    }
+}
+
+/* Media query para tablets en modo vertical */
+@media (max-width: 1024px) {
+    #content_hero {
+        height: 30vh; /* Altura para tablets en modo vertical */
+    }
 }
 
 #content_hero:before {

@@ -132,3 +132,4 @@ dmypy.json
 #visual code
 ../.vscode
 *.sql
+**/.DS_Store
